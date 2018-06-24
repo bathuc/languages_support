@@ -8,9 +8,17 @@ use App\Models\Katakana;
 
 class JapanController extends Controller
 {
-    public function hiragana()
+    public function hiragana(Request $request)
     {
-        
+        $testFlag = null;
+        $hiragana = Katakana::get();
+        if($request->post()) {
+            $testFlag = 1;
+            $data = $request->all();
+            $chooseId = json_decode($data['chooseId']);
+            $hiragana = Higagana::getChoosenHigagana($chooseId);
+        }
+        return view('frontend.japan.hiragana.hiragana', compact('hiragana', 'testFlag'));
     }
 
     public function katakana(Request $request)
@@ -22,10 +30,6 @@ class JapanController extends Controller
             $data = $request->all();
             $chooseId = json_decode($data['chooseId']);
             $katakana = Katakana::getChoosenKatakana($chooseId);
-//            echo "<pre>";
-//            print_r($katakana);
-//            echo "<pre>";
-//            die();
         }
         return view('frontend.japan.katakana.katakana', compact('katakana', 'testFlag'));
     }

@@ -11,11 +11,6 @@ class Katakana extends BaseModel
     public static function getChoosenKatakana($data)
     {
         if(empty($data)) return null;
-//        $katakana = self::where(function ($query) use ($data){
-//            $query->where([['romaji', '=', 'a']]);
-//            $query->orWhere([['romaji', '=', 'i']]);
-//        })->get();
-
         $katakana = self::where(function ($query) use ($data) {
             $flag = true;
             foreach ($data as $key => $item) {

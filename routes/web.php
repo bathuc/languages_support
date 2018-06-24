@@ -12,5 +12,6 @@
 */
 
 Route::get('/hiragana', 'JapanController@hiragana');
+Route::post('/hiragana', 'JapanController@hiragana');
 Route::get('/katakana', 'JapanController@katakana');
 Route::post('/katakana', 'JapanController@katakana');

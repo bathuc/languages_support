@@ -1,5 +1,45 @@
 @extends('layouts.frontend.index')
 
 @section('content')
+    @if(!$testFlag)
+        @include('frontend.japan.hiragana.selection')
+    @else
+        @php
+            $randKeys = array_rand($hiragana, 3);
+            $randText = $hiragana[$randKeys[0]]['name'] . $hiragana[$randKeys[1]]['name'] . $hiragana[$randKeys[2]]['name'] ;
+            $randRomaji = $hiragana[$randKeys[0]]['romaji'] . $hiragana[$randKeys[1]]['romaji'] . $hiragana[$randKeys[2]]['romaji'] ;
+        @endphp
+        <div id="hira">
+            <span id="hira_alert"></span>
+            <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $randText }}</span>
+        </div>
+        <div id="main">
+            <div id="entry_area">
+                Type the rōmaji:<br>
+                <form method="post" id="frm">
+                    <input type="text" id="enter_romaji" name="enter_romaji"><br>
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
+        </div>
+        <script>
+            $('#enter_romaji').focus();
+            function randomData(){
 
+            }
+            function runHiraTest(){
+                if($('#enter_romaji').val() == '{{$randRomaji}}'){
+                    $('#hira_alert').html('correct');
+                }
+                else{
+                    $('#hira_alert').html('incorrect');
+                }
+            };
+
+            $('#frm').on('submit',function(e){
+                e.preventDefault();
+                runHiraTest();
+            })
+        </script>
+    @endif
 @endsection
