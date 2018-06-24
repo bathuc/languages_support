@@ -23,6 +23,7 @@
             </div>
         </div>
         <script>
+            $('#enter_romaji').focus();
             function randomData(){
 
             }
