@@ -10,8 +10,9 @@
             $randRomaji = $katakana[$randKeys[0]]['romaji'] . $katakana[$randKeys[1]]['romaji'] . $katakana[$randKeys[2]]['romaji'] ;
         @endphp
         <div id="kana">
-            <span id="kana_alert"></span>
-            <span id="kana_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $randText }}</span>
+            <span id="kana_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $randText }}</span><br>
+            <span id="alert"></span>
+            <span id="success"></span>
         </div>
         <div id="main">
             <div id="entry_area">
@@ -28,11 +29,13 @@
 
             }
             function runKanaTest(){
+                $('#success').html('');
+                $('#alert').html('');
                 if($('#enter_romaji').val() == '{{$randRomaji}}'){
-                    $('#kana_alert').html('correct');
+                    $('#success').html('correct');
                 }
                 else{
-                    $('#kana_alert').html('incorrect');
+                    $('#alert').html('incorrect');
                 }
             };
 

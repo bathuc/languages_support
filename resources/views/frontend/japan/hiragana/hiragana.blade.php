@@ -10,8 +10,9 @@
             $randRomaji = $hiragana[$randKeys[0]]['romaji'] . $hiragana[$randKeys[1]]['romaji'] . $hiragana[$randKeys[2]]['romaji'] ;
         @endphp
         <div id="hira">
-            <span id="hira_alert"></span>
-            <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $randText }}</span>
+            <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $randText }}</span><br>
+            <span id="alert"></span>
+            <span id="success"></span>
         </div>
         <div id="main">
             <div id="entry_area">
@@ -28,11 +29,13 @@
 
             }
             function runHiraTest(){
+                $('#success').html('');
+                $('#alert').html('');
                 if($('#enter_romaji').val() == '{{$randRomaji}}'){
-                    $('#hira_alert').html('correct');
+                    $('#success').html('correct');
                 }
                 else{
-                    $('#hira_alert').html('incorrect');
+                    $('#alert').html('incorrect');
                 }
             };
 

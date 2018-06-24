@@ -2668,7 +2668,6 @@ TABLE#kana_choice {
     border: 1px solid #666;
     margin-bottom: 1em;
 }
-user agent stylesheet
 table {
     white-space: normal;
     line-height: normal;
@@ -2679,7 +2678,7 @@ table {
     text-align: start;
     font-variant: normal;
 }
-user agent stylesheet
+
 table {
     display: table;
     border-collapse: separate;
@@ -2713,4 +2712,26 @@ TABLE#kana_choice TD.active {
 TABLE#kana_choice TD.inactive {
     background-color: #ccc;
     color: #666;
+}
+#hira{
+    margin-top: 50px;
+}
+#kana{
+    margin-top: 50px;
+}
+#hira_show{
+    font-size: 350%;
+    margin-top: 230px;
+}
+#kana_show{
+    font-size: 350%;
+    margin-top: 230px;
+}
+#alert{
+    font-size:120%;
+    color:red
+}
+#success{
+    font-size:120%;
+    color:green
 }
