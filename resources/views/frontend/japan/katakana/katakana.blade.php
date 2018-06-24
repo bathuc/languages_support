@@ -1,6 +1,7 @@
 @extends('layouts.frontend.index')
 
 @section('content')
+    <h1 id="head1">Katakana Drill</h1>
     @if(!$testFlag)
         @include('frontend.japan.katakana.selection')
     @else
@@ -19,7 +20,7 @@
                 Type the rōmaji:<br>
                 <form method="post" id="frm">
                     <input type="text" id="enter_romaji" name="enter_romaji"><br>
-                    <input type="submit" value="Submit"/>
+                    {{--<input type="submit" value="Submit"/>--}}
                 </form>
             </div>
         </div>

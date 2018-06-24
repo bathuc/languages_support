@@ -1,6 +1,7 @@
 @extends('layouts.frontend.index')
 
 @section('content')
+    <h1 id="head1">Hiragana Drill</h1>
     @if(!$testFlag)
         @include('frontend.japan.hiragana.selection')
     @else

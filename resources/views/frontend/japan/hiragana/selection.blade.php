@@ -1,5 +1,4 @@
 
-<h1 id="head1">Hiragana Drill</h1>
 <table id="kana_choice">
     <tbody><tr id="vowel_activators">
         <td class="clickable deactivate" id="everything">Deactivate Everything</td>
