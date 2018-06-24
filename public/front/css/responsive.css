@@ -1,0 +1,256 @@
+@media only screen and (max-width: 1200px){
+	.multi-plus .col-sm-9 .fl_l select:last-child {
+		margin-left: 0 !important;
+		margin-top: 10px !important;
+		clear: both;
+	}
+}
+@media only screen and (max-width: 1024px){
+	.container {
+	    width: 100%;
+	}
+	.clearfix .col-md-12{
+		clear: both;
+		overflow: hidden;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.col-horizontal .col-sm-4{
+		width: 73% !important;
+		padding-right: 0;
+	}
+	.multi-plus .col-sm-9 .fl_l select.both-clear{
+		margin-right: 10px !important;
+		clear: both;
+	}
+	.multi-plus .col-sm-9 .fl_l select:last-child{
+		clear: none;
+		margin-top: 0 !important;
+		margin-left: auto !important;
+	}
+	.multi-horizontal .mg_l20{
+		margin-left: 0 !important;
+	}
+	.sub-box input{
+		margin-bottom: 10px;
+	}
+	.clearfix .col-xs-9 .mg_t5, .block-horizontal .col-xs-9 .mg_t5{
+		margin: 5px 10px 20px 10px !important;
+	}
+	.clearfix .col-xs-9 select, .sub-box{
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+	.clearfix.multi-horizontal .col-md-9 .mg_t5{
+		margin: 5px 10px 15px 10px !important;
+	}
+}
+
+@media only screen and (max-width: 768px){
+	.clearfix .col-md-12{
+		clear: both;
+		overflow: hidden;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.clearfix .col-md-12 .col-sm-3, .clearfix .col-md-12 .col-sm-9, .sub-max-wid input, .sub-max-wid select,
+	.wid-horizontal .col-xs-4 {
+	    width: 100% !important;
+	}
+	.clearfix .col-md-12 .col-sm-9 select{
+		width: 25%;
+		margin-bottom: 10px;
+	}
+	.multi-plus .col-sm-9 .fl_l select:last-child {
+		clear: none;
+	    margin-left: 36px !important;
+	}
+	.col-horizontal .col-sm-3{
+		width: 38% !important;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.col-horizontal .col-md-12:last-child .col-sm-3{
+		width: 100% !important;
+		margin-bottom: 10px;
+	}
+	.col-horizontal .col-md-12:last-child .col-sm-9{
+		padding-left: 0;
+		width: 100% !important;
+	}
+	.col-horizontal .col-sm-9{
+		width: 62% !important;
+		padding-right: 0;
+	}
+	.col-horizontal .col-sm-9 select{
+		width: 24% !important;
+	}
+	.col-horizontal .col-md-12{
+		padding-left: 0;
+		padding-right: 0;
+	}
+	/*.col-sm-12{
+		padding-left: 0 !important;
+	}*/
+	.mw340{
+		min-width: 100%;
+	    margin: 0 auto !important;
+	}
+	.cs-horizontal .col-md-9 .sub-box:first-child{
+		margin-bottom: 10px;
+	}
+	.cs-horizontal .col-md-12, .texterea-horizontal .col-md-12, .check-horizontal .col-md-12,
+	.multi-horizontal .col-md-12{
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.cs-horizontal .col-md-12 .col-xs-9, .check-horizontal .col-md-12 .col-xs-9,
+	.texterea-horizontal .col-md-12 .col-xs-9, .multi-horizontal .col-md-12 .col-xs-9{
+		padding-right: 0;
+	}
+	.clearfix.cs-horizontal .col-md-12 .col-xs-3, .clearfix.cs-horizontal .col-xs-9,
+	.cs-horizontal .col-md-9 .sub-box{
+		width: 100% !important;
+	}
+	.sub-max-wid{
+		width: 87%;
+		margin-right: 0;
+		margin-bottom: 10px;
+	}
+	.sub-box select{
+		width: 31% !important;
+	}
+	.multi-horizontal.clearfix .col-md-12 .col-sm-9 select{
+		width: 17%;
+	}
+	.multi-plus .col-sm-9 .fl_l select.both-clear{
+		clear: none;
+		margin-right: 0 !important;
+	}
+	.clearfix.cs-horizontal .col-xs-9 .mg_t5:nth-child(3n+1){
+		margin-left: 0 !important;
+	}
+	.button-login-normal {
+		padding: 8px 12px;
+	    min-width: 42%;
+	    width: 42%;
+	    margin: 0 10px;
+	}
+}
+@media only screen and (max-width: 600px){
+	.clearfix .col-md-12 .col-sm-9 select, .multi-horizontal.clearfix .col-md-12 .col-sm-9 select {
+	    margin-bottom: 10px;
+	    width: 34%;
+	}
+}
+
+@media only screen and (max-width: 480px){
+	.col-horizontal .col-sm-3, .col-horizontal .col-sm-9, 
+	.clearfix .col-md-12 .col-sm-3, .clearfix .col-md-12 .col-sm-9,
+	.check-horizontal .col-md-12:nth-child(odd) .col-xs-3, 
+	.check-horizontal .col-md-12:nth-child(odd) .col-xs-9, .sub-max-wid input, .sub-max-wid select,
+	.texterea-horizontal .col-sm-3, .texterea-horizontal .col-sm-9, .wid-horizontal .col-xs-4,
+	.block-horizontal .col-xs-3, .block-horizontal .col-xs-9,
+	.multi-horizontal .col-xs-3, .multi-horizontal .col-xs-9{
+		width: 100% !important;
+	}
+	.check-horizontal .col-md-12:nth-child(even) .col-xs-3{
+		width: 28% !important;
+	}
+	.check-horizontal .col-md-12:nth-child(even) .col-xs-9{
+		width: 72% !important;
+		padding-right: 0;
+	}
+	.wid-horizontal .col-xs-9 select{
+		width: 20% !important;
+		padding: 6px 1px;
+	}
+	.clearfix .col-md-12 .col-sm-9 select, .multi-horizontal.clearfix .col-md-12 .col-sm-9 select {
+		margin-bottom: 10px;
+		width: 34%;
+	}
+	.multi-plus .col-sm-9 .fl_l select:last-child {
+	    margin-left: 36px !important;
+	}
+	.block-horizontal .col-xs-9 .fl_l.mg_r5, .sub-box{
+		margin-right: 0 !important;
+	}
+	.sub-max-wid{
+		width: 81%;
+		margin-right: 0;
+	}
+	.sub-box select{
+		width: 36.4% !important;
+	}
+	.block-horizontal .col-xs-9 .fl_l .fl_l{
+		margin-left: 0 !important;
+		margin-top: 10px !important;
+	}
+	.clearfix .col-md-12 .col-sm-9 select{
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+	.clearfix .col-md-12 .col-sm-3{
+		margin-bottom: 10px;
+	}
+	.wid-horizontal .col-xs-9 .mg_t5{
+		margin-top: 5px !important;
+	}
+	.col-horizontal .col-sm-3, .check-horizontal .col-xs-3{
+		margin-bottom: 10px;
+		margin-top: 0;
+	}
+	.col-horizontal .col-sm-9{
+		padding-left: 0 !important;
+	}
+	.wid-horizontal .col-xs-4, .check-horizontal .col-md-12, .cs-horizontal .col-md-12,
+	.multi-horizontal .col-xs-3, .multi-horizontal .col-xs-9, .texterea-horizontal .col-xs-3,
+	.cs-horizontal .col-xs-3, .cs-horizontal .col-xs-9, .texterea-horizontal .col-md-12,
+	.check-horizontal .col-xs-3, .check-horizontal .col-xs-9, .texterea-horizontal .col-xs-9,
+	.block-horizontal .col-xs-3, .block-horizontal .col-xs-9, .multi-horizontal .col-md-12{
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.multi-horizontal .col-md-12{
+		padding-bottom: 0;
+	}
+	.multi-horizontal .border-bottom-solid{
+		padding-bottom: 10px;
+	}
+	.multi-horizontal .col-sm-9 select:last-child{
+		margin-bottom: 0 !important;
+	}
+	.block-horizontal .col-md-12{
+		padding-right: 0;
+	}
+	.clearfix .col-xs-9 .text-ruby{
+		display: block;
+	    float: none;
+	    line-height: normal;
+        margin: 10px 0 10px 0 !important;
+	}
+	.check-rume {
+	    padding-left: 30px;
+	    margin-bottom: 0px;
+	}
+	.checkmark {
+	    height: 18px;
+	    width: 19px;
+	    top: 5px;
+	}
+	.check-rume .checkmark:before {
+	    left: 2px;
+	    top: 7px;
+	    width: 14px;
+	    height: 0;
+	}
+	.check-rume .checkmark:after {
+	    left: 9px;
+	    top: 1px;
+	    width: 0px;
+	    height: 14px;
+	}
+	.notice-title{
+		font-size: 32px;
+	}
+}

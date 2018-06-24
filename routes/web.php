@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/hiragana', 'JapanController@hiragana');
+Route::get('/katakana', 'JapanController@katakana');
+Route::post('/katakana', 'JapanController@katakana');

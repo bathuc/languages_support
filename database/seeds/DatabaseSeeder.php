@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $tables = [
+            'HiraganaSeeder',
+            'KatakanaSeeder',
+        ];
+        foreach ($tables as $item) {
+            $this->call($item);
+        }
     }
 }
