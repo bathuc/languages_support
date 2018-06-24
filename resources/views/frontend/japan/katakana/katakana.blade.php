@@ -19,7 +19,7 @@
             <div id="entry_area">
                 Type the rōmaji:<br>
                 <form method="post" id="frm">
-                    <input type="text" id="enter_romaji" name="enter_romaji"><br>
+                    <input type="text" id="enter_romaji" name="enter_romaji" autocomplete="off"><br>
                     {{--<input type="submit" value="Submit"/>--}}
                 </form>
             </div>
