@@ -32,6 +32,7 @@
 		{!! renderJs($arrayJs) !!}
     </head>
     <body>
+        @include('layouts.frontend.header')
         <div class="container">
 			@yield('content')
         </div>

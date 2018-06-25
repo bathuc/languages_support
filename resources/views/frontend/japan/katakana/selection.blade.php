@@ -1,38 +1,38 @@
 
 <table id="kana_choice">
     <tbody><tr id="vowel_activators">
-        <td class="clickable deactivate" id="everything">Deactivate Everything</td>
-        <td class="clickable activate" id="" style="display: table-cell;">Activate All&nbsp;-a</td>
-        <td class="clickable activate" id="">Activate All&nbsp;-i</td>
-        <td class="clickable activate" id="">Activate All&nbsp;-u</td>
-        <td class="clickable activate" id="">Activate All&nbsp;-e</td>
-        <td class="clickable activate" id="">Activate All&nbsp;-o</td>
+        <td class="activate" id="everything">Activate Everything</td>
+        <td class="activate" id="" style="display: table-cell;">Activate All&nbsp;-a</td>
+        <td class="activate" id="">Activate All&nbsp;-i</td>
+        <td class="activate" id="">Activate All&nbsp;-u</td>
+        <td class="activate" id="">Activate All&nbsp;-e</td>
+        <td class="activate" id="">Activate All&nbsp;-o</td>
         <td class="yoon" colspan="3" rowspan="2" style="background-color: rgb(255, 255, 255); display: none;"></td>
     </tr>
     <tr id="row_a">
-        <td class="deactivate" id="all_vowel">Deactivate All&nbsp;a</td>
-        <td class="clickable active" id="a">a&nbsp; ア</td>
-        <td class="clickable active" id="i">i&nbsp; イ</td>
-        <td class="clickable active" id="u">u&nbsp; ウ</td>
-        <td class="clickable active" id="e">e&nbsp; エ</td>
-        <td class="clickable active" id="o">o&nbsp; オ</td>
+        <td class="headrow activate" id="all_vowel" data-row="a">Deactivate All&nbsp;a</td>
+        <td class="clickable inactive" id="a">a&nbsp; ア</td>
+        <td class="clickable inactive" id="i">i&nbsp; イ</td>
+        <td class="clickable inactive" id="u">u&nbsp; ウ</td>
+        <td class="clickable inactive" id="e">e&nbsp; エ</td>
+        <td class="clickable inactive" id="o">o&nbsp; オ</td>
     </tr>
     <tr id="row_k">
-        <td class="activate" id="all_k">Activate All&nbsp;k-</td>
-        <td class="clickable active" id="ka">ka&nbsp; カ</td>
-        <td class="clickable active" id="ki">ki&nbsp; キ</td>
+        <td class="headrow activate" id="all_k" data-row="k">Activate All&nbsp;k</td>
+        <td class="clickable inactive" id="ka">ka&nbsp; カ</td>
+        <td class="clickable inactive" id="ki">ki&nbsp; キ</td>
         <td class="clickable inactive" id="ku">ku&nbsp; ク</td>
         <td class="clickable inactive" id="ke">ke&nbsp; ケ</td>
-        <td class="clickable active" id="ko">ko&nbsp;コ</td>
+        <td class="clickable inactive" id="ko">ko&nbsp;コ</td>
         <td class="yoon" id="kya" style="display: none;">kya&nbsp; きゃ</td>
         <td class="yoon" id="kyu" style="display: none;">kyu&nbsp; きゅ</td>
         <td class="yoon" id="kyo" style="display: none;">kyo&nbsp; きょ</td>
     </tr>
     <tr id="row_s">
-        <td class="activate" id="all_s">Activate All&nbsp;s-</td>
+        <td class="headrow activate" id="all_s" data-row="s">Activate All&nbsp;s</td>
         <td class="clickable inactive" id="sa">sa&nbsp; サ</td>
-        <td class="clickable active" id="shi">shi&nbsp; シ</td>
-        <td class="clickable active" id="su">su&nbsp; ス</td>
+        <td class="clickable inactive" id="shi">shi&nbsp; シ</td>
+        <td class="clickable inactive" id="su">su&nbsp; ス</td>
         <td class="clickable inactive" id="se">se&nbsp; セ</td>
         <td class="clickable inactive" id="so">so&nbsp; ソ</td>
         <td class="yoon" id="sha" style="display: none;">sha&nbsp; しゃ</td>
@@ -40,32 +40,32 @@
         <td class="yoon" id="sho" style="display: none;">sho&nbsp; しょ</td>
     </tr>
     <tr id="row_t">
-        <td class="deactivate" id="all_t">Deactivate All&nbsp;t-</td>
-        <td class="clickable active" id="ta">ta&nbsp; タ</td>
-        <td class="clickable active" id="chi">chi&nbsp; チ</td>
-        <td class="clickable active" id="tsu">tsu&nbsp; ツ</td>
-        <td class="clickable active" id="te">te&nbsp; テ</td>
-        <td class="clickable active" id="to">to&nbsp; テ</td>
+        <td class="headrow activate" id="all_t" data-row="t">Activate All&nbsp;t</td>
+        <td class="clickable inactive" id="ta">ta&nbsp; タ</td>
+        <td class="clickable inactive" id="chi">chi&nbsp; チ</td>
+        <td class="clickable inactive" id="tsu">tsu&nbsp; ツ</td>
+        <td class="clickable inactive" id="te">te&nbsp; テ</td>
+        <td class="clickable inactive" id="to">to&nbsp; ト</td>
         <td class="yoon" id="cha" style="display: none;">cha&nbsp; ちゃ</td>
         <td class="yoon" id="chu" style="display: none;">chu&nbsp; ちゅ</td>
         <td class="yoon" id="cho" style="display: none;">cho&nbsp; ちょ</td>
     </tr>
     <tr id="row_n">
-        <td class="activate" id="all_n">Activate All&nbsp;n-</td>
+        <td class="headrow activate" id="all_n" data-row="n">Activate All&nbsp;n</td>
         <td class="clickable inactive" id="na">na&nbsp; ナ</td>
-        <td class="clickable active" id="ni">ni&nbsp; ニ</td>
+        <td class="clickable inactive" id="ni">ni&nbsp; ニ</td>
         <td class="clickable inactive" id="nu">nu&nbsp; ヌ</td>
-        <td class="clickable active" id="ne">ne&nbsp; ネ</td>
+        <td class="clickable inactive" id="ne">ne&nbsp; ネ</td>
         <td class="clickable inactive" id="no">no&nbsp; ノ</td>
         <td class="yoon" id="nya" style="display: none;">nya&nbsp; にゃ</td>
         <td class="yoon" id="nyu" style="display: none;">nyu&nbsp; にゅ</td>
         <td class="yoon" id="nyo" style="display: none;">nyo&nbsp; にょ</td>
     </tr>
     <tr id="row_h">
-        <td class="activate" id="all_h">Activate All&nbsp;h-</td>
+        <td class="headrow activate" id="all_h" data-row="h">Activate All&nbsp;h</td>
         <td class="clickable inactive" id="ha">ha&nbsp; ハ</td>
-        <td class="clickable active" id="hi">hi&nbsp; ヒ</td>
-        <td class="clickable active" id="fu">fu&nbsp; フ</td>
+        <td class="clickable inactive" id="hi">hi&nbsp; ヒ</td>
+        <td class="clickable inactive" id="fu">fu&nbsp; フ</td>
         <td class="clickable inactive" id="he">he&nbsp; ヘ</td>
         <td class="clickable inactive" id="ho">ho&nbsp; ホ</td>
         <td class="yoon" id="hya" style="display: none;">hya&nbsp; ひゃ</td>
@@ -73,9 +73,9 @@
         <td class="yoon" id="hyo" style="display: none;">hyo&nbsp; ひょ</td>
     </tr>
     <tr id="row_m">
-        <td class="activate" id="all_m">Activate All&nbsp;m-</td>
+        <td class="headrow activate" id="all_m" data-row="m">Activate All&nbsp;m</td>
         <td class="clickable inactive" id="ma">ma&nbsp; マ</td>
-        <td class="clickable active" id="mi">mi&nbsp; ミ</td>
+        <td class="clickable inactive" id="mi">mi&nbsp; ミ</td>
         <td class="clickable inactive" id="mu">mu&nbsp; ム</td>
         <td class="clickable inactive" id="me">me&nbsp; メ</td>
         <td class="clickable inactive" id="mo">mo&nbsp; モ</td>
@@ -84,8 +84,8 @@
         <td class="yoon" id="myo" style="display: none;">myo&nbsp; みょ</td>
     </tr>
     <tr id="row_y">
-        <td class="activate" id="all_y">Activate All&nbsp;y-</td>
-        <td class="clickable active" id="ya">ya&nbsp; モ</td>
+        <td class="headrow activate" id="all_y" data-row="y">Activate All&nbsp;y</td>
+        <td class="clickable inactive" id="ya">ya&nbsp; モ</td>
         <td></td>
         <td class="clickable inactive" id="yu">yu&nbsp; ユ</td>
         <td></td>
@@ -93,8 +93,8 @@
         <td class="yoon" colspan="3" style="background-color: rgb(255, 255, 255); display: none;"></td>
     </tr>
     <tr id="row_r">
-        <td class="activate" id="all_r">Activate All&nbsp;r-</td>
-        <td class="clickable active" id="ra">ra&nbsp; ラ</td>
+        <td class="headrow activate" id="all_r" data-row="r">Activate All&nbsp;r</td>
+        <td class="clickable inactive" id="ra">ra&nbsp; ラ</td>
         <td class="clickable inactive" id="ri">ri&nbsp; リ</td>
         <td class="clickable inactive" id="ru">ru&nbsp; ル</td>
         <td class="clickable inactive" id="re">re&nbsp; レ</td>
@@ -104,15 +104,15 @@
         <td class="yoon" id="ryo" style="display: none;">ryo&nbsp; りょ</td>
     </tr>
     <tr id="row_w">
-        <td class="activate" id="all_w">Activate All&nbsp;w-</td>
+        <td class="headrow activate" id="all_w" data-row="w">Activate All&nbsp;w</td>
         <td class="clickable inactive" id="wa">wa&nbsp; ワ</td>
         <td></td>
         <td></td>
         <td class="clickable inactive" id="wo">wo&nbsp; ヲ</td>
         <td class="yoon" colspan="3" style="background-color: rgb(255, 255, 255); display: none;"></td>
     </tr>
-    <tr id="row_bare_n">
-        <td></td>
+    <tr id="row_nn">
+        <td class="headrow activate" id="all_nn" data-row="nn">Activate All&nbsp;n</td>
         <td></td>
         <td></td>
         <td></td>
@@ -190,14 +190,14 @@
         $('#frm').submit();
     });
     function setToggle(element, index) {
-        var active = element.hasClass('active');
+        var active = element.hasClass('activate');
         if(active){
             element.html('Active All ' + index);
-            element.removeClass('active').addClass('deactive');
+            element.removeClass('activate').addClass('deactivate');
         }
         else{
             element.html('Deactive All ' + index);
-            element.removeClass('deactive').addClass('active');
+            element.removeClass('deactivate').addClass('activate');
         }
     }
     function setStatus(element,status) {
@@ -213,45 +213,29 @@
     }
 
     function rowToggle(head,index) {
-        var active = head.hasClass('active');
+        var active = head.hasClass('activate');
         setToggle(head, index);
         $('#row_'+ index + ' td.clickable').each(function(index){
             setStatus($(this), active);
         });
     }
 
-    $('#all_vowel').click(function(){
-        rowToggle($(this),'a');
+    $('.headrow').click(function(){
+        rowToggle($(this),$(this).data('row'));
     });
 
-    $('#all_k').click(function(){
-        rowToggle($(this),'k');
-    });
-    $('#all_s').click(function(){
-        rowToggle($(this),'s');
-    });
-    $('#all_t').click(function(){
-        rowToggle($(this),'t');
-    });
-    $('#all_n').click(function(){
-        rowToggle($(this),'n');
-    });
-    $('#all_h').click(function(){
-        rowToggle($(this),'h');
-    });
-    $('#all_m').click(function(){
-        rowToggle($(this),'m');
-    });
-    $('#all_y').click(function(){
-        rowToggle($(this),'y');
-    });
-    $('#all_r').click(function(){
-        rowToggle($(this),'r');
-    });
-    $('#all_w').click(function(){
-        rowToggle($(this),'w');
-    });
-    $('.clickable').click(function(){
-        setStatus($(this),!$(this).hasClass('active'));
+    $('#everything').click(function(){
+       if($(this).hasClass('deactivate')){
+           $(this).html('Activate Everything ');
+           $(this).removeClass('deactivate').addClass('activate');
+           setStatus($('.clickable'),0);
+           $('.headrow').removeClass('deactivate').addClass('activate');
+       }
+       else{
+           $(this).html('Deactivate Everything ');
+           $(this).removeClass('activate').addClass('deactivate');
+           setStatus($('.clickable'),1);
+           $('.headrow ').removeClass('activate').addClass('deactivate');
+       }
     });
 </script>

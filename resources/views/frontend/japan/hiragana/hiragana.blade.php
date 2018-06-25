@@ -6,9 +6,9 @@
         @include('frontend.japan.hiragana.selection')
     @else
         @php
-            $randKeys = array_rand($hiragana, 3);
-            $randText = $hiragana[$randKeys[0]]['name'] . $hiragana[$randKeys[1]]['name'] . $hiragana[$randKeys[2]]['name'] ;
-            $randRomaji = $hiragana[$randKeys[0]]['romaji'] . $hiragana[$randKeys[1]]['romaji'] . $hiragana[$randKeys[2]]['romaji'] ;
+            $randKeys = array_rand($hiragana, 4);
+            $randText = $hiragana[$randKeys[0]]['name'] . $hiragana[$randKeys[1]]['name'] . $hiragana[$randKeys[2]]['name'] . $hiragana[$randKeys[3]]['name'] ;
+            $randRomaji = $hiragana[$randKeys[0]]['romaji'] . $hiragana[$randKeys[1]]['romaji'] . $hiragana[$randKeys[2]]['romaji'] . $hiragana[$randKeys[3]]['romaji'] ;
         @endphp
         <div id="hira">
             <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $randText }}</span><br>
