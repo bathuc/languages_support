@@ -117,7 +117,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td class="clickable active" id="nn">n&nbsp; ん</td>
+        <td class="clickable active" id="n">n&nbsp; ん</td>
         <td class="yoon" colspan="3" style="background-color: rgb(255, 255, 255); display: none;"></td>
     </tr>
     <tr id="row_g">
@@ -176,6 +176,7 @@
 <form method="post" id="frm">
     {{ csrf_field() }}
     <input type="hidden" name="chooseId">
+    <input type="number" name="numberCharacter" value="4" style="width:50px" autofocus/>
     <input id="startTest" type="button" value="Test Me">
 </form>
 <script>

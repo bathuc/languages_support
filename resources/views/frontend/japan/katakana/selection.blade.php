@@ -85,7 +85,7 @@
     </tr>
     <tr id="row_y">
         <td class="headrow activate" id="all_y" data-row="y">Activate All&nbsp;y</td>
-        <td class="clickable inactive" id="ya">ya&nbsp; モ</td>
+        <td class="clickable inactive" id="ya">ya&nbsp; ヤ</td>
         <td></td>
         <td class="clickable inactive" id="yu">yu&nbsp; ユ</td>
         <td></td>
@@ -176,6 +176,7 @@
 <form method="post" id="frm">
     {{ csrf_field() }}
     <input type="hidden" name="chooseId">
+    <input type="number" name="numberCharacter" value="4" style="width:50px" autofocus/>
     <input id="startTest" type="button" value="Test Me">
 </form>
 <script>
