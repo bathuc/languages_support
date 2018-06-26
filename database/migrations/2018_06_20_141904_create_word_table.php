@@ -17,11 +17,11 @@ class CreateWordTable extends Migration
             $table->increments('id');
             $table->string('word');
             $table->string('sound')->nullable();
-            $table->integer('word_meaning_id')->nullable();
-            $table->integer('word_example_id')->nullable();
+            $table->string('meaning')->nullable();
+            $table->string('example')->nullable();
         });
 
-        DB::table('word')->insert(['word'=>'focus']);
+        DB::table('word')->insert(['word'=>'focus','meaning'=>'tập trung']);
     }
 
     /**
@@ -31,6 +31,6 @@ class CreateWordTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('english_word');
+        Schema::dropIfExists('word');
     }
 }

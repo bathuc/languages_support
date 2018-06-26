@@ -225,6 +225,10 @@
         rowToggle($(this),$(this).data('row'));
     });
 
+    $('.clickable').click(function(){
+        setStatus($(this),!$(this).hasClass('active'));
+    });
+
     $('#everything').click(function(){
        if($(this).hasClass('deactivate')){
            $(this).html('Activate Everything ');

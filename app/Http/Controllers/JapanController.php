@@ -10,7 +10,7 @@ class JapanController extends Controller
 {
     public function hiragana(Request $request)
     {
-        $testFlag = null;$randText = ''; $randRomaji = '';
+        $testFlag = null;$randText = ''; $randRomaji = ''; $error = '';
         $hiragana = Higagana::get();
         if($request->post()) {
             $testFlag = 1;
@@ -22,9 +22,10 @@ class JapanController extends Controller
             if($numberCharacter < 1) $numberCharacter = 1;
             if($numberCharacter > count($hiragana))$numberCharacter = count($hiragana);
             if($numberCharacter > 10) $numberCharacter = 10;
-            if(count($hiragana) <= 1) {
+            if(count($hiragana) <= 2) {
                 $testFlag = 0;
-                return view('frontend.japan.katakana.katakana', compact('katakana', 'testFlag'));
+                $error = 'Please choose at least 3 item';
+                return view('frontend.japan.hiragana.hiragana', compact('katakana', 'testFlag', 'error'));
             }
 
             $randKeys = array_rand($hiragana, $numberCharacter);
@@ -34,12 +35,12 @@ class JapanController extends Controller
             }
         }
         return view('frontend.japan.hiragana.hiragana',
-            compact('hiragana', 'testFlag', 'randText', 'randRomaji'));
+            compact('hiragana', 'testFlag', 'randText', 'randRomaji', 'error'));
     }
 
     public function katakana(Request $request)
     {
-        $testFlag = null;$randText = ''; $randRomaji = '';
+        $testFlag = null;$randText = ''; $randRomaji = ''; $error = '';
         $katakana = Katakana::get();
         if($request->post()) {
             $testFlag = 1;
@@ -50,9 +51,10 @@ class JapanController extends Controller
             if($numberCharacter < 1) $numberCharacter = 1;
             if($numberCharacter > count($katakana))$numberCharacter = count($katakana);
             if($numberCharacter > 10) $numberCharacter = 10;
-            if(count($katakana) <= 1) {
+            if(count($katakana) <= 2) {
                 $testFlag = 0;
-                return view('frontend.japan.katakana.katakana', compact('katakana', 'testFlag'));
+                $error = 'Please choose at least 3 item';
+                return view('frontend.japan.katakana.katakana', compact('katakana', 'testFlag', 'error'));
             }
 
             $randKeys = array_rand($katakana, $numberCharacter);
@@ -63,6 +65,6 @@ class JapanController extends Controller
 
         }
         return view('frontend.japan.katakana.katakana',
-            compact('katakana', 'testFlag', 'randText', 'randRomaji'));
+            compact('katakana', 'testFlag', 'randText', 'randRomaji', 'error'));
     }
 }

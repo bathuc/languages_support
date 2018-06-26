@@ -1,6 +1,10 @@
 @extends('layouts.frontend.index')
 
 @section('content')
+    <br>
+    @if($error)
+        <div class="alert alert-danger choose-more">{{ $error }}</div>
+    @endif
     <h1 id="head1">Katakana Drill</h1>
     @if(!$testFlag)
         @include('frontend.japan.katakana.selection')
