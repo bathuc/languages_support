@@ -8,37 +8,32 @@
         <meta name="description" content="">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="stylesheet" href="{{ URL::to('/admin/') }}/bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+        {!! Html::style('admin/front/css/bootstrap.min.css') !!}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="{{ URL::to('/admin/') }}/bower_components/font-awesome/css/font-awesome.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="{{ URL::to('/admin/') }}/bower_components/Ionicons/css/ionicons.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="{{ URL::to('/admin/') }}/dist/css/AdminLTE.min.css">
+        {!! Html::style('admin/front/css/font-awesome.min.css') !!}
+        {!! Html::style('admin/front/css/ionicons.min.css') !!}
+        {!! Html::style('admin/front/css/AdminLTE.min.css') !!}
         <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
               page. However, you can choose any other skin. Make sure you
               apply the skin class to the body tag so the changes take effect. -->
-        <link rel="stylesheet" href="{{ URL::to('/admin/') }}/dist/css/skins/skin-blue.min.css">
-        <link rel="stylesheet" href="{{ URL::to('/admin/') }}/dist/css/style.css">
+        {!! Html::style('admin/front/css/skins/skin-blue.min.css') !!}
+        {!! Html::style('admin/front/css/style.css') !!}
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <link rel="stylesheet" href="{{ URL::to('/admin/') }}/css/custom-styles.css">
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <!-- Google Font -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-        <script src="{{ URL::to('/admin/') }}/bower_components/jquery/dist/jquery.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        {!! Html::script('admin/front/js/jquery.min.js') !!}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment-with-locales.min.js"></script>
-        <!-- Bootstrap 3.3.7 -->
-        <script src="{{ URL::to('/admin/') }}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        {!! Html::script('admin/front/js/bootstrap.min.js') !!}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" async="async"></script>
-        <!-- AdminLTE App -->
-        <script src="{{ URL::to('/admin/') }}/dist/js/adminlte.min.js"></script>    </head>
+        {!! Html::script('admin/front/js/adminlte.min.js') !!}
+
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
