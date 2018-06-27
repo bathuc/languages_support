@@ -108,9 +108,40 @@ class AdminController extends Controller
         return view('admin.words.words_new', compact('message'));
     }
 
-    public function wordEdit(Request $request)
+    public function wordEdit(Request $request, $id)
     {
-        return view('admin.words.words_edit');
+        $word = Word::where(['id' => $id])->first();
+        if (empty($word)) {
+            return redirect()->route('admin.words');
+        }
+
+        $message = ['info' => [], 'pass' => []];
+        if ($request->isMethod('post')) {
+            // edit info
+            $validator = Validator::make($request->all(), [
+                'word' => 'required|max:255',
+                'meaning' => 'required|max:255',
+            ]);
+            if (!empty($validator) && $validator->fails()) {
+                // fail
+                $message['info']['success'] = 0;
+                $message['info']['message'] = "Error Occur";
+            } else {
+                $dataUpdate = [
+                    'word' => $request->word,
+                    'meaning' => $request->meaning,
+                ];
+                if(!empty($request->example)) {
+                    $dataUpdate['example'] = $request->example;
+                }
+                Word::where('id', $id)->update($dataUpdate);
+                $message['info']['success'] = 1;
+                $message['info']['message'] = "Update successful";
+            }
+        }
+
+        $word = Word::where(['id' => $id])->first();
+        return view('admin.words.words_edit', compact('word', 'message'));
     }
 
     public function phrases(Request $request)
