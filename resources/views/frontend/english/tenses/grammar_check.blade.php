@@ -20,42 +20,9 @@
         </tbody>
     </table>
 
-    <h1>Grammar Check</h1>
-    <div id="hira">
-        <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $random['rand_text'] }}</span><br>
-        <span id="alert"></span>
-        <span id="success"></span>
+    <div id="ajaxBox">
+        @include('frontend.english.tenses.grammar_random')
     </div>
-    <br>
-    <div id="main">
-        <div id="entry_area">
-            Type the Tense:<br>
-            <form method="post" id="frm">
-                <input type="text" id="enter_tense" name="enter_tense" autocomplete="off"><br>
-            </form>
-        </div>
-    </div>
-    <script>
-        $('#enter_tense').focus();
-
-        function runHiraTest(){
-            $('#success').html('');
-            $('#alert').html('');
-            var tenseName = '{{ $random['tense_name'] }}';
-            if($('#enter_tense').val().trim().toUpperCase() == tenseName.toUpperCase()){
-                $('#success').html('correct');
-            }
-            else{
-                $('#alert').html('incorrect');
-            }
-        };
-
-        $('#frm').on('submit',function(e){
-            e.preventDefault();
-            runHiraTest();
-        })
-
-    </script>
 
     <style>
         .info-table a{

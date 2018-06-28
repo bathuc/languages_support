@@ -8,12 +8,12 @@ class Higagana extends BaseModel
 {
     protected $table = 'hiragana';
 
-    public static function getChoosenHigagana($data)
+    public static function getChoosenHigagana($romajiArray)
     {
-        if(empty($data)) return null;
-        $katakana = self::where(function ($query) use ($data) {
+        if(empty($romajiArray)) return null;
+        $hiragana = self::where(function ($query) use ($romajiArray) {
             $flag = true;
-            foreach ($data as $key => $item) {
+            foreach ($romajiArray as $key => $item) {
                 if($flag) {
                     $query->where([['romaji', '=', $item]]);
                     $flag = false;
@@ -23,6 +23,23 @@ class Higagana extends BaseModel
                 }
             }
         })->get()->toArray();
-        return $katakana;
+        return $hiragana;
+    }
+
+    public static function getRandomHiragana($romaji,$numberCharacter)
+    {
+        $randText = ''; $randRomaji = '';
+        $hiragana = self::getChoosenHigagana($romaji);
+        $randKeys = array_rand($hiragana, $numberCharacter);
+        for($i=0; $i< $numberCharacter; $i++) {
+            $randText .= $hiragana[$randKeys[$i]]['name'];
+            $randRomaji .= $hiragana[$randKeys[$i]]['romaji'];
+        }
+
+        return [
+            'hiragana_text' => $randText,
+            'romaji' => $randRomaji,
+        ];
+
     }
 }

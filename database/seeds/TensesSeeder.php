@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -36,9 +35,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He speaks.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He does not speak.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Does he speak?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He speaks.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He does not speak.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Does he speak?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -62,9 +61,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He is speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He is not speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Is he speaking?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He is speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He is not speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Is he speaking?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -88,9 +87,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He spoke.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He did not speak.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Did he speak?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He spoke.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He did not speak.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Did he speak?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -114,9 +113,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He was speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He was not speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Was he speaking?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He was speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He was not speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Was he speaking?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -142,9 +141,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He has spoken.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He has not spoken.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Has he spoken?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He has spoken.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He has not spoken.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Has he spoken?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -168,9 +167,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He has been speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He has not been speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Has he been speaking?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He has been speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He has not been speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Has he been speaking?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -194,9 +193,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He had spoken.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He had not spoken.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Had he spoken?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He had spoken.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He had not spoken.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Had he spoken?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -219,9 +218,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He had been speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He had not been speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Had he been speaking?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He had been speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He had not been speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Had he been speaking?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -244,9 +243,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He is going to speak.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He is not going to speak.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Is he going to speak?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He is going to speak.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He is not going to speak.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Is he going to speak?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -268,9 +267,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He will be speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He will not be speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Will he be speaking?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He will be speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He will not be speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Will he be speaking?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -291,9 +290,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He will have spoken.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He will not have spoken.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Will he have spoken?	'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He will have spoken.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He will not have spoken.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Will he have spoken?	'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -315,9 +314,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He will have been speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He will not have been speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Will he have been speaking?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He will have been speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He will not have been speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Will he have been speaking?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -339,9 +338,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: If He was you, He would speak.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: If He was you, He would not speak.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: If He was you, Would he speak?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'If He was you, He would speak.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'If He was you, He would not speak.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'If He was you, Would he speak?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -363,9 +362,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: If He was you, He would be speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: If He was you, He would not be speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: If He was you, Would he be speaking?	'],
+            ['tenses_id'=> $tenseId, 'describe' => 'If He was you, He would be speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'If He was you, He would not be speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'If He was you, Would he be speaking?	'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -386,9 +385,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He would have spoken.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He would not have spoken.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Would he have spoken?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He would have spoken.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He would not have spoken.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Would he have spoken?'],
         ];
 
         DB::table('tenses')->insert($tenseData);
@@ -410,9 +409,9 @@ class TensesSeeder extends Seeder
         ];
 
         $tenseExample =[
-            ['tenses_id'=> $tenseId, 'describe' => 'A: He would have been speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'N: He would not have been speaking.'],
-            ['tenses_id'=> $tenseId, 'describe' => 'Q: Would he have been speaking?'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He would have been speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'He would not have been speaking.'],
+            ['tenses_id'=> $tenseId, 'describe' => 'Would he have been speaking?'],
         ];
 
         DB::table('tenses')->insert($tenseData);

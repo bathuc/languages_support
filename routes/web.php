@@ -11,16 +11,22 @@
 |
 */
 
+Route::get('/', 'JapanController@index')->name('index');
 Route::get('/hiragana', 'JapanController@hiragana')->name('hiragana');
 Route::post('/hiragana', 'JapanController@hiragana')->name('hiragana');
+Route::post('/hiraRandom', 'JapanController@getHiraganaRandom')->name('hiragana.random');
+
 Route::get('/katakana', 'JapanController@katakana')->name('katakana');
 Route::post('/katakana', 'JapanController@katakana')->name('katakana');
+Route::post('/kanaRandom', 'JapanController@getKatakanaRandom')->name('katakana.random');
+
 Route::get('/words', 'EnglishController@words')->name('words');
 Route::post('/words', 'EnglishController@words')->name('words');
 Route::get('/phrases', 'EnglishController@phrases')->name('phrases');
 
 Route::get('/tenses', 'EnglishController@tenses')->name('tenses');
 Route::post('/tenses', 'EnglishController@tenses')->name('tenses');
+Route::post('/grammarRandom', 'EnglishController@grammarRandom')->name('tenses.grammar.random');
 Route::get('/tenses/detail/{id}', 'EnglishController@tenseDetail')->name('tense.detail');
 
 Route::post('/phrases', 'EnglishController@phrases')->name('phrases');

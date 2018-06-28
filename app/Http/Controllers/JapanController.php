@@ -8,34 +8,49 @@ use App\Models\Katakana;
 
 class JapanController extends Controller
 {
-    public function hiragana(Request $request)
+    public function index()
     {
-        $testFlag = null;$randText = ''; $randRomaji = ''; $error = '';
-        $hiragana = Higagana::get();
-        if($request->post()) {
-            $testFlag = 1;
-            $data = $request->all();
-            $chooseId = json_decode($data['chooseId']);
-            $hiragana = Higagana::getChoosenHigagana($chooseId);
+        return redirect()->route('hiragana');
+    }
 
-            $numberCharacter = $data['numberCharacter'];
-            if($numberCharacter < 1) $numberCharacter = 1;
-            if($numberCharacter > count($hiragana))$numberCharacter = count($hiragana);
-            if($numberCharacter > 10) $numberCharacter = 10;
-            if(count($hiragana) <= 2) {
-                $testFlag = 0;
-                $error = 'Please choose at least 3 item';
-                return view('frontend.japan.hiragana.hiragana', compact('katakana', 'testFlag', 'error'));
-            }
-
-            $randKeys = array_rand($hiragana, $numberCharacter);
-            for($i=0; $i< $numberCharacter; $i++) {
-                $randText .= $hiragana[$randKeys[$i]]['name'];
-                $randRomaji .= $hiragana[$randKeys[$i]]['romaji'];
+    public function getHiraganaRandom(Request $request)
+    {
+        if($request->ajax()) {
+            $romaji = session()->get('hira_romaji');
+            $number = session()->get('hira_number');
+            if( $romaji && $number){
+                $random = Higagana::getRandomHiragana($romaji,$number);
+                return view('frontend.japan.hiragana.random', compact('random'));
             }
         }
-        return view('frontend.japan.hiragana.hiragana',
-            compact('hiragana', 'testFlag', 'randText', 'randRomaji', 'error'));
+    }
+
+    public function hiragana(Request $request)
+    {
+        $hiragana = Higagana::get();
+        if($request->post()) {
+            $data = $request->all();
+            $romaji = json_decode($data['chooseId']);
+            session()->put('hira_romaji', $romaji);
+            session()->put('hira_number', $data['numberCharacter']);
+
+            $numberCharacter = $data['numberCharacter'];
+            $random = Higagana::getRandomHiragana($romaji,$numberCharacter);
+            return view('frontend.japan.hiragana.hiragana_test', compact('random'));
+        }
+        return view('frontend.japan.hiragana.hiragana_selection', compact('hiragana'));
+    }
+
+    public function getKatakanaRandom(Request $request)
+    {
+        if($request->ajax()) {
+            $romaji = session()->get('kana_romaji');
+            $number = session()->get('kana_number');
+            if( $romaji && $number){
+                $random = Katakana::getRandomKatakana($romaji,$number);
+                return view('frontend.japan.katakana.random', compact('random'));
+            }
+        }
     }
 
     public function katakana(Request $request)
@@ -43,28 +58,15 @@ class JapanController extends Controller
         $testFlag = null;$randText = ''; $randRomaji = ''; $error = '';
         $katakana = Katakana::get();
         if($request->post()) {
-            $testFlag = 1;
             $data = $request->all();
-            $chooseId = json_decode($data['chooseId']);
-            $katakana = Katakana::getChoosenKatakana($chooseId);
+            $romaji = json_decode($data['chooseId']);
+            session()->put('kana_romaji', $romaji);
+            session()->put('kana_number', $data['numberCharacter']);
+
             $numberCharacter = $data['numberCharacter'];
-            if($numberCharacter < 1) $numberCharacter = 1;
-            if($numberCharacter > count($katakana))$numberCharacter = count($katakana);
-            if($numberCharacter > 10) $numberCharacter = 10;
-            if(count($katakana) <= 2) {
-                $testFlag = 0;
-                $error = 'Please choose at least 3 item';
-                return view('frontend.japan.katakana.katakana', compact('katakana', 'testFlag', 'error'));
-            }
-
-            $randKeys = array_rand($katakana, $numberCharacter);
-            for($i=0; $i< $numberCharacter; $i++) {
-                $randText .= $katakana[$randKeys[$i]]['name'];
-                $randRomaji .= $katakana[$randKeys[$i]]['romaji'];
-            }
-
+            $random = Katakana::getRandomKatakana($romaji,$numberCharacter);
+            return view('frontend.japan.katakana.katakana_test', compact('random'));
         }
-        return view('frontend.japan.katakana.katakana',
-            compact('katakana', 'testFlag', 'randText', 'randRomaji', 'error'));
+        return view('frontend.japan.katakana.katakana_selection');
     }
 }

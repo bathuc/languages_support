@@ -34,10 +34,24 @@ class EnglishController extends Controller
         if($request->post()) {
             $ids = json_decode($request->chooseId,1);
             $type = $request->typeCheck;
+            session()->put('ids', $ids);
+            session()->put('type', $type);
             $tenses = Tense::whereIn('id',$ids)->get()->toArray();
             $random = Tense::getRandomArray($ids, $request->typeCheck);
             return view('frontend.english.tenses.grammar_check', compact( 'tenses', 'random'));
         }
         return view('frontend.english.tenses.main', compact('tenses'));
+    }
+
+    public function grammarRandom(Request $request)
+    {
+        if($request->ajax()) {
+            $ids = session()->get('ids');
+            $type = session()->get('type');
+            if( $ids && $type){
+                $random = Tense::getRandomArray($ids, $type);
+                return view('frontend.english.tenses.grammar_random', compact( 'tenses', 'random'));
+            }
+        }
     }
 }
