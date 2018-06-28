@@ -19,6 +19,8 @@ class CreateWordTable extends Migration
             $table->string('sound')->nullable();
             $table->string('meaning')->nullable();
             $table->string('example')->nullable();
+            $table->string('example1')->nullable();
+            $table->string('subjects_id')->nullable();
         });
 
         DB::table('word')->insert(['word'=>'focus','meaning'=>'tập trung']);

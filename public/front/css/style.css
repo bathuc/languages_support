@@ -2687,10 +2687,6 @@ table {
     border-color: grey;
 }
 
-TABLE#kana_choice TD.deactivate {
-    background-color: #ccf;
-    color: #336;
-}
 TABLE#kana_choice TD, TABLE#kana_choice TH {
     border: 1px solid #666;
     text-align: center;
@@ -2702,6 +2698,10 @@ TABLE .clickable {
     cursor: pointer;
 }
 
+TABLE#kana_choice TD.deactivate {
+    background-color: #ccf;
+    color: #336;
+}
 TABLE#kana_choice TD.activate {
     background-color: #fdd;
     color: #400;

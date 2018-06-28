@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $tables = [
             'HiraganaSeeder',
             'KatakanaSeeder',
+            'TensesSeeder',
         ];
         foreach ($tables as $item) {
             $this->call($item);

@@ -18,6 +18,11 @@ Route::post('/katakana', 'JapanController@katakana')->name('katakana');
 Route::get('/words', 'EnglishController@words')->name('words');
 Route::post('/words', 'EnglishController@words')->name('words');
 Route::get('/phrases', 'EnglishController@phrases')->name('phrases');
+
+Route::get('/tenses', 'EnglishController@tenses')->name('tenses');
+Route::post('/tenses', 'EnglishController@tenses')->name('tenses');
+Route::get('/tenses/detail/{id}', 'EnglishController@tenseDetail')->name('tense.detail');
+
 Route::post('/phrases', 'EnglishController@phrases')->name('phrases');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {

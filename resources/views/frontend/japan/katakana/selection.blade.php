@@ -180,8 +180,8 @@
     <input id="startTest" type="button" value="Test Me">
 </form>
 <script>
-    var chooseId = [];
     $('#startTest').click(function(){
+        var chooseId = [];
         $('.clickable').each(function(index){
             if($(this).hasClass('active')){
                 chooseId.push($(this).attr('id'));

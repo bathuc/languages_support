@@ -85,22 +85,7 @@
                     <span class="bar3"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('hiragana')}}">Hiragana</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route('katakana')}}">Katakana</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route('words')}}">Words</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route('phrases')}}">Phrases</a>
-                        </li>
-                    </ul>
-                </div>
+                @include('layouts.frontend.navigate_bar')
             </nav>
         </div>
     </div>

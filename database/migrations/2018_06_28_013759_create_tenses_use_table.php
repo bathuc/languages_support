@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePhraseExampleTable extends Migration
+class CreateTensesUseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreatePhraseExampleTable extends Migration
      */
     public function up()
     {
-        Schema::create('phrase_example', function (Blueprint $table) {
+        Schema::create('tenses_use', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('describe')->nullable();
+            $table->string('describe_vi')->nullable();
+            $table->integer('tenses_id')->nullable();
         });
     }
 
@@ -26,6 +28,6 @@ class CreatePhraseExampleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phrase_example');
+        Schema::dropIfExists('tenses_use');
     }
 }
