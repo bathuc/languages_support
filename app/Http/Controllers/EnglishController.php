@@ -49,6 +49,7 @@ class EnglishController extends Controller
             $ids = session()->get('ids');
             $type = session()->get('type');
             if( $ids && $type){
+                $tenses = Tense::whereIn('id',$ids)->get()->toArray();
                 $random = Tense::getRandomArray($ids, $type);
                 return view('frontend.english.tenses.grammar_random', compact( 'tenses', 'random'));
             }

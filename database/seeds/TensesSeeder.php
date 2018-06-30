@@ -206,7 +206,7 @@ class TensesSeeder extends Seeder
         $tenseId++;
         $tenseData = [
             'id'=> $tenseId,
-            'name_eng'=> 'Past Perfect',
+            'name_eng'=> 'Past Perfect Continuous',
             'name_vi' => 'quá khứ hoàn thành tiếp diễn',
             'signal_words'=> 'for, since, the whole day, all day'
         ];
