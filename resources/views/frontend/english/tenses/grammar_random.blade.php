@@ -1,7 +1,18 @@
 
+@php
+    $simpleCheck = ($simpleRand == true) ? 'checked' : '';
+    $normalCheck = ($simpleRand == false) ? 'checked' : '';
+    $randomText =  ($simpleRand == true) ? $random['rand_simple_text'] : $random['rand_text'];
+
+    $exampleFlag = session()->get('type') == 'example' ? true : false;
+@endphp
 <h1>Grammar Check</h1>
+@if($exampleFlag)
+    <input type="radio" name="randText" value="simple" {{ $simpleCheck }}/><h3>Simple</h3>
+    <input type="radio" name="randText" value="normal" {{ $normalCheck }}/><h3>Normal</h3>
+@endif
 <div id="hira">
-    <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $random['rand_text'] }}</span><br>
+    <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $randomText }}</span><br>
     <span id="alert"></span>
     <span id="success"></span>
 </div>
@@ -39,6 +50,15 @@
 <script>
     $('#enter_tense').focus();
 
+    $('input[name=randText]').on('change',function(){
+        console.log($(this).val());
+        if($(this).val() == 'simple'){
+            $('#hira_show').html('{{ $random['rand_simple_text'] }}');
+        }
+        else {
+            $('#hira_show').html('{{ $random['rand_text'] }}');
+        }
+    });
     function testChecked(element,name){
         if(name == '{{ $random['tense_name'] }}'){
             $('#alert').html('');
@@ -62,7 +82,9 @@
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type: 'post',
             url:  '{{ route('tenses.grammar.random') }}',
-            data: {},
+            data: {
+                'simpleRand' : ($('input[name=randText]:checked').val() == 'simple')? 1 : 0,
+            },
             success: function(respond) {
                 $('#ajaxBox').html(respond);
             }
@@ -82,3 +104,13 @@
         }
     };
 </script>
+<style>
+    #hira_show{
+        line-height: 1.4;
+    }
+    h3 {
+        display: inline;
+        color: darkgreen;
+        margin: 0 10px;
+    }
+</style>

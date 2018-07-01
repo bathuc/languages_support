@@ -69,7 +69,7 @@
                         chooseId.push($(this).data('id'));
                     }
                 });
-                if(chooseId.length > 2) {
+                if(chooseId.length >= 2) {
                     $('input[name=chooseId]').val(JSON.stringify(chooseId));
                     $('#frm').submit();
                 }

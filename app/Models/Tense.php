@@ -28,6 +28,12 @@ class Tense extends Model
             $examples = $tense->tenseExample->toArray();
             $key = array_rand($examples,1);
             $random = ['tense_name'=>$tense->name_eng, 'rand_text'=> $examples[$key]['describe']];
+
+            // tense simple case
+            $three =  array_slice($examples, 0, 3);
+            $threeKey =  array_rand($three,1);
+            $random['rand_simple_text'] = $examples[$threeKey]['describe'];
+
             return $random;
         }
         else{
@@ -35,6 +41,12 @@ class Tense extends Model
             $uses = $tense->tenseUse->toArray();
             $key = array_rand($uses,1);
             $random = ['tense_name'=>$tense->name_eng, 'rand_text'=> $uses[$key]['describe']];
+
+            // tense simple case
+            $three =  array_slice($uses, 0, 3);
+            $threeKey =  array_rand($three,1);
+            $random['rand_simple_text'] = $uses[$threeKey]['describe'];
+
             return $random;
         }
     }

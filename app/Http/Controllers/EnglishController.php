@@ -34,11 +34,13 @@ class EnglishController extends Controller
         if($request->post()) {
             $ids = json_decode($request->chooseId,1);
             $type = $request->typeCheck;
+            $simpleRand = true;
             session()->put('ids', $ids);
             session()->put('type', $type);
+            session()->put('simpleRand', $simpleRand);
             $tenses = Tense::whereIn('id',$ids)->get()->toArray();
             $random = Tense::getRandomArray($ids, $request->typeCheck);
-            return view('frontend.english.tenses.grammar_check', compact( 'tenses', 'random'));
+            return view('frontend.english.tenses.grammar_check', compact( 'tenses', 'random', 'simpleRand'));
         }
         return view('frontend.english.tenses.main', compact('tenses'));
     }
@@ -48,10 +50,12 @@ class EnglishController extends Controller
         if($request->ajax()) {
             $ids = session()->get('ids');
             $type = session()->get('type');
+            $simpleRand = $request->simpleRand;
+            session()->put('simpleRand', $simpleRand);
             if( $ids && $type){
                 $tenses = Tense::whereIn('id',$ids)->get()->toArray();
                 $random = Tense::getRandomArray($ids, $type);
-                return view('frontend.english.tenses.grammar_random', compact( 'tenses', 'random'));
+                return view('frontend.english.tenses.grammar_random', compact( 'tenses', 'random', 'simpleRand'));
             }
         }
     }
