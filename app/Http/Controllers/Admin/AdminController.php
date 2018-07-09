@@ -146,6 +146,77 @@ class AdminController extends Controller
 
     public function phrases(Request $request)
     {
-        return view('admin.phrases.phrases');
+        $phrases = Phrase::paginate(10);
+        return view('admin.phrases.phrases',compact('phrases'));
+    }
+
+    public function coundPhrase(Request $request) {
+        $count = Phrase::where(['phrase' => $request->phrase])->count();
+        return ['count' => $count];
+    }
+
+    public function phrasesNew(Request $request)
+    {
+        $message = [];
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'phrase' => 'required|max:255',
+                'meaning' => 'required|max:255',
+            ]);
+            if (!empty($validator) && $validator->fails()) {
+                // fail
+                $message['success'] = 0;
+                $message['message'] = config('master.MESSAGE_NOTIFICATION.MSG_031');
+            } else {
+                $count = Phrase::where(['phrase' => $request->phrase])->count();
+                if (!$count) {
+                    $data = [
+                        'phrase' => $request->phrase,
+                        'meaning' => $request->meaning,
+                        'example' => $request->example
+                    ];
+                    Phrase::insert($data);
+                    $message['success'] = 1;
+                    $message['message'] = 'Phrase create successful';
+                }
+            }
+        }
+        return view('admin.phrases.phrases_new', compact('message'));
+    }
+
+    public function phrasesEdit(Request $request, $id)
+    {
+        $phrase = Phrase::where(['id' => $id])->first();
+        if (empty($phrase)) {
+            return redirect()->route('admin.phrases');
+        }
+
+        $message = ['info' => [], 'pass' => []];
+        if ($request->isMethod('post')) {
+            // edit info
+            $validator = Validator::make($request->all(), [
+                'phrase' => 'required|max:255',
+                'meaning' => 'required|max:255',
+            ]);
+            if (!empty($validator) && $validator->fails()) {
+                // fail
+                $message['info']['success'] = 0;
+                $message['info']['message'] = "Error Occur";
+            } else {
+                $dataUpdate = [
+                    'phrase' => $request->phrase,
+                    'meaning' => $request->meaning,
+                ];
+                if(!empty($request->example)) {
+                    $dataUpdate['example'] = $request->example;
+                }
+                Phrase::where('id', $id)->update($dataUpdate);
+                $message['info']['success'] = 1;
+                $message['info']['message'] = "Update successful";
+            }
+        }
+
+        $phrase = Phrase::where(['id' => $id])->first();
+        return view('admin.phrases.phrases_edit', compact('phrase', 'message'));
     }
 }

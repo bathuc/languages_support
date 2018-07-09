@@ -1,7 +1,7 @@
 @extends('layouts.admin.index')
 @section('content')
     <section class="content-header">
-        <h1>ユーザー管理</h1>
+        <h1>Words Management</h1>
         <ol class="breadcrumb">
             <li><a href="{{Route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
             <li class="active">Words</li>
@@ -21,7 +21,7 @@
 
             <div class="box">
                 <div class="box-header">
-                    <p class="box-note"><span>{{ $words->firstItem() }} 件目～{{ $words->lastItem() }}件目</span> <span>計: {{ $words->total() }}件</span></p>
+                    <p class="box-note"><span>From {{ $words->firstItem() }} To {{ $words->lastItem() }} </span> <span>Total: {{ $words->total() }}words</span></p>
                     <div class="box-tools">
                          {!! $words->links() !!}
                     </div>

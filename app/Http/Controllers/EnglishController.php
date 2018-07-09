@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Tense;
 use App\Models\TenseUse;
 use App\Models\TenseExample;
+use App\Models\Phrase;
 
 class EnglishController extends Controller
 {
@@ -14,9 +15,19 @@ class EnglishController extends Controller
         return view('frontend.english.words');
     }
 
+    public function getRandomPhrase(Request $request)
+    {
+        $latestRand = $request->latestRand;
+        $phrase = Phrase::getRandomItem($latestRand);
+        return view('frontend.english.phrases.random', compact('phrase'));
+    }
+
     public function phrases(Request $request)
     {
-        return view('frontend.english.phrases');
+        $latestRand = true;
+        $phrase = Phrase::getRandomItem();
+
+        return view('frontend.english.phrases.phrases', compact('phrase', 'latestRand'));
     }
 
     public function tenseDetail($id)

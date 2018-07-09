@@ -23,13 +23,13 @@ Route::post('/kanaRandom', 'JapanController@getKatakanaRandom')->name('katakana.
 Route::get('/words', 'EnglishController@words')->name('words');
 Route::post('/words', 'EnglishController@words')->name('words');
 Route::get('/phrases', 'EnglishController@phrases')->name('phrases');
+Route::post('/random-phrases', 'EnglishController@getRandomPhrase')->name('phrases.random');
 
 Route::get('/tenses', 'EnglishController@tenses')->name('tenses');
 Route::post('/tenses', 'EnglishController@tenses')->name('tenses');
 Route::post('/grammarRandom', 'EnglishController@grammarRandom')->name('tenses.grammar.random');
 Route::get('/tenses/detail/{id}', 'EnglishController@tenseDetail')->name('tense.detail');
 
-Route::post('/phrases', 'EnglishController@phrases')->name('phrases');
 
 Route::get('/generatejs', 'CodeController@generateJs')->name('code.generate.js');
 Route::post('/generatejs', 'CodeController@generateJs')->name('code.generate.js');
@@ -54,7 +54,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/edit/{id}', 'AdminController@wordEdit')->name('admin.words.edit');
     });
 
+    Route::group(['prefix' => 'phrases'], function () {
+        Route::get('/', 'AdminController@phrases')->name('admin.phrases');
+        Route::get('/new', 'AdminController@phrasesNew')->name('admin.phrases.new');
+        Route::post('/new', 'AdminController@phrasesNew')->name('admin.phrases.new');
+        Route::post('/coundword', 'AdminController@coundPhrase')->name('admin.phrases.coundPhrase');
 
-    Route::get('/phrases', 'AdminController@phrases')->name('admin.phrases');
+        Route::get('/edit/{id}', 'AdminController@phrasesEdit')->name('admin.phrases.edit');
+        Route::post('/edit/{id}', 'AdminController@phrasesEdit')->name('admin.phrases.edit');
+    });
+
 
 });

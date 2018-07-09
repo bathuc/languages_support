@@ -2,15 +2,15 @@
 @section('content')
 
 <section class="content-header">
-    <h1>Add New Word</h1>
+    <h1>Add New Phrase</h1>
 </section>
 
 <section class="content container-fluid">
     <div class="row">
         <div class="box">
             <div class="box-body">
-                    <p>Create New Word</p>
-                    <a href="{{ route('admin.words') }}" class="btn btn-default btn-flat pull-right">Back</a>
+                    <p>Create New Phrase</p>
+                    <a href="{{ route('admin.phrases') }}" class="btn btn-default btn-flat pull-right">Back</a>
             </div>
         </div>
 
@@ -27,13 +27,13 @@
                         <?php endif?>
                     <?php endif?>
                     <div class="box-bor clearfix">
-                        <h4>■Word Information</h4>
+                        <h4>■Phrase Information</h4>
                         <table class="table">
                             <tbody><tr>
-                                <th>Word</th>
+                                <th>Phrase</th>
                                 <td>
-                                    <p class="text-red" id="word_error"></p>
-                                    <input id="word" name="word" type="text" class="box_inline form-control w30">
+                                    <p class="text-red" id="phrase_error"></p>
+                                    <input id="phrase" name="phrase" type="text" class="box_inline form-control w30">
                                 </td>
                             </tr>
                             <tr>
@@ -63,14 +63,14 @@
 
     <script>
         $(document).ready(function(){
-            function validateWord() {
-                $('#word_error').html("");
-                if($.trim($('#word').val()) == ''){
-                    $('#word_error').html( 'The field is require');
+            function validatePhrase() {
+                $('#phrase_error').html("");
+                if($.trim($('#phrase').val()) == ''){
+                    $('#phrase_error').html( 'The field is require');
                     return false;
                 }
-                if($('#word').val().length > 255) {
-                    $('#word_error').html( 'word must be less than 255 characters');
+                if($('#phrase').val().length > 255) {
+                    $('#phrase_error').html( 'word must be less than 255 characters');
                     return false;
                 }
 
@@ -92,19 +92,19 @@
                 // check loginID already exist
                 $.ajax({
                     type: 'post',
-                    url: '{{route("admin.words.coundWord")}}',
-                    data: {'word': $('#word').val().trim()},
+                    url: '{{route("admin.phrases.coundPhrase")}}',
+                    data: {'phrase': $('#phrase').val().trim()},
                     dataType: "json",
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     success: function (result) {
                         if (result.count > 0) {
-                            $('#word_error').html( 'This word is already exist');
+                            $('#phrase_error').html( 'This phrase is already exist');
                         }
                         else {
                             // validate rules
-                            var valWord = validateWord();
+                            var valPhrase = validatePhrase();
                             var valMeaning = validateMeaning();
-                            if( valWord && valMeaning ) {
+                            if( valPhrase && valMeaning ) {
                                 $('#formFrm').submit();
                             }
                         }

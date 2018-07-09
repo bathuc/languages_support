@@ -15,11 +15,9 @@ class CreatePhraseTable extends Migration
     {
         Schema::create('phrase', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('phrase_name')->nullable();
+            $table->string('phrase')->nullable();
             $table->string('meaning')->nullable();
             $table->string('example')->nullable();
-            $table->string('example1')->nullable();
-            $table->string('example2')->nullable();
         });
     }
 
