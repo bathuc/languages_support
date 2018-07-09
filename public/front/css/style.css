@@ -2510,7 +2510,7 @@ nav.navbar{
         top: 100%;
         float: left;
         left: 0;
-         width: 100%;
+        width: 100%;
         z-index: 99;
     }
     .navbar-nav{
@@ -2735,4 +2735,14 @@ TABLE#kana_choice TD.inactive {
 #success{
     font-size:120%;
     color:green
+}
+.btn-standard {
+    width: 100%;
+    font-size: 16px;
+    color: #fff;
+    background: #ff6a4a;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 180px;
 }

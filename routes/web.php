@@ -32,6 +32,7 @@ Route::get('/tenses/detail/{id}', 'EnglishController@tenseDetail')->name('tense.
 Route::post('/phrases', 'EnglishController@phrases')->name('phrases');
 
 Route::get('/generatejs', 'CodeController@generateJs')->name('code.generate.js');
+Route::post('/generatejs', 'CodeController@generateJs')->name('code.generate.js');
 Route::post('/insert-row-js', 'CodeController@insertRowJs')->name('code.insert.row.js');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {

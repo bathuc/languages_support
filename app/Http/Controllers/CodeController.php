@@ -13,9 +13,11 @@ class CodeController extends Controller
             return view('frontend.code.render_js.insert_row', compact('rowId'));
         }
     }
-    public function generateJs()
+    public function generateJs(Request $request)
     {
+        if($request->post()) {
 
+        }
         return view('frontend.code.render_js.main');
     }
 }
