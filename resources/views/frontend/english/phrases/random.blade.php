@@ -9,7 +9,7 @@
 <br><br><br>
 
 <div class="wrapper">
-    <span id="hira_show" class="inline" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $phrase['phrase'] }}</span><br>
+    <span id="hira_show" class="inline" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $phrase['phrase'] }}</span><br><br>
     <div class="show-meaning inline" style="display: none">
         <span id="meaning" >Meaning: {{ $phrase['meaning'] }}</span><br>
         <span id="example" >Example: {{ $phrase['example'] }}</span><br>
@@ -43,7 +43,7 @@
 </script>
 <style>
     .wrapper{
-        height:60px;
+        height:80px;
     }
     .inline {
         display: inline;
