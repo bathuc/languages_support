@@ -7,12 +7,24 @@ use App\Models\Tense;
 use App\Models\TenseUse;
 use App\Models\TenseExample;
 use App\Models\Phrase;
+use App\Models\Word;
 
 class EnglishController extends Controller
 {
+
+    public function getRandomWord(Request $request)
+    {
+        $latestRand = $request->latestRand;
+        $word = Word::getRandomItem($latestRand);
+        return view('frontend.english.words.random', compact('word'));
+    }
+
     public function words(Request $request)
     {
-        return view('frontend.english.words');
+        $latestRand = true;
+        $word = Word::getRandomItem();
+
+        return view('frontend.english.words.words', compact('word', 'latestRand'));
     }
 
     public function getRandomPhrase(Request $request)

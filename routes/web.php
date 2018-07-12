@@ -22,6 +22,7 @@ Route::post('/kanaRandom', 'JapanController@getKatakanaRandom')->name('katakana.
 
 Route::get('/words', 'EnglishController@words')->name('words');
 Route::post('/words', 'EnglishController@words')->name('words');
+Route::post('/random-word', 'EnglishController@getRandomWord')->name('word.random');
 Route::get('/phrases', 'EnglishController@phrases')->name('phrases');
 Route::post('/random-phrases', 'EnglishController@getRandomPhrase')->name('phrases.random');
 
