@@ -118,6 +118,9 @@ input:checked + .slider:before {
 .w30 {
     width: 30%;
 }
+.w50 {
+    width: 50%;
+}
 .box-bor {
     border-bottom: 1px solid #ccc;
     margin-top: 20px;

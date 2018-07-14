@@ -1,7 +1,25 @@
+@php
+    $check20 = ($wordNumber == 20)? 'checked' : '';
+    $check50 = ($wordNumber == 50)? 'checked' : '';
+    $check100 = ($wordNumber == 100)? 'checked' : '';
+    $checkRandom = ($wordNumber == 'random')? 'checked' : '';
+@endphp
 
 <h1 id="head1">Words Drill</h1>
-<input type="radio" name="word" value="latestRand" checked> First 100 words
-<input type="radio" name="word" value="Random"> Random
+<div class="word-wrapper">
+    <input type="radio" name="wordNumber" value="20" {{ $check20 }} > First 20 words
+</div>
+<div class="word-wrapper">
+    <input type="radio" name="wordNumber" value="50" {{ $check50 }}> First 50 words
+</div>
+<div class="word-wrapper">
+    <input type="radio" name="wordNumber" value="100" {{ $check100 }}> First 100 words
+</div>
+<div class="word-wrapper">
+    <input type="radio" name="wordNumber" value="random" {{ $checkRandom }}> Random
+</div>
+
+
 <br><br><br>
 
 <div class="wrapper">
@@ -9,7 +27,10 @@
     <div class="show-meaning inline" style="display: none">
         <span id="meaning" >Meaning: {{ $word['meaning'] }}</span><br>
         @if(!empty($word['example']))
-            <span id="example" >Example: {{ $word['example'] }}</span><br>
+            <span id="example" >{{ $word['example'] }}</span><br>
+        @endif
+        @if(!empty($word['example1']))
+            <span id="example1" >{{ $word['example1'] }}</span><br>
         @endif
     </div>
 </div>
@@ -26,7 +47,7 @@
                 type: 'post',
                 url:  '{{ route('word.random') }}',
                 data: {
-                    'latestRand': $('#word').val() == 'latestRand',
+                    'wordNumber': $('input[name=wordNumber]:checked').val(),
                 },
                 success: function(respond) {
                     $('#ajaxBox').html(respond);
@@ -41,10 +62,14 @@
 </script>
 <style>
     .wrapper{
-        height:80px;
+        height:100px;
     }
     .inline {
         display: inline;
+    }
+    .word-wrapper {
+        display: inline-block;
+        margin-right: 50px;
     }
 </style>
 

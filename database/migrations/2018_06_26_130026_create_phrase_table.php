@@ -18,7 +18,10 @@ class CreatePhraseTable extends Migration
             $table->string('phrase')->nullable();
             $table->string('meaning')->nullable();
             $table->string('example')->nullable();
+            $table->string('example1')->nullable();
         });
+
+        DB::table('phrase')->insert(['phrase'=>'Keep up','meaning'=>'Tiếp tục','example'=>'Well done! Keep up the good work/Keep it up']);
     }
 
     /**

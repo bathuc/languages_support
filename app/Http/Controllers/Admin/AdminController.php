@@ -97,7 +97,8 @@ class AdminController extends Controller
                     $data = [
                         'word' => $request->word,
                         'meaning' => $request->meaning,
-                        'example' => $request->example
+                        'example' => $request->example,
+                        'example1' => $request->example1,
                     ];
                     Word::insert($data);
                     $message['success'] = 1;
@@ -130,10 +131,10 @@ class AdminController extends Controller
                 $dataUpdate = [
                     'word' => $request->word,
                     'meaning' => $request->meaning,
+                    'example' => $request->example,
+                    'example1' => $request->example1,
                 ];
-                if(!empty($request->example)) {
-                    $dataUpdate['example'] = $request->example;
-                }
+
                 Word::where('id', $id)->update($dataUpdate);
                 $message['info']['success'] = 1;
                 $message['info']['message'] = "Update successful";
@@ -173,7 +174,8 @@ class AdminController extends Controller
                     $data = [
                         'phrase' => $request->phrase,
                         'meaning' => $request->meaning,
-                        'example' => $request->example
+                        'example' => $request->example,
+                        'example1' => $request->example1,
                     ];
                     Phrase::insert($data);
                     $message['success'] = 1;
@@ -206,10 +208,10 @@ class AdminController extends Controller
                 $dataUpdate = [
                     'phrase' => $request->phrase,
                     'meaning' => $request->meaning,
+                    'example' => $request->example,
+                    'example1' => $request->example1,
                 ];
-                if(!empty($request->example)) {
-                    $dataUpdate['example'] = $request->example;
-                }
+
                 Phrase::where('id', $id)->update($dataUpdate);
                 $message['info']['success'] = 1;
                 $message['info']['message'] = "Update successful";

@@ -14,32 +14,32 @@ class EnglishController extends Controller
 
     public function getRandomWord(Request $request)
     {
-        $latestRand = $request->latestRand;
-        $word = Word::getRandomItem($latestRand);
-        return view('frontend.english.words.random', compact('word'));
+        $wordNumber = $request->wordNumber;
+        $word = Word::getRandomItem($wordNumber);
+        return view('frontend.english.words.random', compact('word','wordNumber'));
     }
 
     public function words(Request $request)
     {
-        $latestRand = true;
-        $word = Word::getRandomItem();
+        $wordNumber = 20;   // default
+        $word = Word::getRandomItem($wordNumber);
 
-        return view('frontend.english.words.words', compact('word', 'latestRand'));
+        return view('frontend.english.words.words', compact('word', 'wordNumber'));
     }
 
     public function getRandomPhrase(Request $request)
     {
-        $latestRand = $request->latestRand;
-        $phrase = Phrase::getRandomItem($latestRand);
-        return view('frontend.english.phrases.random', compact('phrase'));
+        $phrasesNumber = $request->phrasesNumber;
+        $phrase = Phrase::getRandomItem($phrasesNumber);
+        return view('frontend.english.phrases.random', compact('phrase','phrasesNumber'));
     }
 
     public function phrases(Request $request)
     {
-        $latestRand = true;
-        $phrase = Phrase::getRandomItem();
+        $phrasesNumber = 20; // default
+        $phrase = Phrase::getRandomItem($phrasesNumber);
 
-        return view('frontend.english.phrases.phrases', compact('phrase', 'latestRand'));
+        return view('frontend.english.phrases.phrases', compact('phrase', 'phrasesNumber'));
     }
 
     public function tenseDetail($id)

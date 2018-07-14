@@ -8,16 +8,16 @@ class Phrase extends BaseModel
 {
     protected $table = 'phrase';
 
-    public static function getRandomItem($latestFlag = true)
+    public static function getRandomItem($phrasesNumber = 20)
     {
-        // first 1000 phrase
-        if($latestFlag){
-            $phrases = self::all()->take(100)->toArray();
+        // take all
+        if($phrasesNumber == 'random'){
+            $phrases = self::all()->toArray();
             $randKey = array_rand($phrases, 1);
             return $phrases[$randKey];
         }
         else {
-            $phrases = self::all()->toArray();
+            $phrases = self::all()->take($phrasesNumber)->toArray();
             $randKey = array_rand($phrases, 1);
             return $phrases[$randKey];
         }

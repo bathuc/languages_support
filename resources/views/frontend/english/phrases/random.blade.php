@@ -1,14 +1,36 @@
+@php
+    $check20 = ($phrasesNumber == 20)? 'checked' : '';
+    $check50 = ($phrasesNumber == 50)? 'checked' : '';
+    $check100 = ($phrasesNumber == 100)? 'checked' : '';
+    $checkRandom = ($phrasesNumber == 'random')? 'checked' : '';
+@endphp
 
 <h1 id="head1">Phrases Game</h1>
-<input type="radio" name="phrases" value="latestRand" checked> First 100 phrases
-<input type="radio" name="phrases" value="Random"> Random
+<div class="phrase-wrapper">
+    <input type="radio" name="phrasesNumber" value="20" {{ $check20 }}> First 20 phrases
+</div>
+<div class="phrase-wrapper">
+    <input type="radio" name="phrasesNumber" value="50" {{ $check50 }}> First 50 phrases
+</div>
+<div class="phrase-wrapper">
+    <input type="radio" name="phrasesNumber" value="100" {{ $check100 }}> First 100 phrases
+</div>
+<div class="phrase-wrapper">
+    <input type="radio" name="phrasesNumber" value="random" {{ $checkRandom }}> Random
+</div>
+
 <br><br><br>
 
 <div class="wrapper">
     <span id="hira_show" class="inline" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $phrase['phrase'] }}</span><br><br>
     <div class="show-meaning inline" style="display: none">
         <span id="meaning" >Meaning: {{ $phrase['meaning'] }}</span><br>
-        <span id="example" >Example: {{ $phrase['example'] }}</span><br>
+        @if(!empty($phrase['example']))
+            <span id="example" >{{ $phrase['example'] }}</span><br>
+        @endif
+        @if(!empty($phrase['example1']))
+            <span id="example1" >{{ $phrase['example1'] }}</span><br>
+        @endif
     </div>
 </div>
 
@@ -24,7 +46,7 @@
                 type: 'post',
                 url:  '{{ route('phrases.random') }}',
                 data: {
-                    'latestRand': $('#phrase').val() == 'latestRand',
+                    'phrasesNumber': $('input[name=phrasesNumber]:checked').val(),
                 },
                 success: function(respond) {
                     $('#ajaxBox').html(respond);
@@ -41,10 +63,14 @@
 </script>
 <style>
     .wrapper{
-        height:80px;
+        height:100px;
     }
     .inline {
         display: inline;
+    }
+    .phrase-wrapper {
+        display: inline-block;
+        margin-right: 50px;
     }
 </style>
 

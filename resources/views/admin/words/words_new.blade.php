@@ -33,28 +33,39 @@
                                 <th>Word</th>
                                 <td>
                                     <p class="text-red" id="word_error"></p>
-                                    <input id="word" name="word" type="text" class="box_inline form-control w30">
+                                    <input id="word" name="word" type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Meaning</th>
                                 <td>
                                     <p class="text-red" id="meaning_error"></p>
-                                    <input id="meaning" name="meaning" type="text" class="box_inline form-control w30">
+                                    <input id="meaning" name="meaning" type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Example</th>
                                 <td>
                                     <p class="text-red" id="example_error"></p>
-                                    <input id="example" name="example" type="text" class="box_inline form-control w30">
+                                    <input id="example" name="example" type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
-                            </tbody></table>
+                            <tr>
+                                <th>Example 1</th>
+                                <td>
+                                    <p class="text-red" id="example1_error"></p>
+                                    <input id="example1" name="example1" type="text" class="box_inline form-control w50">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <button id="confirm" type="button" class="btn btn-primary btn-flat">Create</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                        <div class="col-md-12">
-                            <button id="confirm" type="button" class="btn btn-primary btn-flat pull-right">Create</button>
-                        </div>
                     </div>
                 </form>
             </div>

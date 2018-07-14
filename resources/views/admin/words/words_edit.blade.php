@@ -42,29 +42,38 @@
                                 <th>Word:</th>
                                 <td>
                                     <p class="text-red" id="word_error"></p>
-                                    <input name="word" id="word" value="{{ $word->word }}" type="text" class="box_inline form-control w30">
+                                    <input name="word" id="word" value="{{ $word->word }}" type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Meaning:</th>
                                 <td>
                                     <p class="text-red" id="meaning_error"></p>
-                                    <input name="meaning" id="meaning" value="{{ $word->meaning }}" type="text" class="box_inline form-control w30">
+                                    <input name="meaning" id="meaning" value="{{ $word->meaning }}" type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Example:</th>
                                 <td>
                                     <p class="text-red" id="loginid_error"></p>
-                                    <input name="example" id="example" value="{{ $word->example }}" type="text" class="box_inline form-control w30">
+                                    <input name="example" id="example" value="{{ $word->example }}" type="text" class="box_inline form-control w50">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Example 1</th>
+                                <td>
+                                    <p class="text-red" id="example1_error"></p>
+                                    <input id="example1" name="example1" value="{{ $word->example1 }}" type="text" class="box_inline form-control w50">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <button id="confirmInfo" type="button" class="btn btn-primary btn-flat">Edit</button>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-
-                        <div class="col-md-12">
-                            <button id="confirmInfo" type="button" class="btn btn-primary btn-flat pull-right">Edit</button>
-                        </div>
                     </form>
                 </div>
 

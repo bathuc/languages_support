@@ -8,16 +8,16 @@ class Word extends BaseModel
 {
     protected $table = 'word';
 
-    public static function getRandomItem($latestFlag = true)
+    public static function getRandomItem($wordNumber = 20)
     {
-        // first 1000 word
-        if($latestFlag){
-            $words = self::all()->take(100)->toArray();
+        // take all
+        if($wordNumber == 'random'){
+            $words = self::all()->toArray();
             $randKey = array_rand($words, 1);
             return $words[$randKey];
         }
         else {
-            $words = self::all()->toArray();
+            $words = self::all()->take($wordNumber)->toArray();
             $randKey = array_rand($words, 1);
             return $words[$randKey];
         }
