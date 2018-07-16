@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\MainHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,6 @@ class AdminController extends Controller
 {
     protected $guard = 'admin';
     protected $admin = [];
-    protected $candidate = [];
 
     public function __construct() {
         $except = ['login', 'resetPassword'];
@@ -69,12 +69,11 @@ class AdminController extends Controller
 
     public function words(Request $request)
     {
-        $words = Word::paginate(10);
+        $words = Word::where('user_id',$this->admin->id)->paginate(10);
         return view('admin.words.words',compact('words'));
     }
 
     public function coundWord(Request $request) {
-        $loginid = $request->input('word');
         $count = Word::where(['word' => $request->word])->count();
         return ['count' => $count];
     }
@@ -82,10 +81,12 @@ class AdminController extends Controller
     public function wordNew(Request $request)
     {
         $message = [];
+        $subject = MainHelper::getSubject();
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'word' => 'required|max:255',
                 'meaning' => 'required|max:255',
+                'subjectId' => 'required',
             ]);
             if (!empty($validator) && $validator->fails()) {
                 // fail
@@ -99,6 +100,9 @@ class AdminController extends Controller
                         'meaning' => $request->meaning,
                         'example' => $request->example,
                         'example1' => $request->example1,
+                        'sound' => $request->sound,
+                        'subject_id' => $request->subjectId,
+                        'user_id' => $this->admin->id,
                     ];
                     Word::insert($data);
                     $message['success'] = 1;
@@ -106,13 +110,15 @@ class AdminController extends Controller
                 }
             }
         }
-        return view('admin.words.words_new', compact('message'));
+
+        return view('admin.words.words_new', compact('message','subject'));
     }
 
     public function wordEdit(Request $request, $id)
     {
         $word = Word::where(['id' => $id])->first();
-        if (empty($word)) {
+        $subject = MainHelper::getSubject();
+        if (empty($word) || $word->user_id != $this->admin->id) {
             return redirect()->route('admin.words');
         }
 
@@ -133,6 +139,8 @@ class AdminController extends Controller
                     'meaning' => $request->meaning,
                     'example' => $request->example,
                     'example1' => $request->example1,
+                    'sound' => $request->sound,
+                    'subject_id' => $request->subjectId,
                 ];
 
                 Word::where('id', $id)->update($dataUpdate);
@@ -142,12 +150,12 @@ class AdminController extends Controller
         }
 
         $word = Word::where(['id' => $id])->first();
-        return view('admin.words.words_edit', compact('word', 'message'));
+        return view('admin.words.words_edit', compact('word', 'message', 'subject'));
     }
 
     public function phrases(Request $request)
     {
-        $phrases = Phrase::paginate(10);
+        $phrases = Phrase::where('user_id',$this->admin->id)->paginate(10);
         return view('admin.phrases.phrases',compact('phrases'));
     }
 
@@ -176,6 +184,7 @@ class AdminController extends Controller
                         'meaning' => $request->meaning,
                         'example' => $request->example,
                         'example1' => $request->example1,
+                        'user_id' => $this->admin->id,
                     ];
                     Phrase::insert($data);
                     $message['success'] = 1;
@@ -189,7 +198,7 @@ class AdminController extends Controller
     public function phrasesEdit(Request $request, $id)
     {
         $phrase = Phrase::where(['id' => $id])->first();
-        if (empty($phrase)) {
+        if (empty($phrase) || $phrase->user_id != $this->admin->id) {
             return redirect()->route('admin.phrases');
         }
 

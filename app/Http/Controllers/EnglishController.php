@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Helpers\MainHelper;
+use View;
 use App\Models\Tense;
 use App\Models\TenseUse;
 use App\Models\TenseExample;
@@ -11,35 +14,65 @@ use App\Models\Word;
 
 class EnglishController extends Controller
 {
+    protected $guard = 'admin';
+    protected $admin = [];
+
+    public function __construct()
+    {
+        $except = ['tenseDetail', 'tenses', 'grammarRandom'];
+        // $this->middleware('auth:' . $this->guard)->except($except);
+        $this->middleware(function ($request, $next) {
+            if (!Auth::guard($this->guard)->check()) {
+                return redirect()->route('tenses');
+            }
+            $this->admin = Auth::guard($this->guard)->user();
+            View::share(['admin' => $this->admin]);
+            return $next($request);
+        })->except($except);
+    }
+
 
     public function getRandomWord(Request $request)
     {
         $wordNumber = $request->wordNumber;
-        $word = Word::getRandomItem($wordNumber);
-        return view('frontend.english.words.random', compact('word','wordNumber'));
+        $showTime = $request->showTime;
+        $subjectId = $request->subjectId;
+        $userId = $this->admin->id;
+        $subject = MainHelper::getSubject();
+        $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
+        $word20 = Word::getWords(20, $userId, $subjectId);
+        return view('frontend.english.words.random', compact('word', 'word20','wordNumber', 'showTime', 'subject', 'subjectId'));
     }
 
     public function words(Request $request)
     {
         $wordNumber = 20;   // default
-        $word = Word::getRandomItem($wordNumber);
-
-        return view('frontend.english.words.words', compact('word', 'wordNumber'));
+        $showTime = 2; // second
+        $userId = $this->admin->id;
+        $subject = MainHelper::getSubject();
+        $subjectId = 1;     // default - common
+        $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
+        $word20 = Word::where('user_id',$userId)->get()->take(20)->toArray();
+        return view('frontend.english.words.words', compact('word', 'wordNumber', 'word20', 'showTime', 'subject', 'subjectId'));
     }
 
     public function getRandomPhrase(Request $request)
     {
         $phrasesNumber = $request->phrasesNumber;
-        $phrase = Phrase::getRandomItem($phrasesNumber);
-        return view('frontend.english.phrases.random', compact('phrase','phrasesNumber'));
+        $showTime = $request->showTime;
+        $userId = $this->admin->id;
+        $phrase = Phrase::getRandomItem($phrasesNumber, $userId);
+        return view('frontend.english.phrases.random', compact('phrase','phrasesNumber', 'showTime'));
     }
 
     public function phrases(Request $request)
     {
         $phrasesNumber = 20; // default
-        $phrase = Phrase::getRandomItem($phrasesNumber);
+        $showTime = 2; // second
+        $userId = $this->admin->id;
+        $phrase = Phrase::getRandomItem($phrasesNumber, $userId);
 
-        return view('frontend.english.phrases.phrases', compact('phrase', 'phrasesNumber'));
+        return view('frontend.english.phrases.phrases', compact('phrase', 'phrasesNumber', 'showTime'));
     }
 
     public function tenseDetail($id)

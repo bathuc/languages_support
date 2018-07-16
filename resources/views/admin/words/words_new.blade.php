@@ -29,11 +29,22 @@
                     <div class="box-bor clearfix">
                         <h4>■Word Information</h4>
                         <table class="table">
-                            <tbody><tr>
+                            <tbody>
+                            <tr>
+                                <th>Subject</th>
+                                <td>
+                                    <select name="subjectId" class="box_inline form-control w50">
+                                        @foreach($subject as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Word</th>
                                 <td>
                                     <p class="text-red" id="word_error"></p>
-                                    <input id="word" name="word" type="text" class="box_inline form-control w50">
+                                    <input id="word" name="word" type="text" class="box_inline form-control w50" autofocus>
                                 </td>
                             </tr>
                             <tr>
@@ -55,6 +66,12 @@
                                 <td>
                                     <p class="text-red" id="example1_error"></p>
                                     <input id="example1" name="example1" type="text" class="box_inline form-control w50">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Sound link</th>
+                                <td>
+                                    <input id="sound" name="sound" type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
                             <tr>
@@ -124,6 +141,13 @@
             });
         });
     </script>
+    <style>
+        select {
+            /*height: 35px;*/
+            /*width: 210px;*/
+            text-align: center;
+        }
+    </style>
 </section>
 
 @endsection

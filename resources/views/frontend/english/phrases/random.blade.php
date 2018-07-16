@@ -18,7 +18,9 @@
 <div class="phrase-wrapper">
     <input type="radio" name="phrasesNumber" value="random" {{ $checkRandom }}> Random
 </div>
-
+<div class="phrase-wrapper">
+    Show Time <input type="number" name="showTime" value="{{ $showTime }}">
+</div>
 <br><br><br>
 
 <div class="wrapper">
@@ -47,6 +49,7 @@
                 url:  '{{ route('phrases.random') }}',
                 data: {
                     'phrasesNumber': $('input[name=phrasesNumber]:checked').val(),
+                    'showTime': $('input[name=showTime]').val(),
                 },
                 success: function(respond) {
                     $('#ajaxBox').html(respond);
@@ -54,7 +57,8 @@
             });
         });
 
-        setTimeout(function(){ $('.show-meaning').show(); }, 3000);
+        var showTime = {{ $showTime }} * 1000;
+        setTimeout(function(){ $('.show-meaning').show(); }, showTime);
 
         $('.btn-show-meaning').click(function(){
             $('.show-meaning').show();
@@ -63,7 +67,7 @@
 </script>
 <style>
     .wrapper{
-        height:100px;
+        height:110px;
     }
     .inline {
         display: inline;
@@ -71,6 +75,16 @@
     .phrase-wrapper {
         display: inline-block;
         margin-right: 50px;
+    }
+    #meaning {
+        font-size: 22px;
+    }
+    .show-meaning{
+        font-size: 20px;
+    }
+    input[type=number] {
+        width: 50px;
+        text-align: center;
     }
 </style>
 

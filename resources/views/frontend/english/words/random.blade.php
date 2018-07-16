@@ -18,20 +18,53 @@
 <div class="word-wrapper">
     <input type="radio" name="wordNumber" value="random" {{ $checkRandom }}> Random
 </div>
-
-
+<div class="word-wrapper">
+    Show Time <input type="number" name="showTime" value="{{ $showTime }}">
+</div>
+<div class="word-wrapper">
+    <select name="subjectId" id="dropDownId" class="box_inline form-control w50">
+        @foreach($subject as $item)
+            @if($subjectId == $item->id)
+                <option value="{{ $item->id }}" selected="selected">{{ $item->name_vi }}</option>
+            @else
+                <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
+            @endif
+        @endforeach
+    </select>
+</div>
 <br><br><br>
 
-<div class="wrapper">
-    <span id="hira_show" class="inline" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $word['word'] }}</span><br><br>
-    <div class="show-meaning inline" style="display: none">
-        <span id="meaning" >Meaning: {{ $word['meaning'] }}</span><br>
-        @if(!empty($word['example']))
-            <span id="example" >{{ $word['example'] }}</span><br>
-        @endif
-        @if(!empty($word['example1']))
-            <span id="example1" >{{ $word['example1'] }}</span><br>
-        @endif
+<div class="page-content">
+    <div class="wrapper inline">
+        <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $word['word'] }}</span><br><br>
+        <div class="show-meaning" style="display: none">
+            <span id="meaning" >Meaning: {{ $word['meaning'] }}</span><br>
+            @if(!empty($word['example']))
+                <span id="example" >{{ $word['example'] }}</span><br>
+            @endif
+            @if(!empty($word['example1']))
+                <span id="example1" >{{ $word['example1'] }}</span><br>
+            @endif
+        </div>
+    </div>
+    <div class="table-wrapper inline">
+        <table class="table table-bordered info-table" summary="Explanation on English tenses" cellspacing="0">
+            <tbody>
+
+            @for($i=0; $i<count($word20)+1; $i++)
+                <tr>
+                    @for($j = 0; $j<4; $j++)
+                        @php $index = $i*4 + $j; @endphp
+                        @if(isset($word20[$index]))
+                            <td>
+                                <a href="{{ route('tense.detail', $word20[$index]['id']) }}">{{ $word20[$index]['word'] }}</a>
+                            </td>
+                        @endif
+                    @endfor
+                </tr>
+            @endfor
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -42,34 +75,67 @@
 <script>
     $(document).ready(function () {
         $('.btn-next').click(function(){
+            getNextWord();
+        });
+
+        $('#dropDownId').on('change',function(){
+            getNextWord();
+        });
+
+        function getNextWord(){
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: 'post',
                 url:  '{{ route('word.random') }}',
                 data: {
                     'wordNumber': $('input[name=wordNumber]:checked').val(),
+                    'showTime': $('input[name=showTime]').val(),
+                    'subjectId': $('#dropDownId').val(),
                 },
                 success: function(respond) {
                     $('#ajaxBox').html(respond);
                 }
             });
-        });
-        setTimeout(function(){ $('.show-meaning').show(); }, 3000);
+        }
+
+        var showTime = {{ $showTime }} * 1000;
+        setTimeout(function(){ $('.show-meaning').show(); }, showTime);
+
         $('.btn-show-meaning').click(function(){
             $('.show-meaning').show();
         });
     });
 </script>
 <style>
+    .inline {
+        display: inline-block;
+    }
     .wrapper{
         height:100px;
+        width: 60%
     }
-    .inline {
-        display: inline;
+    .table-wrapper {
+        width: 29%;
+    }
+    .info-table a{
+        text-decoration: none;
     }
     .word-wrapper {
         display: inline-block;
         margin-right: 50px;
+    }
+    #meaning {
+        font-size: 22px;
+    }
+    .show-meaning{
+        font-size: 20px;
+    }
+    input[type=number] {
+        width: 50px;
+        text-align: center;
+    }
+    .table-bordered {
+        border: none;
     }
 </style>
 

@@ -19,13 +19,14 @@ class CreateAdministratorsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->char('avail_flg', 1)->default(1);
+            $table->integer('role')->default(2);
             $table->timestamp('created_date')->useCurrent();;
             $table->timestamp('modified_date')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));;
             $table->rememberToken();
+            // role:
+            //  superAdmin : 1
+            //  editor:     2
         });
-
-        $user = ['name'=>'admin', 'email'=>'admin@admin.com', 'password'=>\Hash::make('admin123')];
-        DB::table('administrators')->insert($user);
     }
 
     /**

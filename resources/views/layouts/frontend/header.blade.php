@@ -30,6 +30,7 @@
                     <div class="dropdown">
                         <div class="dropdown-toggle" data-toggle="dropdown"><img src="/front/images/user.png"></div>
                         <ul class="dropdown-menu pull-right">
+                            <li><a target="_blank" href="{{route('admin.login')}}">Admin</a></li>
                             <li><a href="{{route('hiragana')}}">Hiragana</a></li>
                             <li><a href="{{route('katakana')}}">Katakana</a></li>
                         </ul>

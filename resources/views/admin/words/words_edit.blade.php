@@ -39,6 +39,20 @@
                         <table class="table">
                             <tbody>
                             <tr>
+                                <th>Subject</th>
+                                <td>
+                                    <select name="subjectId" class="box_inline form-control w50">
+                                        @foreach($subject as $item)
+                                            @if($item->id == $word->subject_id)
+                                                <option value="{{ $item->id }}" selected="selected">{{ $item->name_vi }}</option>
+                                            @else
+                                                <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Word:</th>
                                 <td>
                                     <p class="text-red" id="word_error"></p>
@@ -64,6 +78,12 @@
                                 <td>
                                     <p class="text-red" id="example1_error"></p>
                                     <input id="example1" name="example1" value="{{ $word->example1 }}" type="text" class="box_inline form-control w50">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Sound link</th>
+                                <td>
+                                    <input id="sound" name="sound" value="{{ $word->sound }}"  type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
                             <tr>
