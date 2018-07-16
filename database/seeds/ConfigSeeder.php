@@ -20,7 +20,7 @@ class ConfigSeeder extends Seeder
         DB::table('subject')->insert($data);
 
         // insert Administrator
-        $user = ['name'=>'admin', 'email'=>'admin@admin.com', 'password'=>\Hash::make('admin123'),'role'=>1];
+        $user = ['name'=>'Thuc Le', 'email'=>'lebathuc@gmail.com', 'password'=>\Hash::make('admin123'),'role'=>1];
         DB::table('administrators')->insert($user);
     }
 }
