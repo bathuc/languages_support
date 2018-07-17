@@ -26,7 +26,8 @@
                             <div class="alert alert-danger"> {{ $message['message'] }} </div>
                         <?php endif?>
                     <?php endif?>
-                    <div class="box-bor clearfix">
+                    @if(!empty($subject))
+                        <div class="box-bor clearfix">
                         <h4>■Word Information</h4>
                         <table class="table">
                             <tbody>
@@ -84,6 +85,7 @@
                         </table>
 
                     </div>
+                    @endif
                 </form>
             </div>
         </div>

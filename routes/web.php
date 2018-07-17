@@ -65,5 +65,25 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/edit/{id}', 'AdminController@phrasesEdit')->name('admin.phrases.edit');
     });
 
+    Route::group(['prefix' => 'subject'], function () {
+        Route::get('/', 'AdminController@subject')->name('admin.subject');
+        Route::get('/new', 'AdminController@subjectNew')->name('admin.subject.new');
+        Route::post('/new', 'AdminController@subjectNew')->name('admin.subject.new');
+        Route::post('/coundsubject', 'AdminController@coundSubject')->name('admin.subject.coundsubject');
+
+        Route::get('/edit/{id}', 'AdminController@subjectEdit')->name('admin.subject.edit');
+        Route::post('/edit/{id}', 'AdminController@subjectEdit')->name('admin.subject.edit');
+    });
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', 'AdminController@user')->name('admin.user');
+        Route::get('/new', 'AdminController@userNew')->name('admin.user.new');
+        Route::post('/new', 'AdminController@userNew')->name('admin.user.new');
+        Route::post('/counduser', 'AdminController@coundUser')->name('admin.user.counduser');
+        Route::post('/lockuser', 'AdminController@lockUser')->name('admin.user.lock.user');
+
+        Route::get('/edit/{id}', 'AdminController@userEdit')->name('admin.user.edit');
+        Route::post('/edit/{id}', 'AdminController@userEdit')->name('admin.user.edit');
+    });
 
 });

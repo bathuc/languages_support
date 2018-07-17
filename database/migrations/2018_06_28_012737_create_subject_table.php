@@ -17,6 +17,7 @@ class CreateSubjectTable extends Migration
             $table->increments('id');
             $table->string('name_eng')->nullable();
             $table->string('name_vi')->nullable();
+            $table->string('user_id')->nullable();
         });
     }
 

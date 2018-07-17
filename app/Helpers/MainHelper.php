@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Validator;
 
 class MainHelper
 {
-    public static function getSubject()
+    public static function getSubject($userId)
     {
-        return DB::table('subject')->get()->toArray();
+        return DB::table('subject')
+                ->where('user_id',$userId)
+                ->get()->toArray();
     }
 
 }

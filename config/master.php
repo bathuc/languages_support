@@ -57,6 +57,11 @@ return [
         'select' => '--',
         'select_full' => '-- 選択してください --',
     ],
+    'ADMIN_ROLE' => [
+        'SUPER_ADMIN' => 1,
+        'ADMIN' => 2,
+        'EDITOR' => 3,
+    ],
     'YEAR' => date('Y'),
     'YEAR_MIN' => date('Y')-80,
     'YEAR_MAX_EXPIRED' => 2040,

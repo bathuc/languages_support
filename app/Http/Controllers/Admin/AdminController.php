@@ -12,6 +12,7 @@ use View;
 use App\Models\Administrator;
 use App\Models\Word;
 use App\Models\Phrase;
+use App\Models\Subject;
 
 class AdminController extends Controller
 {
@@ -74,14 +75,19 @@ class AdminController extends Controller
     }
 
     public function coundWord(Request $request) {
-        $count = Word::where(['word' => $request->word])->count();
+        $count = Word::where(['word' => $request->word,'user_id'=>$this->admin->id])->count();
         return ['count' => $count];
     }
 
     public function wordNew(Request $request)
     {
         $message = [];
-        $subject = MainHelper::getSubject();
+        $subject = MainHelper::getSubject($this->admin->id);
+        if(empty($subject)) {
+            $message['success'] = 0;
+            $message['message'] = 'Create Subject First';
+        }
+
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'word' => 'required|max:255',
@@ -93,7 +99,7 @@ class AdminController extends Controller
                 $message['success'] = 0;
                 $message['message'] = config('master.MESSAGE_NOTIFICATION.MSG_031');
             } else {
-                $count = Word::where(['word' => $request->word])->count();
+                $count = Word::where(['word' => $request->word,'user_id'=>$this->admin->id])->count();
                 if (!$count) {
                     $data = [
                         'word' => $request->word,
@@ -160,7 +166,7 @@ class AdminController extends Controller
     }
 
     public function coundPhrase(Request $request) {
-        $count = Phrase::where(['phrase' => $request->phrase])->count();
+        $count = Phrase::where(['phrase' => $request->phrase,'user_id'=>$this->admin->id])->count();
         return ['count' => $count];
     }
 
@@ -177,7 +183,7 @@ class AdminController extends Controller
                 $message['success'] = 0;
                 $message['message'] = config('master.MESSAGE_NOTIFICATION.MSG_031');
             } else {
-                $count = Phrase::where(['phrase' => $request->phrase])->count();
+                $count = Phrase::where(['phrase' => $request->phrase,'user_id'=>$this->admin->id])->count();
                 if (!$count) {
                     $data = [
                         'phrase' => $request->phrase,
@@ -229,5 +235,191 @@ class AdminController extends Controller
 
         $phrase = Phrase::where(['id' => $id])->first();
         return view('admin.phrases.phrases_edit', compact('phrase', 'message'));
+    }
+
+    public function subject(Request $request)
+    {
+        $subject = Subject::where('user_id',$this->admin->id)->paginate(10);
+        return view('admin.subject.subject',compact('subject'));
+    }
+
+    public function coundSubject(Request $request) {
+        $count = Subject::where(['name_eng' => $request->name_eng,'user_id'=>$this->admin->id])->count();
+        return ['count' => $count];
+    }
+
+    public function subjectNew(Request $request)
+    {
+        $message = [];
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'name_eng' => 'required|max:255',
+                'name_vi' => 'required|max:255',
+            ]);
+            if (!empty($validator) && $validator->fails()) {
+                // fail
+                $message['success'] = 0;
+                $message['message'] = config('master.MESSAGE_NOTIFICATION.MSG_031');
+            } else {
+                $count = Subject::where(['name_eng' => $request->name_eng,'user_id'=>$this->admin->id])->count();
+                if (!$count) {
+                    $data = [
+                        'name_eng' => $request->name_eng,
+                        'name_vi' => $request->name_vi,
+                        'user_id' => $this->admin->id,
+                    ];
+                    Subject::insert($data);
+                    $message['success'] = 1;
+                    $message['message'] = 'Subject create successful';
+                }
+            }
+        }
+        return view('admin.subject.subject_new', compact('message'));
+    }
+
+    public function subjectEdit(Request $request, $id)
+    {
+        $subject = Subject::where(['id' => $id])->first();
+        if (empty($subject) || $subject->user_id != $this->admin->id) {
+            return redirect()->route('admin.subject');
+        }
+
+        $message = ['info' => [], 'pass' => []];
+        if ($request->isMethod('post')) {
+            if ($request->edittype == 'delete_subject') {
+                Subject::where('id', $id)->delete();
+                return redirect()->route('admin.subject');
+            }
+
+            // edit info
+            $validator = Validator::make($request->all(), [
+                'name_eng' => 'required|max:255',
+                'name_vi' => 'required|max:255',
+            ]);
+            if (!empty($validator) && $validator->fails()) {
+                // fail
+                $message['info']['success'] = 0;
+                $message['info']['message'] = "Error Occur";
+            } else {
+                $dataUpdate = [
+                    'name_eng' => $request->name_eng,
+                    'name_vi' => $request->name_vi,
+                ];
+
+                Subject::where('id', $id)->update($dataUpdate);
+                $message['info']['success'] = 1;
+                $message['info']['message'] = "Update successful";
+            }
+        }
+
+        $subject = Subject::where(['id' => $id])->first();
+        return view('admin.subject.subject_edit', compact('subject', 'message'));
+    }
+
+    public function user(Request $request)
+    {
+        $superRoleId = config('master.ADMIN_ROLE.SUPER_ADMIN');
+        if($this->admin->role != $superRoleId) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        $user = Administrator::where('role','!=',$superRoleId)->paginate(10);
+        return view('admin.user.user',compact('user'));
+    }
+
+    public function coundUser(Request $request) {
+        $count = Administrator::where(['email' => $request->email])->count();
+        return ['count' => $count];
+    }
+
+    public function lockUser(Request $request)
+    {
+        $superRoleId = config('master.ADMIN_ROLE.SUPER_ADMIN');
+        if($this->admin->role != $superRoleId) {
+            return null;
+        }
+        // toggle lock user
+        echo 'update';
+        Administrator::where(['id' => $request->id])
+                    ->update(['avail_flg'=>$request->available]);
+    }
+
+    public function userNew(Request $request)
+    {
+        $superRoleId = config('master.ADMIN_ROLE.SUPER_ADMIN');
+        if($this->admin->role != $superRoleId) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        $message = [];
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|max:255',
+                'email' => 'required|max:255',
+                'password' => 'required|max:255',
+            ]);
+            if (!empty($validator) && $validator->fails()) {
+                // fail
+                $message['success'] = 0;
+                $message['message'] = config('master.MESSAGE_NOTIFICATION.MSG_031');
+            } else {
+                $count = Administrator::where(['email' => $request->email])->count();
+                if (!$count) {
+                    $data = [
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'password' => \Hash::make($request->password),
+                        'role' => 2,
+                    ];
+                    Administrator::insert($data);
+                    $message['success'] = 1;
+                    $message['message'] = 'User create successful';
+                }
+            }
+        }
+        return view('admin.user.user_new', compact('message'));
+    }
+
+    public function userEdit(Request $request, $id)
+    {
+        $superRoleId = config('master.ADMIN_ROLE.SUPER_ADMIN');
+        if($this->admin->role != $superRoleId) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        $user = Administrator::where(['id' => $id])->first();
+        if (empty($user)) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        $message = ['info' => [], 'pass' => []];
+        if ($request->isMethod('post')) {
+            if ($request->edittype == 'lock_user') {
+                Administrator::where(['id' => $id])->update(['avail_flg'=>0]);
+                return redirect()->route('admin.user');
+            }
+            // edit info
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|max:255',
+                'email' => 'required|max:255',
+            ]);
+            if (!empty($validator) && $validator->fails()) {
+                // fail
+                $message['info']['success'] = 0;
+                $message['info']['message'] = "Error Occur";
+            } else {
+                $dataUpdate = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ];
+
+                Administrator::where('id', $id)->update($dataUpdate);
+                $message['info']['success'] = 1;
+                $message['info']['message'] = "Update successful";
+            }
+        }
+
+        $user = Administrator::where(['id' => $id])->first();
+        return view('admin.user.user_edit', compact('user', 'message'));
     }
 }

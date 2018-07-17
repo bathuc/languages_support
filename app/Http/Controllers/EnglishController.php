@@ -38,7 +38,7 @@ class EnglishController extends Controller
         $showTime = $request->showTime;
         $subjectId = $request->subjectId;
         $userId = $this->admin->id;
-        $subject = MainHelper::getSubject();
+        $subject = MainHelper::getSubject($userId);
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
         $word20 = Word::getWords(20, $userId, $subjectId);
         return view('frontend.english.words.random', compact('word', 'word20','wordNumber', 'showTime', 'subject', 'subjectId'));
@@ -49,7 +49,7 @@ class EnglishController extends Controller
         $wordNumber = 20;   // default
         $showTime = 2; // second
         $userId = $this->admin->id;
-        $subject = MainHelper::getSubject();
+        $subject = MainHelper::getSubject($userId);
         $subjectId = 1;     // default - common
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
         $word20 = Word::where('user_id',$userId)->get()->take(20)->toArray();

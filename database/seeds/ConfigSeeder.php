@@ -11,16 +11,18 @@ class ConfigSeeder extends Seeder
      */
     public function run()
     {
+        // insert Administrator
+        $admin = ['id'=>1,'name'=>'Thuc Le', 'email'=>'lebathuc@gmail.com', 'password'=>\Hash::make('admin123'),'role'=>1];
+        DB::table('administrators')->truncate();
+        DB::table('administrators')->insert($admin);
+
         // insert subjects
         $data = [
-            ['id'=>1, 'name_eng' => 'common', 'name_vi' => 'Phổ Biến'],
-            ['id'=>2, 'name_eng' => 'specialized', 'name_vi' => 'Chuyên Ngành'],
+            ['id'=>1, 'name_eng' => 'common', 'name_vi' => 'Phổ Biến', 'user_id'=>1],
+            ['id'=>2, 'name_eng' => 'specialized', 'name_vi' => 'Chuyên Ngành', 'user_id'=>1],
         ];
         DB::table('subject')->truncate();
         DB::table('subject')->insert($data);
 
-        // insert Administrator
-        $user = ['name'=>'Thuc Le', 'email'=>'lebathuc@gmail.com', 'password'=>\Hash::make('admin123'),'role'=>1];
-        DB::table('administrators')->insert($user);
     }
 }
