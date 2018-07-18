@@ -53,7 +53,13 @@ class AdminController extends Controller
             } else {
                 $credential = ['email' => $data['email'], 'password' => $data['password']];
                 if (Auth::guard($this->guard)->attempt($credential)) {
-                    return redirect()->route('admin.dashboard');
+                    if(Auth::guard($this->guard)->user()->avail_flg == 0) {
+                        Auth::guard($this->guard)->logout();
+                        $errors = 'user has been locked';
+                    }
+                    else {
+                        return redirect()->route('admin.dashboard');
+                    }
                 } else {
                     $errors = config('master.MESSAGE_NOTIFICATION.MSG_001');
                 }
@@ -123,7 +129,7 @@ class AdminController extends Controller
     public function wordEdit(Request $request, $id)
     {
         $word = Word::where(['id' => $id])->first();
-        $subject = MainHelper::getSubject();
+        $subject = MainHelper::getSubject($this->admin->id);
         if (empty($word) || $word->user_id != $this->admin->id) {
             return redirect()->route('admin.words');
         }

@@ -34,14 +34,20 @@ class EnglishController extends Controller
 
     public function getRandomWord(Request $request)
     {
+        $wordId = $request->wordId;
         $wordNumber = $request->wordNumber;
         $showTime = $request->showTime;
         $subjectId = $request->subjectId;
         $userId = $this->admin->id;
         $subject = MainHelper::getSubject($userId);
+        // get word random
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
-        $word20 = Word::getWords(20, $userId, $subjectId);
-        return view('frontend.english.words.random', compact('word', 'word20','wordNumber', 'showTime', 'subject', 'subjectId'));
+        $word12 = Word::getWords(12, $userId, $subjectId);
+        //get selected word
+        if($wordId) {
+            $word = Word::where('id',$wordId)->first();
+        }
+        return view('frontend.english.words.random', compact('word', 'word12','wordNumber', 'showTime', 'subject', 'subjectId'));
     }
 
     public function words(Request $request)
@@ -52,17 +58,24 @@ class EnglishController extends Controller
         $subject = MainHelper::getSubject($userId);
         $subjectId = 1;     // default - common
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
-        $word20 = Word::where('user_id',$userId)->get()->take(20)->toArray();
-        return view('frontend.english.words.words', compact('word', 'wordNumber', 'word20', 'showTime', 'subject', 'subjectId'));
+        $word12 = Word::where('user_id',$userId)->get()->take(12)->toArray();
+        return view('frontend.english.words.words', compact('word', 'wordNumber', 'word12', 'showTime', 'subject', 'subjectId'));
     }
 
     public function getRandomPhrase(Request $request)
     {
+        $phraseId = $request->phraseId;
         $phrasesNumber = $request->phrasesNumber;
         $showTime = $request->showTime;
         $userId = $this->admin->id;
         $phrase = Phrase::getRandomItem($phrasesNumber, $userId);
-        return view('frontend.english.phrases.random', compact('phrase','phrasesNumber', 'showTime'));
+        $phrase12 = Phrase::where('user_id',$userId)->get()->take(12)->toArray();
+
+        //get selected word
+        if($phraseId) {
+            $phrase = Phrase::where('id',$phraseId)->first();
+        }
+        return view('frontend.english.phrases.random', compact('phrase','phrase12', 'phrasesNumber', 'showTime'));
     }
 
     public function phrases(Request $request)
@@ -71,8 +84,9 @@ class EnglishController extends Controller
         $showTime = 2; // second
         $userId = $this->admin->id;
         $phrase = Phrase::getRandomItem($phrasesNumber, $userId);
+        $phrase12 = Phrase::where('user_id',$userId)->get()->take(12)->toArray();
 
-        return view('frontend.english.phrases.phrases', compact('phrase', 'phrasesNumber', 'showTime'));
+        return view('frontend.english.phrases.phrases', compact('phrase', 'phrase12', 'phrasesNumber', 'showTime'));
     }
 
     public function tenseDetail($id)

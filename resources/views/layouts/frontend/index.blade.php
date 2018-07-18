@@ -30,6 +30,7 @@
         ?>
 		{!! renderCss($arrayCss) !!}
 		{!! renderJs($arrayJs) !!}
+        {!! Html::style('admin/front/css/font-awesome.min.css') !!}
     </head>
     <body>
         @include('layouts.frontend.header')

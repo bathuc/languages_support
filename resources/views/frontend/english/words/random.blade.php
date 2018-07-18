@@ -34,75 +34,111 @@
 </div>
 <br><br><br>
 
-<div class="page-content">
-    <div class="wrapper inline">
-        <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $word['word'] }}</span><br><br>
-        <div class="show-meaning" style="display: none">
-            <span id="meaning" >Meaning: {{ $word['meaning'] }}</span><br>
-            @if(!empty($word['example']))
-                <span id="example" >{{ $word['example'] }}</span><br>
-            @endif
-            @if(!empty($word['example1']))
-                <span id="example1" >{{ $word['example1'] }}</span><br>
-            @endif
+@if(!empty($word))
+    <span id="hira_show"
+          style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $word['word'] }}</span>
+    <div class="page-content">
+        <div class="wrapper inline">
+            <div class="show-meaning" style="display: none">
+                @if(!empty($word['sound']))
+                    <audio autoplay class="audio">
+                        <source src="{{$word['sound']}}" type="audio/mpeg">
+                    </audio>
+                @endif
+                <p id="meaning">​</i>{{ $word['meaning'] }}</p>
+                @if(!empty($word['example']))
+                    <span id="example">{{ $word['example'] }}</span><br>
+                @endif
+                @if(!empty($word['example1']))
+                    <span id="example1">{{ $word['example1'] }}</span><br>
+                @endif
+            </div>
+            <br><br>
+            <button class="btn btn-primary btn-next">Next Word</button>
+        </div>
+        <div class="table-wrapper inline">
+            <table class="table table-bordered info-table" cellspacing="0" cellpadding="0">
+                <tbody>
+                @for($i=0; $i<count($word12)+1; $i++)
+                    <tr>
+                        @for($j = 0; $j<4; $j++)
+                            @php $index = $i*4 + $j; @endphp
+                            @if(isset($word12[$index]))
+                                <td>
+                                    <a href="javascript:void(0)" class="word"
+                                       data-word-id="{{ $word12[$index]['id'] }}">{{ $word12[$index]['word'] }}</a>
+                                </td>
+                            @endif
+                        @endfor
+                    </tr>
+                @endfor
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="table-wrapper inline">
-        <table class="table table-bordered info-table" summary="Explanation on English tenses" cellspacing="0">
-            <tbody>
 
-            @for($i=0; $i<count($word20)+1; $i++)
-                <tr>
-                    @for($j = 0; $j<4; $j++)
-                        @php $index = $i*4 + $j; @endphp
-                        @if(isset($word20[$index]))
-                            <td>
-                                <a href="{{ route('tense.detail', $word20[$index]['id']) }}">{{ $word20[$index]['word'] }}</a>
-                            </td>
-                        @endif
-                    @endfor
-                </tr>
-            @endfor
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<br><br>
-<button class="btn btn-primary btn-next">Next Word</button>
-{{--<button class="btn btn-primary btn-show-meaning">Show Meaning</button>--}}
-
+    {{--<button class="btn btn-primary btn-show-meaning">Show Meaning</button>--}}
+@else
+    <h2>Word is empty</h2>
+@endif
 <script>
     $(document).ready(function () {
-        $('.btn-next').click(function(){
+        $('.btn-next').click(function () {
             getNextWord();
         });
 
-        $('#dropDownId').on('change',function(){
+        $('#dropDownId').on('change', function () {
             getNextWord();
         });
 
-        function getNextWord(){
+        function getNextWord() {
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: 'post',
-                url:  '{{ route('word.random') }}',
+                url: '{{ route('word.random') }}',
                 data: {
                     'wordNumber': $('input[name=wordNumber]:checked').val(),
                     'showTime': $('input[name=showTime]').val(),
                     'subjectId': $('#dropDownId').val(),
                 },
-                success: function(respond) {
+                success: function (respond) {
                     $('#ajaxBox').html(respond);
                 }
             });
         }
 
-        var showTime = {{ $showTime }} * 1000;
-        setTimeout(function(){ $('.show-meaning').show(); }, showTime);
-
-        $('.btn-show-meaning').click(function(){
+        var showTime = {{ $showTime }} *
+        1000;
+        setTimeout(function () {
             $('.show-meaning').show();
+        }, showTime);
+
+        $('.btn-show-meaning').click(function () {
+            $('.show-meaning').show();
+        });
+
+        $('#hira_show').click(function(){
+            var soundPath = "{{$word['sound']}}";
+            var sounnd = new Audio(soundPath);
+            sounnd.play();
+        });
+
+        $('.word').click(function () {
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: 'post',
+                url: '{{ route('word.random') }}',
+                data: {
+                    'wordId': $(this).data('word-id'),
+                    'wordNumber': $('input[name=wordNumber]:checked').val(),
+                    'showTime': $('input[name=showTime]').val(),
+                    'subjectId': $('#dropDownId').val(),
+                },
+                success: function (respond) {
+                    $('#ajaxBox').html(respond);
+                }
+            });
         });
     });
 </script>
@@ -110,32 +146,49 @@
     .inline {
         display: inline-block;
     }
-    .wrapper{
-        height:100px;
+
+    .wrapper {
+        /*height: 100px;*/
         width: 60%
     }
+
     .table-wrapper {
-        width: 29%;
+        width: 39%;
     }
-    .info-table a{
+
+    .info-table a {
         text-decoration: none;
     }
+
     .word-wrapper {
         display: inline-block;
         margin-right: 50px;
     }
+
     #meaning {
-        font-size: 22px;
+        font-size: 25px;
     }
-    .show-meaning{
+
+    .show-meaning {
         font-size: 20px;
     }
+
     input[type=number] {
         width: 50px;
         text-align: center;
     }
+
     .table-bordered {
         border: none;
+        border-collapse: collapse;
+    }
+
+    table, tr, td {
+        border: none;
+    }
+
+    #hira_show {
+        cursor: pointer;
     }
 </style>
 
