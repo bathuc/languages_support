@@ -64,8 +64,8 @@
                 <tbody>
                 @for($i=0; $i<count($word16)+1; $i++)
                     <tr>
-                        @for($j = 0; $j<4; $j++)
-                            @php $index = $i*4 + $j; @endphp
+                        @for($j = 0; $j<5; $j++)
+                            @php $index = $i*5 + $j; @endphp
                             @if(isset($word16[$index]))
                                 <td>
                                     <a href="javascript:void(0)" class="word"
@@ -151,11 +151,11 @@
 
     .wrapper {
         /*height: 100px;*/
-        width: 60%
+        width: 55%
     }
 
     .table-wrapper {
-        width: 39%;
+        width: 44%;
     }
 
     .info-table a {
