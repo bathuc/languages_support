@@ -42,7 +42,7 @@ class EnglishController extends Controller
         $subject = MainHelper::getSubject($userId);
         // get word random
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
-        $word16 = Word::getWords(16, $userId, $subjectId);
+        $word16 = Word::getWords(20, $userId, $subjectId);
         //get selected word
         if($wordId) {
             $word = Word::where('id',$wordId)->first();
@@ -58,7 +58,7 @@ class EnglishController extends Controller
         $subject = MainHelper::getSubject($userId);
         $subjectId = 1;     // default - common
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
-        $word16 = Word::getWords(16, $userId, $subjectId);
+        $word16 = Word::getWords(20, $userId, $subjectId);
         return view('frontend.english.words.words', compact('word', 'wordNumber', 'word16', 'showTime', 'subject', 'subjectId'));
     }
 
