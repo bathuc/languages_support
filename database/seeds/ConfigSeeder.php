@@ -12,7 +12,7 @@ class ConfigSeeder extends Seeder
     public function run()
     {
         // insert Administrator
-        $admin = ['id'=>1,'name'=>'Thuc Le', 'email'=>'lebathuc@gmail.com', 'password'=>\Hash::make('admin123'),'role'=>1];
+        $admin = ['id'=>1,'name'=>'Admin', 'email'=>'admin@admin.com', 'password'=>\Hash::make('admin123'),'role'=>1];
         DB::table('administrators')->truncate();
         DB::table('administrators')->insert($admin);
 
