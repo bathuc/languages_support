@@ -62,14 +62,14 @@
         <div class="table-wrapper inline">
             <table class="table table-bordered info-table" cellspacing="0" cellpadding="0">
                 <tbody>
-                @for($i=0; $i<count($word12)+1; $i++)
+                @for($i=0; $i<count($word16)+1; $i++)
                     <tr>
                         @for($j = 0; $j<4; $j++)
                             @php $index = $i*4 + $j; @endphp
-                            @if(isset($word12[$index]))
+                            @if(isset($word16[$index]))
                                 <td>
                                     <a href="javascript:void(0)" class="word"
-                                       data-word-id="{{ $word12[$index]['id'] }}">{{ $word12[$index]['word'] }}</a>
+                                       data-word-id="{{ $word16[$index]['id'] }}">{{ $word16[$index]['word'] }}</a>
                                 </td>
                             @endif
                         @endfor

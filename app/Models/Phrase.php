@@ -13,10 +13,14 @@ class Phrase extends BaseModel
         // take all
         $phrases = [];
         if($phrasesNumber == 'random'){
-            $phrases = self::where('user_id',$userId)->get()->toArray();
+            $phrases = self::where('user_id',$userId)
+                            ->orderBy('id', 'DESC')
+                            ->get()->toArray();
         }
         else {
-            $phrases = self::where('user_id',$userId)->get()->take($phrasesNumber)->toArray();
+            $phrases = self::where('user_id',$userId)
+                            ->orderBy('id', 'DESC')
+                            ->get()->take($phrasesNumber)->toArray();
         }
 
         if(!empty($phrases)){

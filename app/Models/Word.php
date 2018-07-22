@@ -17,10 +17,14 @@ class Word extends BaseModel
             ['subject_id', '=', $subjectId],
         ];
         if($wordNumber == 'random'){
-            $words = self::where($where)->get()->toArray();
+            $words = self::where($where)
+                ->orderBy('id', 'DESC')
+                ->get()->toArray();
         }
         else {
-            $words = self::where($where)->get()->take($wordNumber)->toArray();
+            $words = self::where($where)
+                            ->orderBy('id', 'DESC')
+                            ->get()->take($wordNumber)->toArray();
         }
         // return random
         if(!empty($words)){
@@ -39,6 +43,9 @@ class Word extends BaseModel
             ['subject_id', '=', $subjectId],
         ];
 
-        return self::where($where)->get()->take($wordNumber)->toArray();
+        return
+            self::where($where)
+            ->orderBy('id', 'DESC')
+            ->get()->take($wordNumber)->toArray();
     }
 }

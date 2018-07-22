@@ -42,12 +42,12 @@ class EnglishController extends Controller
         $subject = MainHelper::getSubject($userId);
         // get word random
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
-        $word12 = Word::getWords(12, $userId, $subjectId);
+        $word16 = Word::getWords(16, $userId, $subjectId);
         //get selected word
         if($wordId) {
             $word = Word::where('id',$wordId)->first();
         }
-        return view('frontend.english.words.random', compact('word', 'word12','wordNumber', 'showTime', 'subject', 'subjectId'));
+        return view('frontend.english.words.random', compact('word', 'word16','wordNumber', 'showTime', 'subject', 'subjectId'));
     }
 
     public function words(Request $request)
@@ -58,8 +58,8 @@ class EnglishController extends Controller
         $subject = MainHelper::getSubject($userId);
         $subjectId = 1;     // default - common
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
-        $word12 = Word::where('user_id',$userId)->get()->take(12)->toArray();
-        return view('frontend.english.words.words', compact('word', 'wordNumber', 'word12', 'showTime', 'subject', 'subjectId'));
+        $word16 = Word::getWords(16, $userId, $subjectId);
+        return view('frontend.english.words.words', compact('word', 'wordNumber', 'word16', 'showTime', 'subject', 'subjectId'));
     }
 
     public function getRandomPhrase(Request $request)
@@ -81,10 +81,12 @@ class EnglishController extends Controller
     public function phrases(Request $request)
     {
         $phrasesNumber = 20; // default
-        $showTime = 2; // second
+        $showTime = 3; // second
         $userId = $this->admin->id;
         $phrase = Phrase::getRandomItem($phrasesNumber, $userId);
-        $phrase12 = Phrase::where('user_id',$userId)->get()->take(12)->toArray();
+        $phrase12 = Phrase::where('user_id',$userId)
+                        ->orderBy('id', 'DESC')
+                        ->get()->take(12)->toArray();
 
         return view('frontend.english.phrases.phrases', compact('phrase', 'phrase12', 'phrasesNumber', 'showTime'));
     }

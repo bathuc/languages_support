@@ -121,7 +121,9 @@ class AdminController extends Controller
             }
         }
 
-        $words = Word::where('user_id',$this->admin->id)->paginate(10);
+        $words = Word::where('user_id',$this->admin->id)
+                        ->orderBy('id', 'DESC')
+                        ->paginate(20);
         return view('admin.words.words',compact('words'));
     }
 
@@ -213,7 +215,9 @@ class AdminController extends Controller
 
     public function phrases(Request $request)
     {
-        $phrases = Phrase::where('user_id',$this->admin->id)->paginate(10);
+        $phrases = Phrase::where('user_id',$this->admin->id)
+                            ->orderBy('id', 'DESC')
+                            ->paginate(20);
         return view('admin.phrases.phrases',compact('phrases'));
     }
 
