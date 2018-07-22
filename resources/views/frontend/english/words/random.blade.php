@@ -45,6 +45,9 @@
                         <source src="{{$word['sound']}}" type="audio/mpeg">
                     </audio>
                 @endif
+                @if(!empty($word['ipa']))
+                    <span>{{$word['ipa']}}</span><br>
+                @endif
                 <p id="meaning">​</i>{{ $word['meaning'] }}</p>
                 @if(!empty($word['example']))
                     <span id="example">{{ $word['example'] }}</span><br>
@@ -108,8 +111,7 @@
             });
         }
 
-        var showTime = {{ $showTime }} *
-        1000;
+        var showTime = {{ $showTime }} * 1000;
         setTimeout(function () {
             $('.show-meaning').show();
         }, showTime);
@@ -118,9 +120,9 @@
             $('.show-meaning').show();
         });
 
+        var soundPath = "{{$word['sound']}}";
+        var sounnd = new Audio(soundPath);
         $('#hira_show').click(function(){
-            var soundPath = "{{$word['sound']}}";
-            var sounnd = new Audio(soundPath);
             sounnd.play();
         });
 

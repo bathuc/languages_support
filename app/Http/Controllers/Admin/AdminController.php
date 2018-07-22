@@ -74,8 +74,53 @@ class AdminController extends Controller
         return redirect()->route('admin.login');
     }
 
+    public function getFromDictionary($word)
+    {
+        $re = "/(https:)(.)*(mp3)/";
+        $reIPA = "/span class=\"ipa\">(.)*<\\/span>/";
+        //$html= '<span class="ipa">ˈfəʊ.kəs</span>';
+        //preg_match_all($reIPA, $html, $ipa);
+        $url = 'https://dictionary.cambridge.org/dictionary/english/'. $word;
+        $dictionary = MainHelper::curl('post',$url);
+        preg_match_all($re, $dictionary, $soundMatch);
+        preg_match_all($reIPA, $dictionary, $ipaMatch);
+
+        $sound = ''; $ipa = '';
+        if(isset($soundMatch[0][0])){
+            $sound = $soundMatch[0][0];
+        }
+
+        if(isset($ipaMatch[0][0])){
+            $keywords = preg_split("/[><]+/", $ipaMatch[0][0]);
+            $ipa = $keywords[1];
+        }
+
+        return [
+            'sound'=>$sound,
+            'ipa'=>$ipa,
+        ];
+    }
+
+
     public function words(Request $request)
     {
+        if($request->post()){
+            // update sound
+            if($request->updateSound == 'update') {
+                $where = [
+                    ['user_id' ,'=',$this->admin->id],
+                    ['sound' ,'=',null],
+                ];
+                $words = Word::where($where)->get();
+
+                foreach ($words as $word) {
+                    $newSound = $this->getFromDictionary($word->word);
+                    Word::where('id',$word->id)->update($newSound);
+                }
+                session()->flash('flash_success', 'Sound Link Updated');
+            }
+        }
+
         $words = Word::where('user_id',$this->admin->id)->paginate(10);
         return view('admin.words.words',compact('words'));
     }
@@ -107,14 +152,16 @@ class AdminController extends Controller
             } else {
                 $count = Word::where(['word' => $request->word,'user_id'=>$this->admin->id])->count();
                 if (!$count) {
+//                    $newSound = $this->getFromDictionary($request->word);
                     $data = [
                         'word' => $request->word,
                         'meaning' => $request->meaning,
                         'example' => $request->example,
                         'example1' => $request->example1,
-                        'sound' => $request->sound,
                         'subject_id' => $request->subjectId,
                         'user_id' => $this->admin->id,
+//                        'sound'=>$newSound['sound'],
+//                        'ipa'=>$newSound['ipa'],
                     ];
                     Word::insert($data);
                     $message['success'] = 1;
@@ -151,7 +198,6 @@ class AdminController extends Controller
                     'meaning' => $request->meaning,
                     'example' => $request->example,
                     'example1' => $request->example1,
-                    'sound' => $request->sound,
                     'subject_id' => $request->subjectId,
                 ];
 

@@ -10,11 +10,17 @@
 
     <section class="content container-fluid">
         <div class="row">
+            @if(session()->has('flash_success'))
+                <div class="alert alert-success"> {{ session()->get('flash_success') }} </div>
+            @endif
+
             <div class="box">
                 <div class="box-body">
-                    <form role="form">
-                        <p>Add a word</p>
-                        <a href="{{ route('admin.words.new') }}" class="btn btn-primary btn-flat">new word</a>
+                    <p>Add a word</p>
+                    <a href="{{ route('admin.words.new') }}" class="btn btn-primary btn-flat">new word</a>
+                    <button  class="btn btn-primary btn-flat pull-right update-sound">Update Sound Link</button>
+                    <form id="frmSound">
+                        <input type="hidden" name="updateSound" value="update"/>
                     </form>
                 </div>
             </div>
@@ -58,7 +64,10 @@
             $('.user-row').click(function(){
                 console.log();
                 window.location.href = 'words/edit/'+$(this).attr('data-text');
-            })
+            });
+            $('.update-sound').click(function(){
+                $('#frmSound').submit();
+            });
         });
     </script>
 @endsection

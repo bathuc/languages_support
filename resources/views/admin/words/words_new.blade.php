@@ -70,12 +70,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Sound link</th>
-                                <td>
-                                    <input id="sound" name="sound" type="text" class="box_inline form-control w50">
-                                </td>
-                            </tr>
-                            <tr>
                                 <th></th>
                                 <td>
                                     <button id="confirm" type="button" class="btn btn-primary btn-flat">Create</button>
