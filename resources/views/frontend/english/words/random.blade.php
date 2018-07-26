@@ -1,5 +1,5 @@
 @php
-    $check20 = ($wordNumber == 20)? 'checked' : '';
+    $check30 = ($wordNumber == 30)? 'checked' : '';
     $check50 = ($wordNumber == 50)? 'checked' : '';
     $check100 = ($wordNumber == 100)? 'checked' : '';
     $checkRandom = ($wordNumber == 'random')? 'checked' : '';
@@ -7,7 +7,7 @@
 
 <h1 id="head1">Words Drill</h1>
 <div class="word-wrapper">
-    <input type="radio" name="wordNumber" value="20" {{ $check20 }} > First 20 words
+    <input type="radio" name="wordNumber" value="30" {{ $check30 }} > First 30 words
 </div>
 <div class="word-wrapper">
     <input type="radio" name="wordNumber" value="50" {{ $check50 }}> First 50 words

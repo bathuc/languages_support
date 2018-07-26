@@ -76,18 +76,18 @@ class AdminController extends Controller
 
     public function getFromDictionary($word)
     {
-        $re = "/(https:)(.)*(mp3)/";
+        $re = "/(media)(.)*(mp3)/";
         $reIPA = "/span class=\"ipa\">(.)*<\\/span>/";
         //$html= '<span class="ipa">ˈfəʊ.kəs</span>';
         //preg_match_all($reIPA, $html, $ipa);
         $url = 'https://dictionary.cambridge.org/dictionary/english/'. $word;
-        $dictionary = MainHelper::curl('post',$url);
+        $dictionary = MainHelper::curl('get',$url);
         preg_match_all($re, $dictionary, $soundMatch);
         preg_match_all($reIPA, $dictionary, $ipaMatch);
 
         $sound = ''; $ipa = '';
         if(isset($soundMatch[0][0])){
-            $sound = $soundMatch[0][0];
+            $sound = 'https://dictionary.cambridge.org/'.$soundMatch[0][0];
         }
 
         if(isset($ipaMatch[0][0])){

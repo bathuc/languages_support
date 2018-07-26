@@ -52,7 +52,7 @@ class EnglishController extends Controller
 
     public function words(Request $request)
     {
-        $wordNumber = 20;   // default
+        $wordNumber = 30;   // default
         $showTime = 3; // second
         $userId = $this->admin->id;
         $subject = MainHelper::getSubject($userId);
@@ -81,7 +81,7 @@ class EnglishController extends Controller
     public function phrases(Request $request)
     {
         $phrasesNumber = 20; // default
-        $showTime = 3; // second
+        $showTime = 4; // second
         $userId = $this->admin->id;
         $phrase = Phrase::getRandomItem($phrasesNumber, $userId);
         $phrase12 = Phrase::where('user_id',$userId)
