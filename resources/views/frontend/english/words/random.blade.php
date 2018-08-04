@@ -7,16 +7,20 @@
 
 <h1 id="head1">Words Drill</h1>
 <div class="word-wrapper">
-    <input type="radio" name="wordNumber" value="30" {{ $check30 }} > First 30 words
+    <input type="radio" name="wordNumber" id="word30" value="30" {{ $check30 }} >
+    <label for="word30">First 30 words</label>
 </div>
 <div class="word-wrapper">
-    <input type="radio" name="wordNumber" value="50" {{ $check50 }}> First 50 words
+    <input type="radio" name="wordNumber" id="word50" value="50" {{ $check50 }}>
+    <label for="word50">First 50 words</label>
 </div>
 <div class="word-wrapper">
-    <input type="radio" name="wordNumber" value="100" {{ $check100 }}> First 100 words
+    <input type="radio" name="wordNumber" id="word100" value="100" {{ $check100 }}>
+    <label for="word100">First 100 words</label>
 </div>
 <div class="word-wrapper">
-    <input type="radio" name="wordNumber" value="random" {{ $checkRandom }}> Random
+    <input type="radio" name="wordNumber" id="random" value="random" {{ $checkRandom }}>
+    <label for="random">Random</label>
 </div>
 <div class="word-wrapper">
     Show Time <input type="number" name="showTime" value="{{ $showTime }}">
@@ -57,7 +61,7 @@
                 @endif
             </div>
             <br><br>
-            <button class="btn btn-primary btn-next">Next Word</button>
+            <button class="btn btn-primary btn-lg btn-next">Next Word</button>
         </div>
         <div class="table-wrapper inline">
             <table class="table table-bordered info-table" cellspacing="0" cellpadding="0">
@@ -116,9 +120,9 @@
             $('.show-meaning').show();
         }, showTime);
 
-        $('.btn-show-meaning').click(function () {
+        /*$('.btn-show-meaning').click(function () {
             $('.show-meaning').show();
-        });
+        });*/
 
         var soundPath = "{{$word['sound']}}";
         var sounnd = new Audio(soundPath);
@@ -191,6 +195,9 @@
 
     #hira_show {
         cursor: pointer;
+    }
+    label{
+        font-weight:normal;
     }
 </style>
 

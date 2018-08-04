@@ -107,12 +107,12 @@ class AdminController extends Controller
         if($request->post()){
             // update sound
             if($request->updateSound == 'update') {
-                $where = [
-                    ['user_id' ,'=',$this->admin->id],
-                    ['sound' ,'=',null],
-                ];
-                $words = Word::where($where)->get();
-
+                $words = Word::where('user_id', $this->admin->id)
+                                ->where(function ($query) {
+                                    $query->where('sound','');
+                                    $query->orWhere('sound',null);
+                                })
+                                ->get();
                 foreach ($words as $word) {
                     $newSound = $this->getFromDictionary($word->word);
                     Word::where('id',$word->id)->update($newSound);
