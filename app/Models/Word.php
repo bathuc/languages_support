@@ -8,7 +8,7 @@ class Word extends BaseModel
 {
     protected $table = 'word';
 
-    public static function getRandomItem($wordNumber = 20, $userId, $subjectId=1)
+    public static function getRandomItem($wordNumber = 0, $userId, $subjectId=1)
     {
         // take all
         $words = [];
@@ -16,7 +16,7 @@ class Word extends BaseModel
             ['user_id', '=', $userId],
             ['subject_id', '=', $subjectId],
         ];
-        if($wordNumber == 'random'){
+        if($wordNumber === 'random'){
             $words = self::where($where)
                 ->orderBy('id', 'DESC')
                 ->get()->toArray();
@@ -24,7 +24,8 @@ class Word extends BaseModel
         else {
             $words = self::where($where)
                             ->orderBy('id', 'DESC')
-                            ->get()->take($wordNumber)->toArray();
+                            ->skip($wordNumber*30)->take(30)
+                            ->get()->toArray();
         }
         // return random
         if(!empty($words)){
@@ -35,8 +36,11 @@ class Word extends BaseModel
         return null;
     }
 
-    public static function getWords($wordNumber = 20, $userId, $subjectId=1)
+    public static function getWords($wordNumber = 0, $userId, $subjectId=1)
     {
+        if($wordNumber === 'random') {
+            $wordNumber = 0;
+        }
         // take all
         $where = [
             ['user_id', '=', $userId],
@@ -46,6 +50,30 @@ class Word extends BaseModel
         return
             self::where($where)
             ->orderBy('id', 'DESC')
-            ->get()->take($wordNumber)->toArray();
+            ->skip($wordNumber*40)->take(40)
+            ->get()->toArray();
     }
+
+    public static function getShuffleWords($wordNumber, $userId, $subjectId)
+    {
+        $where = [
+            ['user_id', '=', $userId],
+            ['subject_id', '=', $subjectId],
+        ];
+        if($wordNumber === 'random') {
+            $words = self::where($where)
+                    ->orderBy('id', 'DESC')
+                    ->get()->toArray();
+        }
+        else{
+            $words = self::where($where)
+                ->orderBy('id', 'DESC')
+                ->skip($wordNumber*30)->take(30)
+                ->get()->toArray();
+        }
+
+        shuffle($words);
+        return $words;
+    }
+
 }

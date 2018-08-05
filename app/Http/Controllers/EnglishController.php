@@ -42,24 +42,26 @@ class EnglishController extends Controller
         $subject = MainHelper::getSubject($userId);
         // get word random
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
-        $word16 = Word::getWords(30, $userId, $subjectId);
+        $wordList = Word::getWords($wordNumber, $userId, $subjectId);
+        $wordSound = Word::getShuffleWords($wordNumber, $userId, $subjectId);
         //get selected word
         if($wordId) {
             $word = Word::where('id',$wordId)->first();
         }
-        return view('frontend.english.words.random', compact('word', 'word16','wordNumber', 'showTime', 'subject', 'subjectId'));
+        return view('frontend.english.words.random', compact('word', 'wordList', 'wordSound', 'wordNumber', 'showTime', 'subject', 'subjectId'));
     }
 
     public function words(Request $request)
     {
-        $wordNumber = 30;   // default
-        $showTime = 3; // second
+        $wordNumber = 0;   // default
+        $showTime = 4; // second
         $userId = $this->admin->id;
         $subject = MainHelper::getSubject($userId);
         $subjectId = 1;     // default - common
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
-        $word16 = Word::getWords(30, $userId, $subjectId);
-        return view('frontend.english.words.words', compact('word', 'wordNumber', 'word16', 'showTime', 'subject', 'subjectId'));
+        $wordList = Word::getWords($wordNumber, $userId, $subjectId);
+        $wordSound = Word::getShuffleWords($wordNumber, $userId, $subjectId);
+        return view('frontend.english.words.words', compact('word', 'wordNumber', 'wordList', 'wordSound', 'showTime', 'subject', 'subjectId'));
     }
 
     public function getRandomPhrase(Request $request)

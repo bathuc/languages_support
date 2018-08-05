@@ -5,46 +5,50 @@
     $checkRandom = ($phrasesNumber == 'random')? 'checked' : '';
 @endphp
 
-<h1 id="head1">Phrases Game</h1>
-<div class="phrase-wrapper">
-    <input type="radio" name="phrasesNumber" value="20" {{ $check20 }}> First 20 phrases
-</div>
-<div class="phrase-wrapper">
-    <input type="radio" name="phrasesNumber" value="50" {{ $check50 }}> First 50 phrases
-</div>
-<div class="phrase-wrapper">
-    <input type="radio" name="phrasesNumber" value="100" {{ $check100 }}> First 100 phrases
-</div>
-<div class="phrase-wrapper">
-    <input type="radio" name="phrasesNumber" value="random" {{ $checkRandom }}> Random
-</div>
-<div class="phrase-wrapper">
-    Show Time <input type="number" name="showTime" value="{{ $showTime }}">
-</div>
-<br><br><br>
-
-<span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $phrase['phrase'] }}</span><br><br>
-<div class="page-content">
-    <div class="wrapper inline">
-        <div class="show-meaning inline" style="display: none">
-            <p id="meaning" >{{ $phrase['meaning'] }}</p>
-            @if(!empty($phrase['example']))
-                <span id="example" >{{ $phrase['example'] }}</span><br>
-            @endif
-            @if(!empty($phrase['example1']))
-                <span id="example1" >{{ $phrase['example1'] }}</span><br>
-            @endif
-        </div>
-        <br><br>
-        <button class="btn btn-primary btn-next">Next Phrase</button>
+<div class="d-flex justify-content-between align-items-center pt-3 w-75">
+    <div>
+        <input type="radio" name="phrasesNumber" value="20" {{ $check20 }}> First 20 phrases
     </div>
-    <div class="table-wrapper inline">
+    <div>
+        <input type="radio" name="phrasesNumber" value="50" {{ $check50 }}> First 50 phrases
+    </div>
+    <div>
+        <input type="radio" name="phrasesNumber" value="100" {{ $check100 }}> First 100 phrases
+    </div>
+    <div>
+        <input type="radio" name="phrasesNumber" value="random" {{ $checkRandom }}> Random
+    </div>
+    <div class=" d-flex align-items-center">
+        <label for="showTime" class="pr-2">Show Time</label>
+        <input type="number" name="showTime" class="form-control" value="{{ $showTime }}">
+    </div>
+</div>
+
+<div class="d-flex justify-content-between pt-4">
+    <div class="word-wrap">
+        <div class="page-content">
+            <div class="wrapper-phrase">
+                <span id="phrase_show">{{ $phrase['phrase'] }}</span>
+                <div class="show-meaning pt-2" style="display: none">
+                    <p id="meaning" >{{ $phrase['meaning'] }}</p>
+                    @if(!empty($phrase['example']))
+                        <span id="example" >{{ $phrase['example'] }}</span><br>
+                    @endif
+                    @if(!empty($phrase['example1']))
+                        <span id="example1" >{{ $phrase['example1'] }}</span><br>
+                    @endif
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-next">Next Phrase</button>
+        </div>
+    </div>
+    <div class="table-wrapper">
         <table class="table table-bordered info-table" cellspacing="0" cellpadding="0">
             <tbody>
             @for($i=0; $i<count($phrase12)+1; $i++)
                 <tr>
-                    @for($j = 0; $j<3; $j++)
-                        @php $index = $i*3 + $j; @endphp
+                    @for($j = 0; $j<2; $j++)
+                        @php $index = $i*2 + $j; @endphp
                         @if(isset($phrase12[$index]))
                             <td>
                                 <a href="javascript:void(0)" class="phrase"
@@ -58,8 +62,6 @@
         </table>
     </div>
 </div>
-
-{{--<button class="btn btn-primary btn-show-meaning">Show Meaning</button>--}}
 
 <script>
     $(document).ready(function () {
@@ -102,40 +104,5 @@
         });
     });
 </script>
-<style>
-    .inline {
-        display: inline-block;
-    }
-    .wrapper {
-        width: 60%
-    }
-    .table-wrapper {
-        width: 39%;
-    }
-    .phrase-wrapper {
-        display: inline-block;
-        margin-right: 50px;
-    }
-    .info-table a {
-        text-decoration: none;
-    }
-    #meaning {
-        font-size: 25px;
-    }
-    .show-meaning{
-        font-size: 20px;
-    }
-    input[type=number] {
-        width: 50px;
-        text-align: center;
-    }
-    .table-bordered {
-        border: none;
-        border-collapse: collapse;
-    }
 
-    table, tr, td {
-        border: none;
-    }
-</style>
 

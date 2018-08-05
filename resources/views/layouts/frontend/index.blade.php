@@ -19,6 +19,7 @@
         ];
         $arrayJs = [
             '/front/js/jquery.min.js',
+            '/front/js/popper.min.js',
             '/front/js/bootstrap.min.js',
             '/front/js/jquery.validate.js',
             '/front/js/style.js',
