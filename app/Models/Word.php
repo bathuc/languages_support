@@ -24,7 +24,7 @@ class Word extends BaseModel
         else {
             $words = self::where($where)
                             ->orderBy('id', 'DESC')
-                            ->skip($wordNumber*30)->take(30)
+                            ->skip($wordNumber*40)->take(40)
                             ->get()->toArray();
         }
         // return random
@@ -68,7 +68,7 @@ class Word extends BaseModel
         else{
             $words = self::where($where)
                 ->orderBy('id', 'DESC')
-                ->skip($wordNumber*30)->take(30)
+                ->skip($wordNumber*40)->take(40)
                 ->get()->toArray();
         }
 
