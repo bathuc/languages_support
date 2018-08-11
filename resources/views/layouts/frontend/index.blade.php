@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta content="IE=edge" http-equiv="X-UA-Compatible">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>My default App</title>
+		<title>Languages support</title>
         <meta name="description" content="">
         <link rel="shortcut icon" href="/favicon.ico?v=1">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
