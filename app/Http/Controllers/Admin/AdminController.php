@@ -52,7 +52,7 @@ class AdminController extends Controller
                 $errors = config('master.MESSAGE_NOTIFICATION.MSG_001');
             } else {
                 $credential = ['email' => $data['email'], 'password' => $data['password']];
-                if (Auth::guard($this->guard)->attempt($credential)) {
+                if (Auth::guard($this->guard)->attempt($credential, 1)) {
                     if(Auth::guard($this->guard)->user()->avail_flg == 0) {
                         Auth::guard($this->guard)->logout();
                         $errors = 'user has been locked';
