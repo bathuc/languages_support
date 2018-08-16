@@ -168,14 +168,14 @@
             var soundTime = 0;
             soundList.forEach(function(sound){
                 setTimeout(function (sound){
-                    var audio = new Audio(sound.sound);
-                    audio.play();
                     $('#hira_show').html(sound.word);
                     var html = '<span>'+sound.ipa+'</span><br>'+
                                 '<p id="meaning">​</i>'+sound.meaning+'</p>'+
                                 '<span id="example">'+sound.example+'</span><br>'+
                                 '<span id="example1">'+sound.example1+'</span><br>';
                     $('.show-meaning').html(html).show();
+                    var audio = new Audio(sound.sound);
+                    audio.play();
                 }, soundTime, sound);
                 soundTime += showTime * 1000;
             });
