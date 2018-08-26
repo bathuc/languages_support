@@ -13,6 +13,7 @@ use App\Models\Administrator;
 use App\Models\Word;
 use App\Models\Phrase;
 use App\Models\Subject;
+use App\Helpers\Dom;
 
 class AdminController extends Controller
 {
@@ -76,27 +77,17 @@ class AdminController extends Controller
 
     public function getFromDictionary($word)
     {
-        $re = "/(media)(.)*(mp3)/";
-        $reIPA = "/span class=\"ipa\">(.)*<\\/span>/";
-        //$html= '<span class="ipa">ˈfəʊ.kəs</span>';
-        //preg_match_all($reIPA, $html, $ipa);
         $url = 'https://dictionary.cambridge.org/dictionary/english/'. $word;
-        $dictionary = MainHelper::curl('get',$url);
-        preg_match_all($re, $dictionary, $soundMatch);
-        preg_match_all($reIPA, $dictionary, $ipaMatch);
+        $html = Dom::curl($url);
+        $soundElement = Dom::getNodesByClass($html,'circle circle-btn sound audio_play_button')->item(0);
+        $mp3 = Dom::getDomElementAttribute($soundElement,'data-src-mp3');
+        $mp3 = 'https://dictionary.cambridge.org' . $mp3;
 
-        $sound = ''; $ipa = '';
-        if(isset($soundMatch[0][0])){
-            $sound = 'https://dictionary.cambridge.org/'.$soundMatch[0][0];
-        }
-
-        if(isset($ipaMatch[0][0])){
-            $keywords = preg_split("/[><]+/", $ipaMatch[0][0]);
-            $ipa = $keywords[1];
-        }
+        $ipaElement = Dom::getNodesByClass($html,'ipa')->item(0);
+        $ipa = Dom::getDomElementValue($ipaElement);
 
         return [
-            'sound'=>$sound,
+            'sound'=>$mp3,
             'ipa'=>$ipa,
         ];
     }
