@@ -13,6 +13,9 @@
                     if(e.keyCode == 39) { // right
                         getNextWord();
                     }
+                    else if(e.keyCode == 40) {
+                        $('#hira_show').click();
+                    }
                 });
                 function getNextWord() {
                     $.ajax({
