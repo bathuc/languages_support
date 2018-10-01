@@ -10,11 +10,20 @@
         <script>
             $(document).ready(function () {
                 $('body').on('keydown', function(e) {
+                    var wordNumber = parseInt($('input[name=wordNumber]:checked').val()) ;
                     if(e.keyCode == 39) { // right
                         getNextWord();
                     }
-                    else if(e.keyCode == 40) {
+                    else if(e.keyCode == 40) {  //down
                         $('#hira_show').click();
+                    }
+                    else if(e.keyCode == 33 && wordNumber > 0) {  //page up
+                        var checkboxId = '#wordRadio' + (wordNumber - 1);
+                        $(checkboxId).click();
+                    }
+                    else if(e.keyCode == 34 && wordNumber < 3) {  //page down
+                        var checkboxId = '#wordRadio' + (wordNumber + 1);
+                        $(checkboxId).click();
                     }
                 });
                 function getNextWord() {
