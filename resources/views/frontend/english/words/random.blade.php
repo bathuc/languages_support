@@ -28,7 +28,7 @@
         <label for="wordRandom">Random</label>
     </div>
     <div class="d-flex align-items-center">
-        <label for="showTime" class="pr-2">Show <span class="d-none d-sm-block">Time</span></label>
+        <label for="showTime" class="pr-2">Time</label>
         <input type="number" name="showTime" id="showTime" class="form-control" value="{{ $showTime }}">
     </div>
     <div>
