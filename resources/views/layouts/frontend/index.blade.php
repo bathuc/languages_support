@@ -22,11 +22,6 @@
             '/front/js/popper.min.js',
             '/front/js/bootstrap.min.js',
             '/front/js/jquery.validate.js',
-            '/front/js/style.js',
-            '/front/vendor/cropper/js/cropper.js',
-            '/front/js/remodal.min.js',
-            //'/front/vendor/byte-counter/utf8.js',
-            '/front/vendor/byte-counter/eff.js'
         ];
         ?>
 		{!! renderCss($arrayCss) !!}
@@ -34,7 +29,7 @@
         {!! Html::style('admin/front/css/font-awesome.min.css') !!}
     </head>
     <body>
-        @include('layouts.frontend.header')
+        @include('layouts.frontend.navigate_bar')
         <div class="container">
 			@yield('content')
         </div>

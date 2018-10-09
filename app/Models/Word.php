@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Word extends BaseModel
 {
     protected $table = 'word';
+    const WORDS_PER_PAGE = 40;
 
     public static function getRandomItem($wordNumber = 0, $userId, $subjectId=1)
     {
@@ -24,7 +25,7 @@ class Word extends BaseModel
         else {
             $words = self::where($where)
                             ->orderBy('id', 'DESC')
-                            ->skip($wordNumber*40)->take(40)
+                            ->skip($wordNumber*self::WORDS_PER_PAGE)->take(self::WORDS_PER_PAGE)
                             ->get()->toArray();
         }
         // return random
@@ -50,7 +51,7 @@ class Word extends BaseModel
         return
             self::where($where)
             ->orderBy('id', 'DESC')
-            ->skip($wordNumber*40)->take(40)
+            ->skip($wordNumber*self::WORDS_PER_PAGE)->take(self::WORDS_PER_PAGE)
             ->get()->toArray();
     }
 
@@ -68,7 +69,7 @@ class Word extends BaseModel
         else{
             $words = self::where($where)
                 ->orderBy('id', 'DESC')
-                ->skip($wordNumber*40)->take(40)
+                ->skip($wordNumber*self::WORDS_PER_PAGE)->take(self::WORDS_PER_PAGE)
                 ->get()->toArray();
         }
 
