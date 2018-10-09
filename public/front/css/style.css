@@ -2710,7 +2710,10 @@ label{
     margin-top: 230px;
     background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);
 }
-
+/*word page*/
+.word-space{
+    padding-top: 1.5rem!important;
+}
 /*navigation bar*/
 .navigation-bar {
     background-color: #5aa0a0; /* nav background color */
@@ -2840,6 +2843,15 @@ nav.navbar {
         text-align: left;
         width: 100%;
     }
+
+    /*words page*/
+    .wrapper-word {
+        height: 200px;
+    }
+    .word-space{
+        padding-top: 1rem!important;
+    }
+
 }
 
 /*  logo  */

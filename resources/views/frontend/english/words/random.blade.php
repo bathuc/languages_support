@@ -48,7 +48,8 @@
 </div>
 
 @if(!empty($word))
-    <div class="row pt-4">
+    <div class="word-space"></div>
+    <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <span id="hira_show">{{ $word['word'] }}</span>
             <div class="page-content pt-3">
@@ -67,7 +68,7 @@
                             <span id="example">{{ $word['example'] }}</span><br>
                         @endif
                         @if(!empty($word['example1']))
-                            <span id="example1">{{ $word['example1'] }}</span><br>
+                            <span id="example1" class="d-none d-sm-block">{{ $word['example1'] }}</span><br>
                         @endif
                     </div>
                 </div>
