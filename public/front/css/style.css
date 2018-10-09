@@ -2851,6 +2851,12 @@ nav.navbar {
     .word-space{
         padding-top: 1rem!important;
     }
+    #showTime{
+        width: 50px;
+    }
+    #range {
+        width: 165px;
+    }
 
 }
 

@@ -32,7 +32,7 @@
         <input type="number" name="showTime" id="showTime" class="form-control" value="{{ $showTime }}">
     </div>
     <div class="d-none d-md-block">
-        <select name="subjectId" id="dropDownId" class="box_inline form-control w50">
+        <select name="subjectId" id="dropDownId" class="form-control w50">
             @foreach($subject as $item)
                 @if($subjectId == $item->id)
                     <option value="{{ $item->id }}" selected="selected">{{ $item->name_vi }}</option>
