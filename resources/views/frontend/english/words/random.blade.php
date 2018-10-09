@@ -28,7 +28,7 @@
         <label for="wordRandom">Random</label>
     </div>
     <div class="d-flex align-items-center">
-        <label for="showTime" class="pr-2">Show Time</label>
+        <label for="showTime" class="pr-2">Show <span class="d-none d-sm-block">Time</span></label>
         <input type="number" name="showTime" id="showTime" class="form-control" value="{{ $showTime }}">
     </div>
     <div>
@@ -170,7 +170,7 @@
                     var html = '<span>'+sound.ipa+'</span><br>'+
                                 '<p id="meaning">​</i>'+sound.meaning+'</p>'+
                                 '<span id="example">'+sound.example+'</span><br>'+
-                                '<span id="example1"  class="d-none d-sm-block">'+sound.example1+'</span><br>';
+                                '<span id="example1" class="d-none d-sm-block">'+sound.example1+'</span><br>';
                     $('.show-meaning').html(html).show();
                     var audio = new Audio(sound.sound);
                     audio.play();
