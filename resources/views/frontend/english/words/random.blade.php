@@ -170,7 +170,7 @@
                     var html = '<span>'+sound.ipa+'</span><br>'+
                                 '<p id="meaning">​</i>'+sound.meaning+'</p>'+
                                 '<span id="example">'+sound.example+'</span><br>'+
-                                '<span id="example1">'+sound.example1+'</span><br>';
+                                '<span id="example1"  class="d-none d-sm-block">'+sound.example1+'</span><br>';
                     $('.show-meaning').html(html).show();
                     var audio = new Audio(sound.sound);
                     audio.play();
