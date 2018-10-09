@@ -19,10 +19,10 @@
         <input type="radio" name="wordNumber" id="wordRadio2" value="2" {{ $check2 }}>
         <label for="wordRadio2">80 - 120 words</label>
     </div>
-    <div class="d-none d-lg-block">
+    {{--<div class="d-none">
         <input type="radio" name="wordNumber" id="wordRadio3" value="3" {{ $check3 }}>
         <label for="wordRadio3">120 -160 words</label>
-    </div>
+    </div>--}}
     <div class="d-none d-lg-block">
         <input type="radio" name="wordNumber" id="wordRandom" value="random" {{ $checkRandom }}>
         <label for="wordRandom">Random</label>
@@ -31,8 +31,8 @@
         <label for="showTime" class="pr-2">Time</label>
         <input type="number" name="showTime" id="showTime" class="form-control" value="{{ $showTime }}">
     </div>
-    <div>
-        <select name="subjectId" id="dropDownId" class="header-block box_inline form-control w50">
+    <div class="d-none d-md-block">
+        <select name="subjectId" id="dropDownId" class="box_inline form-control w50">
             @foreach($subject as $item)
                 @if($subjectId == $item->id)
                     <option value="{{ $item->id }}" selected="selected">{{ $item->name_vi }}</option>
@@ -40,6 +40,17 @@
                     <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
                 @endif
             @endforeach
+        </select>
+    </div>
+    <div>
+        <select id="range" name="range" class="box_inline form-control w25">
+            @for($i = 0; $i<=$range; $i++)
+                @if($wordNumber ==$i)
+                    <option value="{{ $i }}" selected="selected">{{ $i*40 }} - {{ ($i+1)*40 }} words</option>
+                @else
+                    <option value="{{ $i }}">{{ $i*40 }} - {{ ($i+1)*40 }} words</option>
+                @endif
+            @endfor
         </select>
     </div>
     <div>
@@ -127,6 +138,22 @@
                 }
             });
         }
+
+        $('#range').change(function() {
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: 'post',
+                url: '{{ route('word.random') }}',
+                data: {
+                    'wordNumber': $('#range').val(),
+                    'showTime': $('input[name=showTime]').val(),
+                    'subjectId': $('#dropDownId').val(),
+                },
+                success: function (respond) {
+                    $('#ajaxBox').html(respond);
+                }
+            });
+        });
 
         var showTime = {{ $showTime }} * 1000;
         setTimeout(function () {

@@ -77,4 +77,14 @@ class Word extends BaseModel
         return $words;
     }
 
+    public static function getMaxRangeNumber($userId, $subjectId)
+    {
+        $where = [
+            ['user_id', '=', $userId],
+            ['subject_id', '=', $subjectId],
+        ];
+        $totalWords = self::where($where)->count();
+        $range = ceil($totalWords/self::WORDS_PER_PAGE) - 1;
+        return $range;
+    }
 }

@@ -44,11 +44,12 @@ class EnglishController extends Controller
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
         $wordList = Word::getWords($wordNumber, $userId, $subjectId);
         $wordSound = Word::getShuffleWords($wordNumber, $userId, $subjectId);
+        $range = Word::getMaxRangeNumber($userId, $subjectId);
         //get selected word
         if($wordId) {
             $word = Word::where('id',$wordId)->first();
         }
-        return view('frontend.english.words.random', compact('word', 'wordList', 'wordSound', 'wordNumber', 'showTime', 'subject', 'subjectId'));
+        return view('frontend.english.words.random', compact('word', 'wordList', 'wordSound', 'wordNumber', 'showTime', 'subject', 'subjectId', 'range'));
     }
 
     public function words(Request $request)
@@ -61,7 +62,8 @@ class EnglishController extends Controller
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
         $wordList = Word::getWords($wordNumber, $userId, $subjectId);
         $wordSound = Word::getShuffleWords($wordNumber, $userId, $subjectId);
-        return view('frontend.english.words.words', compact('word', 'wordNumber', 'wordList', 'wordSound', 'showTime', 'subject', 'subjectId'));
+        $range = Word::getMaxRangeNumber($userId, $subjectId);
+        return view('frontend.english.words.words', compact('word', 'wordNumber', 'wordList', 'wordSound', 'showTime', 'subject', 'subjectId', 'range'));
     }
 
     public function getRandomPhrase(Request $request)
