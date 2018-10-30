@@ -38,6 +38,7 @@
                             <th>id</th>
                             <th>word</th>
                             <th>meaning</th>
+                            <th>subject</th>
                             <th>example</th>
                         </tr>
                         @foreach($words as $word)
@@ -45,6 +46,7 @@
                                 <td>{{ $word->id }}</td>
                                 <td>{{ $word->word }}</td>
                                 <td>{{ $word->meaning }}</td>
+                                <td>{{ $word->subject->name_vi}}</td>
                                 <td>{{ $word->example }}</td>
                             </tr>
                         @endforeach

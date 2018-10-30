@@ -87,4 +87,9 @@ class Word extends BaseModel
         $range = ceil($totalWords/self::WORDS_PER_PAGE) - 1;
         return $range;
     }
+
+    public function subject()
+    {
+        return $this->belongsTo('App\Models\Subject', 'subject_id');
+    }
 }
