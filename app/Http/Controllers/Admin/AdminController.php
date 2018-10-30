@@ -79,12 +79,18 @@ class AdminController extends Controller
     {
         $url = 'https://dictionary.cambridge.org/dictionary/english/'. $word;
         $html = Dom::curl($url);
-        $soundElement = Dom::getNodesByClass($html,'circle circle-btn sound audio_play_button')->item(0);
-        $mp3 = Dom::getDomElementAttribute($soundElement,'data-src-mp3');
-        $mp3 = 'https://dictionary.cambridge.org' . $mp3;
+        $mp3 = null; $ipa = null;
+        if(!empty($html)){
+            $soundNodes = Dom::getNodesByClass($html,'circle circle-btn sound audio_play_button');
+            if(count($soundNodes)) {
+                $soundElement = $soundNodes->item(0);
+                $mp3 = Dom::getDomElementAttribute($soundElement,'data-src-mp3');
+                $mp3 = 'https://dictionary.cambridge.org' . $mp3;
 
-        $ipaElement = Dom::getNodesByClass($html,'ipa')->item(0);
-        $ipa = Dom::getDomElementValue($ipaElement);
+                $ipaElement = Dom::getNodesByClass($html,'ipa')->item(0);
+                $ipa = Dom::getDomElementValue($ipaElement);
+            }
+        }
 
         return [
             'sound'=>$mp3,
