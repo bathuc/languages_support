@@ -45,7 +45,7 @@
         </select>
     </div>
 
-    <div class="order-1 order-md-0">
+    <div>
         <select name="subjectId" id="dropDownId" class="form-control w50">
             @foreach($subject as $item)
                 @if($subjectId == $item->id)
@@ -57,7 +57,7 @@
         </select>
     </div>
 
-    <div class="order-0 order-md-1">
+    <div>
         <button type="button" class="btn btn-success play-sound header-block">Play</button>
     </div>
 </div>
