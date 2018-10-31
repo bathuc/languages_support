@@ -5,8 +5,9 @@
     $check3 = ($wordNumber == 3)? 'checked' : '';
     $checkRandom = ($wordNumber === 'random')? 'checked' : '';
 @endphp
+<div class="pt-3"></div>
 
-<div class="d-flex justify-content-between align-items-center pt-3">
+<div class="header-row d-flex flex-wrap justify-content-between align-items-center m-2">
     <div class="d-none d-lg-block">
         <input type="radio" name="wordNumber" id="wordRadio0" value="0" {{ $check0 }} >
         <label for="wordRadio0">First 40 words</label>
@@ -31,18 +32,8 @@
         <label for="showTime" class="pr-2">Time</label>
         <input type="number" name="showTime" id="showTime" class="form-control" value="{{ $showTime }}">
     </div>
-    <div class="d-none d-md-block">
-        <select name="subjectId" id="dropDownId" class="form-control w50">
-            @foreach($subject as $item)
-                @if($subjectId == $item->id)
-                    <option value="{{ $item->id }}" selected="selected">{{ $item->name_vi }}</option>
-                @else
-                    <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
-                @endif
-            @endforeach
-        </select>
-    </div>
-    <div>
+
+    <div class="">
         <select id="range" name="range" class="box_inline form-control w25">
             @for($i = 0; $i<=$range; $i++)
                 @if($wordNumber ==$i)
@@ -53,7 +44,20 @@
             @endfor
         </select>
     </div>
-    <div>
+
+    <div class="order-1 order-md-0">
+        <select name="subjectId" id="dropDownId" class="form-control w50">
+            @foreach($subject as $item)
+                @if($subjectId == $item->id)
+                    <option value="{{ $item->id }}" selected="selected">{{ $item->name_vi }}</option>
+                @else
+                    <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+
+    <div class="order-0 order-md-1">
         <button type="button" class="btn btn-success play-sound header-block">Play</button>
     </div>
 </div>

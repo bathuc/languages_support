@@ -2868,3 +2868,7 @@ nav.navbar {
 .logo-wrapper{
     height: 60px;
 }
+
+.header-row {
+    line-height: 3;
+}
