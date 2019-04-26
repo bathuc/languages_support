@@ -23,6 +23,8 @@ class CreateWordTable extends Migration
             $table->string('example1')->nullable();
             $table->string('subject_id')->default(1);
             $table->integer('user_id');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
