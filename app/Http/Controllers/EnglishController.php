@@ -55,7 +55,7 @@ class EnglishController extends Controller
     public function words(Request $request)
     {
         $wordNumber = 0;   // default
-        $showTime = 4; // second
+        $showTime = 3; // second
         $userId = $this->admin->id;
         $subject = MainHelper::getSubject($userId);
         $subjectId = 1;     // default - common

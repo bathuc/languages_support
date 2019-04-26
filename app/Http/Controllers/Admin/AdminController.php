@@ -14,6 +14,7 @@ use App\Models\Word;
 use App\Models\Phrase;
 use App\Models\Subject;
 use App\Helpers\Dom;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -103,7 +104,7 @@ class AdminController extends Controller
     {
         if($request->post()){
             // update sound
-            if($request->updateSound == 'update') {
+            if($request->type == 'updateSound') {
                 $words = Word::where('user_id', $this->admin->id)
                                 ->where(function ($query) {
                                     $query->where('sound','');
@@ -116,9 +117,18 @@ class AdminController extends Controller
                 }
                 session()->flash('flash_success', 'Sound Link Updated');
             }
+            elseif ($request->type == 'findWord') {
+                $words = Word::where('user_id',$this->admin->id)
+                            ->where('word','like', '%'.$request->word .'%')
+                    ->orderBy('updated_at', 'DESC')
+                    ->orderBy('id', 'DESC')
+                    ->paginate(20);
+                return view('admin.words.words',compact('words'));
+            }
         }
 
         $words = Word::where('user_id',$this->admin->id)
+                        ->orderBy('updated_at', 'DESC')
                         ->orderBy('id', 'DESC')
                         ->paginate(20);
         return view('admin.words.words',compact('words'));
@@ -182,27 +192,37 @@ class AdminController extends Controller
 
         $message = ['info' => [], 'pass' => []];
         if ($request->isMethod('post')) {
-            // edit info
-            $validator = Validator::make($request->all(), [
-                'word' => 'required|max:255',
-                'meaning' => 'required|max:255',
-            ]);
-            if (!empty($validator) && $validator->fails()) {
-                // fail
-                $message['info']['success'] = 0;
-                $message['info']['message'] = "Error Occur";
-            } else {
-                $dataUpdate = [
-                    'word' => $request->word,
-                    'meaning' => $request->meaning,
-                    'example' => $request->example,
-                    'example1' => $request->example1,
-                    'subject_id' => $request->subjectId,
-                ];
-
-                Word::where('id', $id)->update($dataUpdate);
+            if($request->edittype == "updateCurrentDay"){
+                // update current date
+                $timenow = Carbon::now();
+                $word->updated_at = $timenow;
+                $word->save();
                 $message['info']['success'] = 1;
                 $message['info']['message'] = "Update successful";
+            }
+            else{
+                // edit info
+                $validator = Validator::make($request->all(), [
+                    'word' => 'required|max:255',
+                    'meaning' => 'required|max:255',
+                ]);
+                if (!empty($validator) && $validator->fails()) {
+                    // fail
+                    $message['info']['success'] = 0;
+                    $message['info']['message'] = "Error Occur";
+                } else {
+                    $dataUpdate = [
+                        'word' => $request->word,
+                        'meaning' => $request->meaning,
+                        'example' => $request->example,
+                        'example1' => $request->example1,
+                        'subject_id' => $request->subjectId,
+                    ];
+
+                    Word::where('id', $id)->update($dataUpdate);
+                    $message['info']['success'] = 1;
+                    $message['info']['message'] = "Update successful";
+                }
             }
         }
 

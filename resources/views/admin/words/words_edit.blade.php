@@ -9,7 +9,13 @@
     <div class="row">
         <div class="box">
             <div class="box-body">
-                    <p>Back</p>
+                    <div class="">
+                        <form id="frmForm" method="post">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="edittype" value="updateCurrentDay"/>
+                            <button type="submit" class="btn btn-primary btn-submit">Update Current Date</button>
+                        </form>
+                    </div>
                     <a href="/admin/words" class="btn btn-default btn-flat pull-right">Back</a>
             </div>
         </div>
@@ -38,6 +44,12 @@
                         <input name="edittype" value="editinfo" type="hidden">
                         <table class="table">
                             <tbody>
+                            <tr>
+                                <th>Updated at</th>
+                                <td>
+                                    <p> {{ $word->updated_at }}</p>
+                                </td>
+                            </tr>
                             <tr>
                                 <th>Subject</th>
                                 <td>

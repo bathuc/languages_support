@@ -46,7 +46,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
     Route::group(['prefix' => 'words'], function () {
-        Route::get('/', 'AdminController@words')->name('admin.words');
+        Route::match(['get', 'post'], '/', 'AdminController@words')->name('admin.words');
         Route::get('/new', 'AdminController@wordNew')->name('admin.words.new');
         Route::post('/new', 'AdminController@wordNew')->name('admin.words.new');
         Route::post('/coundword', 'AdminController@coundWord')->name('admin.words.coundWord');

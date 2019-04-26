@@ -50,6 +50,7 @@ class Word extends BaseModel
 
         return
             self::where($where)
+            ->orderBy('updated_at', 'DESC')
             ->orderBy('id', 'DESC')
             ->skip($wordNumber*self::WORDS_PER_PAGE)->take(self::WORDS_PER_PAGE)
             ->get()->toArray();
