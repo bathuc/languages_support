@@ -6,10 +6,12 @@
 
     $exampleFlag = session()->get('type') == 'example' ? true : false;
 @endphp
-<h1>Grammar Check</h1>
+<div class="pt-4"></div>
+<h1 class="title">Grammar Check</h1>
+<div class="pt-3"></div>
 @if($exampleFlag)
-    <input type="radio" name="randText" value="simple" {{ $simpleCheck }}/><h3>Simple</h3>
-    <input type="radio" name="randText" value="normal" {{ $normalCheck }}/><h3>Normal</h3>
+    <input id="firstRadio" type="radio" name="randText" value="simple" {{ $simpleCheck }}/><label for="firstRadio" class="radioText text-success">Simple</label>
+    <input id="secondRadio" type="radio" name="randText" value="normal" {{ $normalCheck }}/><label for="secondRadio" class="radioText text-success">Normal</label>
 @endif
 <div id="hira">
     <span id="hira_show" style="background-color: rgb(255, 255, 255); color: rgb(102, 102, 102);">{{ $randomText }}</span><br>
@@ -112,5 +114,11 @@
         display: inline;
         color: darkgreen;
         margin: 0 10px;
+    }
+    .radioText{
+        font-size: 18px;
+        margin-left: 5px;
+        margin-right: 20px;
+        font-weight: bold;
     }
 </style>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\MainHelper;
@@ -19,8 +20,11 @@ class EnglishController extends Controller
 
     public function __construct()
     {
-        $except = ['tenseDetail', 'tenses', 'grammarRandom'];
-        // $this->middleware('auth:' . $this->guard)->except($except);
+        $except = ['tenseDetail', 'tenses', 'grammarRandom',
+            'words','getUserId',  'getRandomWord',
+            'phrases','getRandomPhrase'
+        ];
+
         $this->middleware(function ($request, $next) {
             if (!Auth::guard($this->guard)->check()) {
                 return redirect()->route('tenses');
@@ -38,7 +42,8 @@ class EnglishController extends Controller
         $wordNumber = $request->wordNumber;
         $showTime = $request->showTime;
         $subjectId = $request->subjectId;
-        $userId = $this->admin->id;
+        //$userId = $this->admin->id;
+        $userId = $this->getUserId();
         $subject = MainHelper::getSubject($userId);
         // get word random
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
@@ -56,7 +61,8 @@ class EnglishController extends Controller
     {
         $wordNumber = 0;   // default
         $showTime = 2; // second
-        $userId = $this->admin->id;
+        //$userId = $this->admin->id;
+        $userId = $this->getUserId();
         $subject = MainHelper::getSubject($userId);
         $subjectId = 1;     // default - common
         $word = Word::getRandomItem($wordNumber, $userId, $subjectId);
@@ -66,12 +72,23 @@ class EnglishController extends Controller
         return view('frontend.english.words.words', compact('word', 'wordNumber', 'wordList', 'wordSound', 'showTime', 'subject', 'subjectId', 'range'));
     }
 
+    public function getUserId()
+    {
+        if($this->admin) {
+            return $this->admin->id;
+        }
+
+        $user = Administrator::first();
+        return $user->id;
+    }
+
     public function getRandomPhrase(Request $request)
     {
         $phraseId = $request->phraseId;
         $phrasesNumber = $request->phrasesNumber;
         $showTime = $request->showTime;
-        $userId = $this->admin->id;
+        //$userId = $this->admin->id;
+        $userId = $this->getUserId();
         $phrase = Phrase::getRandomItem($phrasesNumber, $userId);
         $phrase12 = Phrase::where('user_id',$userId)->get()->take(12)->toArray();
 
@@ -86,7 +103,8 @@ class EnglishController extends Controller
     {
         $phrasesNumber = 20; // default
         $showTime = 4; // second
-        $userId = $this->admin->id;
+        //$userId = $this->admin->id;
+        $userId = $this->getUserId();
         $phrase = Phrase::getRandomItem($phrasesNumber, $userId);
         $phrase12 = Phrase::where('user_id',$userId)
                         ->orderBy('id', 'DESC')

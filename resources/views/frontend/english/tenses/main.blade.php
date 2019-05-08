@@ -1,7 +1,8 @@
 @extends('layouts.frontend.index')
 
 @section('content')
-    <h1 id="head1">Tenses</h1>
+    <div class="pt-3"></div>
+    <h1 class="title">Tenses</h1>
 
     <table class="table table-bordered info-table" summary="Explanation on English tenses" cellspacing="0">
         <tbody>
@@ -21,8 +22,9 @@
         </tbody>
     </table>
 
+    <div class="pt-2"></div>
     <p class="error-text txt20 fw-bold color-red"></p>
-    <h1>Random Game</h1>
+    <h1 class="title">Random Game</h1>
     <table class="table table-bordered info-table" id="kana_choice" summary="Explanation on English tenses" cellspacing="0">
         <tbody>
         <thead>
@@ -128,11 +130,8 @@
         });
     </script>
     <style>
-        .info-table a{
-            text-decoration: none;
-        }
-        .table-bordered {
-             border: none;
+        #frm input{
+            margin-left: 20px;
         }
     </style>
 @endsection

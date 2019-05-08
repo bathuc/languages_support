@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="head-title">
-        <h1 id="head1" class="inline">{{ $tense->name_eng }}</h1>
+        <h1 class="title">{{ $tense->name_eng }}</h1>
         <div class="inline">
             @if($tense->id >1)
                 <button type="button" class="btn btn-primary back-tense">Back Tense</button>

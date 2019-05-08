@@ -2876,3 +2876,17 @@ nav.navbar {
 .word{
     font-size: 21px;
 }
+
+.title {
+    font-size: 25px;
+    background-color: transparent;
+}
+.info-table, .info-table td, .info-table tr{
+    font-size: 17px;
+}
+.info-table a{
+    text-decoration: none;
+}
+.table-bordered {
+    border: none;
+}
