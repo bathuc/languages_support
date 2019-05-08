@@ -99,23 +99,28 @@ class AdminController extends Controller
         ];
     }
 
+    public function updateSound()
+    {
+        $words = Word::where('user_id', $this->admin->id)
+            ->where(function ($query) {
+                $query->where('sound','');
+                $query->orWhere('sound',null);
+            })
+            ->get();
+        foreach ($words as $word) {
+            $newSound = $this->getFromDictionary($word->word);
+            Word::where('id',$word->id)->update($newSound);
+        }
+        session()->flash('flash_success', 'Sound Link Updated');
+    }
+
 
     public function words(Request $request)
     {
         if($request->post()){
             // update sound
             if($request->type == 'updateSound') {
-                $words = Word::where('user_id', $this->admin->id)
-                                ->where(function ($query) {
-                                    $query->where('sound','');
-                                    $query->orWhere('sound',null);
-                                })
-                                ->get();
-                foreach ($words as $word) {
-                    $newSound = $this->getFromDictionary($word->word);
-                    Word::where('id',$word->id)->update($newSound);
-                }
-                session()->flash('flash_success', 'Sound Link Updated');
+                $this->updateSound();
             }
             elseif ($request->type == 'findWord') {
                 $words = Word::where('user_id',$this->admin->id)
@@ -161,7 +166,7 @@ class AdminController extends Controller
             } else {
                 $count = Word::where(['word' => $request->word,'user_id'=>$this->admin->id])->count();
                 if (!$count) {
-//                    $newSound = $this->getFromDictionary($request->word);
+                //$newSound = $this->getFromDictionary($request->word);
                     $data = [
                         'word' => $request->word,
                         'meaning' => $request->meaning,
@@ -169,12 +174,11 @@ class AdminController extends Controller
                         'example1' => $request->example1,
                         'subject_id' => $request->subjectId,
                         'user_id' => $this->admin->id,
-//                        'sound'=>$newSound['sound'],
-//                        'ipa'=>$newSound['ipa'],
                     ];
                     Word::insert($data);
                     $message['success'] = 1;
                     $message['message'] = 'Words create successful';
+                    $this->updateSound();
                 }
             }
         }

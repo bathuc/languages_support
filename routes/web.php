@@ -20,8 +20,7 @@ Route::get('/katakana', 'JapanController@katakana')->name('katakana');
 Route::post('/katakana', 'JapanController@katakana')->name('katakana');
 Route::post('/kanaRandom', 'JapanController@getKatakanaRandom')->name('katakana.random');
 
-Route::get('/words', 'EnglishController@words')->name('words');
-Route::post('/words', 'EnglishController@words')->name('words');
+Route::match(['get', 'post'], '/words', 'EnglishController@words')->name('words');
 Route::post('/random-word', 'EnglishController@getRandomWord')->name('word.random');
 Route::get('/phrases', 'EnglishController@phrases')->name('phrases');
 Route::post('/random-phrases', 'EnglishController@getRandomPhrase')->name('phrases.random');
@@ -47,12 +46,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['prefix' => 'words'], function () {
         Route::match(['get', 'post'], '/', 'AdminController@words')->name('admin.words');
-        Route::get('/new', 'AdminController@wordNew')->name('admin.words.new');
-        Route::post('/new', 'AdminController@wordNew')->name('admin.words.new');
+        Route::match(['get', 'post'], '/new', 'AdminController@wordNew')->name('admin.words.new');
         Route::post('/coundword', 'AdminController@coundWord')->name('admin.words.coundWord');
 
-        Route::get('/edit/{id}', 'AdminController@wordEdit')->name('admin.words.edit');
-        Route::post('/edit/{id}', 'AdminController@wordEdit')->name('admin.words.edit');
+        Route::match(['get', 'post'], '/edit/{id}', 'AdminController@wordEdit')->name('admin.words.edit');
     });
 
     Route::group(['prefix' => 'phrases'], function () {

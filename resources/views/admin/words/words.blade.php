@@ -31,7 +31,7 @@
                     <p>Add a word</p>
                     <a href="{{ route('admin.words.new') }}" class="btn btn-primary btn-flat">new word</a>
                     <button  class="btn btn-primary btn-flat pull-right update-sound">Update Sound Link</button>
-                    <form id="frmSound">
+                    <form id="frmSound" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="type" value="updateSound"/>
                     </form>
