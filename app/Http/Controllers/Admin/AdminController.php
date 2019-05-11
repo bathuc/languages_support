@@ -187,7 +187,7 @@ class AdminController extends Controller
                     $data = [
                         'word' => $request->word,
                         'meaning' => $request->meaning,
-                        'example' => $request->example,
+                        //'example' => $request->example,
                         //'example1' => $request->example1,
                         'subject_id' => $request->subjectId,
                         'user_id' => $this->admin->id,
