@@ -36,7 +36,11 @@
                                 <td>
                                     <select name="subjectId" class="box_inline form-control w50">
                                         @foreach($subject as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
+                                            @if($item->id == $subjectIdOld)
+                                                <option value="{{ $item->id }}" selected="selected">{{ $item->name_vi }}</option>
+                                            @else
+                                                <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </td>

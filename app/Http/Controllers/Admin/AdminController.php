@@ -163,7 +163,7 @@ class AdminController extends Controller
 
     public function wordNew(Request $request)
     {
-        $message = [];
+        $message = []; $subjectIdOld = null;
         $subject = MainHelper::getSubject($this->admin->id);
         if(empty($subject)) {
             $message['success'] = 0;
@@ -193,6 +193,7 @@ class AdminController extends Controller
                         'user_id' => $this->admin->id,
                     ];
                     Word::insert($data);
+                    $subjectIdOld = $request->subjectId;
                     $message['success'] = 1;
                     $message['message'] = 'Words create successful';
                     $this->updateSound();
@@ -200,7 +201,7 @@ class AdminController extends Controller
             }
         }
 
-        return view('admin.words.words_new', compact('message','subject'));
+        return view('admin.words.words_new', compact('message','subject', 'subjectIdOld'));
     }
 
     public function wordEdit(Request $request, $id)
