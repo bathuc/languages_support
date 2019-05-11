@@ -80,7 +80,7 @@ class AdminController extends Controller
     {
         $url = 'https://dictionary.cambridge.org/dictionary/english/'. $word;
         $html = Dom::curl($url);
-        $mp3 = null; $ipa = null;
+        $mp3 = null; $ipa = null; $example = null; $example1 = null;
         if(!empty($html)){
             $soundNodes = Dom::getNodesByClass($html,'circle circle-btn sound audio_play_button');
             if(count($soundNodes)) {
@@ -91,11 +91,20 @@ class AdminController extends Controller
                 $ipaElement = Dom::getNodesByClass($html,'ipa')->item(0);
                 $ipa = Dom::getDomElementValue($ipaElement);
             }
+
+            $exampleNodes = Dom::getNodesByClass($html, 'examp emphasized');
+            $firstNode = Dom::getFirstNode($exampleNodes);
+            $secondNode = Dom::getSecondNode($exampleNodes);
+
+            $example = Dom::getDomElementValue($firstNode);
+            $example1 = Dom::getDomElementValue($secondNode);
         }
 
         return [
             'sound'=>$mp3,
             'ipa'=>$ipa,
+            'example'=>$example,
+            'example1'=>$example1,
         ];
     }
 
@@ -108,8 +117,16 @@ class AdminController extends Controller
             })
             ->get();
         foreach ($words as $word) {
-            $newSound = $this->getFromDictionary($word->word);
-            Word::where('id',$word->id)->update($newSound);
+            $info = $this->getFromDictionary($word->word);
+            $word->sound = $info['sound'];
+            $word->ipa = $info['ipa'];
+            if (empty($word->example)) {
+                $word->example = $info['example'];
+            }
+            if (empty($word->example1)) {
+                $word->example1 = $info['example1'];
+            }
+            $word->save();
         }
         session()->flash('flash_success', 'Sound Link Updated');
     }
