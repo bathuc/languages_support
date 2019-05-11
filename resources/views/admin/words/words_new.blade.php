@@ -66,13 +66,13 @@
                                     <input id="example" name="example" type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
-                            <tr>
+                            {{--<tr>
                                 <th>Example 1</th>
                                 <td>
                                     <p class="text-red" id="example1_error"></p>
                                     <input id="example1" name="example1" type="text" class="box_inline form-control w50">
                                 </td>
-                            </tr>
+                            </tr>--}}
                             <tr>
                                 <th></th>
                                 <td>
