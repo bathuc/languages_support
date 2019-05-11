@@ -231,6 +231,10 @@ class Dom
     public static function getDomElementAttribute($element, $attribute)
     {
         $result = null;
+        if($element == null) {
+            return null;
+        }
+
         $classType = get_class($element);
         if ($classType == 'DOMElement') {
             if($element->hasAttribute($attribute)) {
@@ -247,6 +251,10 @@ class Dom
     public static function getDomElementValue($element)
     {
         $result = null;
+        if($element == null) {
+            return null;
+        }
+
         $classType = get_class($element);
         if ($classType == 'DOMElement') {
             $result = $element->nodeValue;
