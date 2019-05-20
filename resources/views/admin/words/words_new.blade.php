@@ -36,7 +36,11 @@
                                 <td>
                                     <select name="subjectId" class="box_inline form-control w50">
                                         @foreach($subject as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
+                                            @if($item->id == $subjectIdOld)
+                                                <option value="{{ $item->id }}" selected="selected">{{ $item->name_vi }}</option>
+                                            @else
+                                                <option value="{{ $item->id }}">{{ $item->name_vi }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </td>
@@ -55,7 +59,7 @@
                                     <input id="meaning" name="meaning" type="text" class="box_inline form-control w50">
                                 </td>
                             </tr>
-                            <tr>
+                            {{--<tr>
                                 <th>Example</th>
                                 <td>
                                     <p class="text-red" id="example_error"></p>
@@ -68,7 +72,7 @@
                                     <p class="text-red" id="example1_error"></p>
                                     <input id="example1" name="example1" type="text" class="box_inline form-control w50">
                                 </td>
-                            </tr>
+                            </tr>--}}
                             <tr>
                                 <th></th>
                                 <td>

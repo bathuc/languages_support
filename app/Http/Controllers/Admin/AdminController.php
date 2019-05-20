@@ -80,7 +80,7 @@ class AdminController extends Controller
     {
         $url = 'https://dictionary.cambridge.org/dictionary/english/'. $word;
         $html = Dom::curl($url);
-        $mp3 = null; $ipa = null;
+        $mp3 = null; $ipa = null; $example = null; $example1 = null;
         if(!empty($html)){
             $soundNodes = Dom::getNodesByClass($html,'circle circle-btn sound audio_play_button');
             if(count($soundNodes)) {
@@ -91,11 +91,20 @@ class AdminController extends Controller
                 $ipaElement = Dom::getNodesByClass($html,'ipa')->item(0);
                 $ipa = Dom::getDomElementValue($ipaElement);
             }
+
+            $exampleNodes = Dom::getNodesByClass($html, 'examp emphasized');
+            $firstNode = Dom::getFirstNode($exampleNodes);
+            $secondNode = Dom::getSecondNode($exampleNodes);
+
+            $example = Dom::getDomElementValue($firstNode);
+            $example1 = Dom::getDomElementValue($secondNode);
         }
 
         return [
             'sound'=>$mp3,
             'ipa'=>$ipa,
+            'example'=>$example,
+            'example1'=>$example1,
         ];
     }
 
@@ -108,8 +117,16 @@ class AdminController extends Controller
             })
             ->get();
         foreach ($words as $word) {
-            $newSound = $this->getFromDictionary($word->word);
-            Word::where('id',$word->id)->update($newSound);
+            $info = $this->getFromDictionary($word->word);
+            $word->sound = $info['sound'];
+            $word->ipa = $info['ipa'];
+            if (empty($word->example)) {
+                $word->example = $info['example'];
+            }
+            if (empty($word->example1)) {
+                $word->example1 = $info['example1'];
+            }
+            $word->save();
         }
         session()->flash('flash_success', 'Sound Link Updated');
     }
@@ -146,7 +163,7 @@ class AdminController extends Controller
 
     public function wordNew(Request $request)
     {
-        $message = [];
+        $message = []; $subjectIdOld = null;
         $subject = MainHelper::getSubject($this->admin->id);
         if(empty($subject)) {
             $message['success'] = 0;
@@ -170,12 +187,13 @@ class AdminController extends Controller
                     $data = [
                         'word' => $request->word,
                         'meaning' => $request->meaning,
-                        'example' => $request->example,
-                        'example1' => $request->example1,
+                        //'example' => $request->example,
+                        //'example1' => $request->example1,
                         'subject_id' => $request->subjectId,
                         'user_id' => $this->admin->id,
                     ];
                     Word::insert($data);
+                    $subjectIdOld = $request->subjectId;
                     $message['success'] = 1;
                     $message['message'] = 'Words create successful';
                     $this->updateSound();
@@ -183,7 +201,7 @@ class AdminController extends Controller
             }
         }
 
-        return view('admin.words.words_new', compact('message','subject'));
+        return view('admin.words.words_new', compact('message','subject', 'subjectIdOld'));
     }
 
     public function wordEdit(Request $request, $id)

@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', 'JapanController@index')->name('index');
+//Route::get('/', 'JapanController@index')->name('index');
+Route::get('/', function () {
+    return redirect()->route('words');
+});
 Route::get('/hiragana', 'JapanController@hiragana')->name('hiragana');
 Route::post('/hiragana', 'JapanController@hiragana')->name('hiragana');
 Route::post('/hiraRandom', 'JapanController@getHiraganaRandom')->name('hiragana.random');

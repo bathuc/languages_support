@@ -3,7 +3,15 @@
 namespace App\Helpers;
 use DOMDocument;
 use DOMXPath;
-
+/*
+ * DOMNodeList
+ *  -- DOMElement (node con)
+ *      -- Attribute
+ *      -- Value
+ *  -- DOMElement
+ *      -- Attribute
+ *      -- Value
+ */
 class Dom
 {
     public static function curl($url = "", $method = 'get',$params = [], $authen = [], $header = 'default')
@@ -49,6 +57,10 @@ class Dom
             $html = self::toHtml($mix);
         }
 
+        if(empty($html)){
+            return '';
+        }
+
         $doc = new DOMDocument();
         $internalErrors = libxml_use_internal_errors(true);
 
@@ -68,7 +80,7 @@ class Dom
         $mixType = gettype($mix);
         if($mixType == 'string') {
             $dom = new DOMDocument();
-            $internalErrors = libxml_use_internal_errors(true);
+            libxml_use_internal_errors(true);
             $dom->loadHTML($mix);
             $nodes = $dom->getElementsByTagName($tag);
         }
@@ -94,7 +106,7 @@ class Dom
 
         $element = null;
         $dom = new DOMDocument();
-        $internalErrors = libxml_use_internal_errors(true);
+        libxml_use_internal_errors(true);
         $dom->loadHTML($html);
         return $dom->getElementById($id);
     }
@@ -125,8 +137,17 @@ class Dom
         return $dom->saveHtml();
     }
 
+    public static function toHtmlRemoveAdvertise($nodes, $adClass)
+    {
+        $nodesHtml = self::toHtml($nodes);
+        $adNode = self::getNodesByClass($nodesHtml, $adClass);
+        $adHtml = self::toHtml($adNode);
+
+        $html = str_replace($adHtml, ' ', $nodesHtml);
+        return $html;
+    }
     /*
-     * $nodes: DOMNodeList
+     * $nodes: DOMNodeList | index = 0,1,2...
      * return: DOMElement
      */
     public static function getNodeByIndex($nodes, $index)
@@ -145,7 +166,7 @@ class Dom
      * $nodes: DOMNodeList
      * purpose: count number of DOMNodeLists
      */
-    public static function nodesCount($nodes)
+    public static function countNodes($nodes)
     {
         $count = 0;
         foreach ($nodes as $node) {
@@ -169,6 +190,18 @@ class Dom
         return $firstChild;
     }
 
+    public static function getSecondNode($nodes)
+    {
+        $secondChild = null; $counter = 0;
+        foreach ($nodes as $node) {
+            $counter++;
+            if($counter == 2){
+                $secondChild = $node;
+                break;
+            }
+        }
+        return $secondChild;
+    }
     /*
      * $nodes: DOMNodeList
      * purpose: get last child of DOMNodeList
@@ -197,7 +230,19 @@ class Dom
      */
     public static function getDomElementAttribute($element, $attribute)
     {
-        return $element->getAttribute($attribute);
+        $result = null;
+        if($element == null) {
+            return null;
+        }
+
+        $classType = get_class($element);
+        if ($classType == 'DOMElement') {
+            if($element->hasAttribute($attribute)) {
+                $result = $element->getAttribute($attribute);
+            }
+        }
+
+        return $result;
     }
 
     /*
@@ -205,7 +250,17 @@ class Dom
      */
     public static function getDomElementValue($element)
     {
-        return $element->nodeValue;
+        $result = null;
+        if($element == null) {
+            return null;
+        }
+
+        $classType = get_class($element);
+        if ($classType == 'DOMElement') {
+            $result = $element->nodeValue;
+        }
+
+        return $result;
     }
 
 }
