@@ -19,11 +19,13 @@ class Word extends BaseModel
         ];
         if($wordNumber === 'random'){
             $words = self::where($where)
+                ->orderBy('updated_at', 'DESC')
                 ->orderBy('id', 'DESC')
                 ->get()->toArray();
         }
         else {
             $words = self::where($where)
+                            ->orderBy('updated_at', 'DESC')
                             ->orderBy('id', 'DESC')
                             ->skip($wordNumber*self::WORDS_PER_PAGE)->take(self::WORDS_PER_PAGE)
                             ->get()->toArray();
@@ -64,11 +66,13 @@ class Word extends BaseModel
         ];
         if($wordNumber === 'random') {
             $words = self::where($where)
+                    ->orderBy('updated_at', 'DESC')
                     ->orderBy('id', 'DESC')
                     ->get()->toArray();
         }
         else{
             $words = self::where($where)
+                ->orderBy('updated_at', 'DESC')
                 ->orderBy('id', 'DESC')
                 ->skip($wordNumber*self::WORDS_PER_PAGE)->take(self::WORDS_PER_PAGE)
                 ->get()->toArray();
