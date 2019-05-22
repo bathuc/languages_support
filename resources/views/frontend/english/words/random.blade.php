@@ -128,12 +128,17 @@
         });
 
         function getNextWord() {
+            var range = $('#range').val();
+            var wordNumber = $('input[name=wordNumber]:checked').val();
+            if(wordNumber == undefined) {
+                wordNumber = range;
+            }
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: 'post',
                 url: '{{ route('word.random') }}',
                 data: {
-                    'wordNumber': $('input[name=wordNumber]:checked').val(),
+                    'wordNumber': wordNumber,
                     'showTime': $('input[name=showTime]').val(),
                     'subjectId': $('#dropDownId').val(),
                 },
