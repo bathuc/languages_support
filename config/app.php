@@ -213,6 +213,7 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'MainHelper' => App\Helpers\MainHelper::class,
     ],
 
 ];
