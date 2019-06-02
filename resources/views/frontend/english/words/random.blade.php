@@ -220,10 +220,9 @@
             var example = $('#example').html();
             var example1 = $('#example1').html();
 
-            if(isMobile == '1'){
+            if(isMobile == '1' && example1 != undefined){
                 $('#example').html(example1);
                 $('#example1').html(example);
-
             }
         });
     });
