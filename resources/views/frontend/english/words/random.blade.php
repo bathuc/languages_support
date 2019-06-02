@@ -220,9 +220,6 @@
             var example = $('#example').html();
             var example1 = $('#example1').html();
 
-            console.log('mobile',isMobile);
-            console.log('example',example);
-            console.log('example1',example1);
             if(isMobile == '1'){
                 $('#example').html(example1);
                 $('#example1').html(example);
