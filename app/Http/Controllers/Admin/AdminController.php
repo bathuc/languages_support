@@ -78,21 +78,22 @@ class AdminController extends Controller
 
     public function getFromDictionary($word)
     {
-        $url = 'https://dictionary.cambridge.org/dictionary/english/'. $word;
+        $url = 'https://dictionary.cambridge.org/dictionary/english/' . $word;
         $html = Dom::curl($url);
+
         $mp3 = null; $ipa = null; $example = null; $example1 = null;
         if(!empty($html)){
-            $soundNodes = Dom::getNodesByClass($html,'circle circle-btn sound audio_play_button');
+            $soundNodes = Dom::getNodesByTagName($html,'source');
             if(count($soundNodes)) {
                 $soundElement = $soundNodes->item(0);
-                $mp3 = Dom::getDomElementAttribute($soundElement,'data-src-mp3');
+                $mp3 = Dom::getDomElementAttribute($soundElement,'src');
                 $mp3 = 'https://dictionary.cambridge.org' . $mp3;
 
                 $ipaElement = Dom::getNodesByClass($html,'ipa')->item(0);
                 $ipa = Dom::getDomElementValue($ipaElement);
             }
 
-            $exampleNodes = Dom::getNodesByClass($html, 'examp emphasized');
+            $exampleNodes = Dom::getNodesByClass($html, 'examp dexamp');
             $firstNode = Dom::getFirstNode($exampleNodes);
             $secondNode = Dom::getSecondNode($exampleNodes);
 
