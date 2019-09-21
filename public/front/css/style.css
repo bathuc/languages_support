@@ -2676,6 +2676,7 @@ a {
 
 #meaning {
     font-size: 25px;
+    font-weight: 600 !important;
 }
 
 .show-meaning {
@@ -2874,7 +2875,7 @@ nav.navbar {
 }
 
 .word{
-    font-size: 21px;
+    font-size: 18px;
 }
 
 .title {

@@ -7,7 +7,7 @@
 @endphp
 <div class="pt-3"></div>
 
-<div class="header-row d-flex flex-wrap justify-content-between align-items-center m-2">
+<div class="header-row d-flex flex-wrap justify-content-between align-items-center">
     <div class="d-none d-lg-block">
         <input type="radio" name="wordNumber" id="wordRadio0" value="0" {{ $check0 }} >
         <label for="wordRadio0">First 40 words</label>
@@ -78,7 +78,7 @@
                         @if(!empty($word['ipa']))
                             <span>{{$word['ipa']}}</span><br>
                         @endif
-                        <p id="meaning">​</i>{{ $word['meaning'] }}</p>
+                        <p id="meaning" class="text-success">​</i>{{ $word['meaning'] }}</p>
                         @if(!empty($word['example']))
                             <span id="example">{{ $word['example'] }}</span><br>
                         @endif
